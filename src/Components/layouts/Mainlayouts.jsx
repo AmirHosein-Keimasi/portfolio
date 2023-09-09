@@ -4,27 +4,25 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { theme } from "../ui/theme";
-
+import {CacheProvider} from "@emotion/react";
 
 const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
 
-
-
-const Mainlayouts = ({Children}) => {
+const Mainlayouts = ({ children }) => {
   return (
-    <cacheProcider value={cacheRtl}>
+    <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
         <HelmetProvider>
           <Helmet>
             <title>وب سایت شخصی امیرحسین کیماسی</title>
           </Helmet>
-          {Children}
+          {children}
         </HelmetProvider>
       </ThemeProvider>
-    </cacheProcider>
+    </CacheProvider>
   );
 };
 
