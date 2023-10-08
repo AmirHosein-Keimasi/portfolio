@@ -4,7 +4,10 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { theme } from "../ui/theme";
-import {CacheProvider} from "@emotion/react";
+import { CacheProvider } from "@emotion/react";
+import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import { Typography, Box, Divider, Avatar } from "@mui/material";
+
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -19,7 +22,10 @@ const Mainlayouts = ({ children }) => {
           <Helmet>
             <title>وب سایت شخصی امیرحسین کیماسی</title>
           </Helmet>
-          {children}
+          {/* grid System */}
+          <Grid container sx={{ height: "100vh" }}>
+           {children}
+          </Grid>
         </HelmetProvider>
       </ThemeProvider>
     </CacheProvider>
