@@ -6,8 +6,13 @@ import {
   TextSnippetRounded,
 } from "@mui/icons-material";
 import { Tab, Tabs } from "@mui/material";
+import { useContext } from "react";
+import MainContext from "../../Context";
 
-const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
+
+const SidebarTabs = () => {
+    const {  setDrawerOpen,handelPageNumber,pageNumber } = useContext(MainContext);
+
   const tabProps = (index) => {
     return {
       id: `sidebar-tab-${index}`,
@@ -23,8 +28,8 @@ const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
         variant="scrollabel"
         allowScrollButtonsMobile
         scrollButtons="auto"
-        onChange={handelChenge}
-        value={value}
+        onChange={handelPageNumber}
+        value={pageNumber}
       >
         <Tab
           label="صفحه اصلی"
@@ -38,7 +43,7 @@ const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
           icon={<Home />}
           iconPosition="start"
           {...tabProps(0)}
-          onClick={()=>{setDrowOpen(true)}}
+          onClick={()=>{setDrawerOpen(false)}}
         />
         <Tab
           sx={{
@@ -52,14 +57,14 @@ const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
           label="درباره ی من "
           icon={<FaceRounded />}
           iconPosition="start"
-          onClick={()=>{setDrowOpen(true)}}
+          onClick={()=>{setDrawerOpen(false)}}
         />
         <Tab
           {...tabProps(2)}
           label="رزومه من"
           icon={<TextSnippetRounded />}
           iconPosition="start"
-          onClick={()=>{setDrowOpen(true)}}
+          onClick={()=>{setDrawerOpen(false)}}
           sx={{
             my: 0.5,
             mx: 1,
@@ -73,7 +78,7 @@ const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
           label="نمونه کار ها "
           icon={<TerminalRounded />}
           iconPosition="start"
-          onClick={()=>{setDrowOpen(true)}}
+          onClick={()=>{setDrawerOpen(false)}}
           sx={{
             my: 0.5,
             mx: 1,
@@ -87,7 +92,7 @@ const SidebarTabs = ({ handelChenge, value, setDrowOpen }) => {
           label=" ارتباط با من"
           icon={<MessageRounded />}
           iconPosition="start"
-          onClick={()=>{setDrowOpen(true)}}
+          onClick={()=>{setDrawerOpen(true)}}
           sx={{
             my: 0.5,
             mx: 1,

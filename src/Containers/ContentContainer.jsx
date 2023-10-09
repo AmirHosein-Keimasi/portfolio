@@ -9,7 +9,7 @@ const ContentContainer = ({children}) => {
         md={9}
         ls={10}
         xl={10}
-        sx={{ backgroundColor: "blue" }}
+        sx={{ backgroundColor: "gray" }}
       >
         
          {children}

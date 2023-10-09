@@ -1,7 +1,9 @@
-import DrawerContent from "./SidebarContent";
-import DrawerActionButton from "../Drawer/DrawerActionButton";
+import { SidebarContent } from "./";
+import  DrawerActionButton from "../drawer/DrawerActionButton";
+import SidebarDrawer from '../drawer/SidebarDrawer'
 
-const Sidebar = ({ handelChenge, value }) => {
+
+const Sidebar = () => {
   // const tabs =[
   //   {label:"صفحه اصلی" , icon :<HomeRounded/>, ...tabProps(0)},
   //   {label:"صفحه اصلی" , icon :<FaceRounded/>, ...tabProps(1)},
@@ -13,8 +15,8 @@ const Sidebar = ({ handelChenge, value }) => {
   return (
     <>
       <DrawerActionButton />
-      <DrawerContent value={value} handelChenge={handelChenge} />
-      <sidebarDrawer />
+      <SidebarContent />
+      <SidebarDrawer />
     </>
   );
 };

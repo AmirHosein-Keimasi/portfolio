@@ -4,7 +4,7 @@ import { grey, } from "@mui/material/colors";
 import {SidebarHeader , SidebarFooter ,SidebarTabs} from ".";
 
 
-const SidebarContent = ({ handelChenge, value, setDrowOpen }) => {
+const SidebarContent = () => {
  
 
   return (
@@ -17,7 +17,7 @@ const SidebarContent = ({ handelChenge, value, setDrowOpen }) => {
     >
      <SidebarHeader/>
       <Divider variant="middle" color={grey[900]} sx={{ mt: 2 }} />
-   <SidebarTabs  value={value} handelChenge={handelChenge} setDrowOpen={setDrowOpen} />
+   <SidebarTabs />
       <Divider variant="middle" color={grey[900]} sx={{ mt: 2 }} />
       <SidebarFooter/>
     </Box>
