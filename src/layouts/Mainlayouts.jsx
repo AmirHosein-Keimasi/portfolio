@@ -3,7 +3,7 @@ import rtlPlugin from "stylis-plugin-rtl";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { theme } from "../ui/theme";
+import { theme } from "./Themes/theme";
 import { CacheProvider } from "@emotion/react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { Typography, Box, Divider, Avatar } from "@mui/material";

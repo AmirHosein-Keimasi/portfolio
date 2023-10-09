@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { Typography, Box, Divider, Avatar } from "@mui/material";
 
 const ContentContainer = ({children}) => {
     return (
