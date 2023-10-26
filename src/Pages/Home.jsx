@@ -1,67 +1,94 @@
-import { Typography, Box } from "@mui/material";
-import React, { useRef } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
+
+import { Box, Typography } from "@mui/material";
 import Typed from "typed.js";
-const Home = () => {
+import Particles from "react-particles";
+import { loadFull } from "tsparticles";
+import { links } from "../constants/particles";
+import bg02 from "../Assets/photo_2022-01-07_22-36-04.jpg";
+import TextTransition, { presets } from "react-text-transition";
+import { Helmet } from "react-helmet-async";
+
+const strings = [
+  "توسعه دهنده فول استک هستم",
+  " مدرس برنامه نویسی هستم",
+  " فریلنسر هستم",
+  " محتواساز دنیای برنامه نویسی هستم",
+];
+
+const Home = ({helmetTitle}) => {
+  const [index, setIndex] = useState(0);
   const nameEl = useRef(null);
   const infoEl = useRef(null);
 
-  const strings = [
-    "من توسعه دهنده ریکت هستم",
-    "من یک فریلنسر هستم",
-    "من دانشجو هستم",
-  ];
-
   useEffect(() => {
     const typedName = new Typed(nameEl.current, {
-      strings: ["[[امیرحسین کیماسی]]"],
-      typeSpeed: 50,
-      backSpeed: 20,
-      backDelay: 10,
+      strings: ["[[ یونس قربانی ]]"],
+      typeSpeed: 80,
+      backSpeed: 50,
+      backDelay: 30,
       showCursor: false,
-    })
-
-    const typeinfo = new Typed(infoEl.current, {
-        strings: strings,
-        startDelay:1500,
-        typeSpeed: 80,
-        backSpeed: 50,
-        backDelay: 50,
-        loop:true,
-        showCursor: false,
-      });
+    });
+    const stiringTranision = setInterval(() => {
+      setIndex((index) => index + 1);
+    }, 2000);
 
     return () => {
-
-      typedName.destroy()
-      typeinfo.destroy()
+      typedName.destroy();
+      clearInterval(stiringTranision);
     };
   }, []);
 
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container) => {
+    await console.log(container);
+  }, []);
   return (
     <Box
       sx={{
-        backgroundImage: `url(${require("../Assets/photo_2022-01-07_22-36-04.jpg")})`,
-        height: "100vh",
+        backgroundImage: `url(${bg02})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Typography ref={nameEl} variant="h3" color="tomato">
-       
-      </Typography>
-      <Typography  ref={infoEl}
-        variant="h5   "
-        color="whitesmoke"
-        sx={{ textDecoration: "underline", textDecorationColor: "gray" }}
-      >
-        در حال یادگیری هستم
-      </Typography>
+<Helmet>
+  <title>{helmetTitle}</title>
+</Helmet>
+ 
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={links}
+      />
+      <Typography ref={nameEl} variant="h3" color="tomato"></Typography>
+      <Box component={"div"} sx={{ display: "flex", mt:3 }}>
+        <TextTransition springConfig={presets.wobbly}>
+          <Typography
+            ref={infoEl}
+            variant="h4"
+            color="whitesmoke"
+            sx={{
+              textDecoration: "underline",
+              textDecorationColor: "primari",
+            }}
+          >
+            {strings[index % strings.length]}
+          </Typography>
+        </TextTransition>
+        <Typography variant="h4" color="whitesmoke" sx={{ mr: 2 }}>
+          من یک
+        </Typography>
+      </Box>
     </Box>
   );
 };

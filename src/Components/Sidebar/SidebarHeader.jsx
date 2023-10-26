@@ -1,10 +1,13 @@
-import { Avatar,Typography } from '@mui/material';
-import React from 'react';
+import { Avatar, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { RandomReveal } from "react-random-reveal";
+import { alphabetPersian } from "../../constants/alphabetPersian";
 
 const SidebarHeader = () => {
-    return (
-       <>
-        <Avatar
+  const [start, setStart] = useState(false);
+  return (
+    <>
+      <Avatar
         src={require("../../Assets/logo.jpg")}
         sx={{
           display: {
@@ -20,17 +23,32 @@ const SidebarHeader = () => {
         }}
       />{" "}
       <Typography color="whitesmoke" sx={{ textAlign: "center" }} variant="h5">
-        امیرحسین کیماسی
+        <RandomReveal
+          characterSet={alphabetPersian}
+          isPlaying
+          duration={4}
+          characters="امیرحسین کیماسی"
+          onComplete={()=>{setStart(true)}}
+        />
       </Typography>
-      <Typography
-        color="whitesmoke"
-        sx={{ textAlign: "center" }}
-        variant="caption"
-      >
-        pc Gamer
-      </Typography>
-       </>
-    );
-}
+      {start &&
+      (
+        <Typography
+          color="whitesmoke"
+          sx={{ textAlign: "center" }}
+          variant="caption"
+        >
+          <RandomReveal
+            characterSet={alphabetPersian}
+            isPlaying
+            duration={4}
+            characters="سلام کیماسی
+"
+          />
+        </Typography>
+      )}
+    </>
+  );
+};
 
 export default SidebarHeader;
