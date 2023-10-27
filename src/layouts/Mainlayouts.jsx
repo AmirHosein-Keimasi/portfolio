@@ -6,7 +6,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { darkTheme, lightTheme, theme } from "./Themes/theme";
 import { CacheProvider } from "@emotion/react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { Typography, Box, Divider, Avatar } from "@mui/material";
+
 
 
 const cacheRtl = createCache({

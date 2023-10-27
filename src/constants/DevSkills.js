@@ -44,7 +44,7 @@ export const DevSkills = {
         color: "secondary",
     },
 };
-export const DevEdu = [
+export const devEdu = [
     {
         year: "۱۳۸۸ - ۱۳۸۹",
         cert: "دیپلم",

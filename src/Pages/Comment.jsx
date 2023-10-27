@@ -9,11 +9,10 @@ import {
   Slide,
   Box,
   Avatar,
-
 } from "@mui/material";
 import { ForumRounded } from "@mui/icons-material";
 import Slider from "react-slick";
-import { userComments } from "../Containers/DevSkills";
+import { userComments } from "../constants/DevSkills";
 
 
 

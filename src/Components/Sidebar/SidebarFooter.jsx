@@ -1,11 +1,11 @@
-import { CopyrightRounded } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-import React from 'react';
+import { CopyrightRounded } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+import React from "react";
 
 const SidebarFooter = () => {
-    return (
-        <>
-         <Box
+  return (
+    <>
+      <Box
         sx={{
           flexGrow: 1,
           display: "flex",
@@ -23,9 +23,9 @@ const SidebarFooter = () => {
             <CopyrightRounded sx={{ verticalAlign: "middle", height: 16 }} />
           </Typography>
         </Typography>
-      </Box>   
-        </>
-    );
-}
+      </Box>
+    </>
+  );
+};
 
 export default SidebarFooter;

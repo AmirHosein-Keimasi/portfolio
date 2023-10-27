@@ -1,40 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-  Typography,
-  Card,
-  CardContent,
-  Divider,
-  Chip,
-  Slide,
-  Grid,
-} from "@mui/material";
-
-import { DevEdu } from "../Containers/DevSkills";
-
+import { Card, CardContent } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 import {
   SettingsEthernetRounded,
   HomeRepairServiceRounded,
   SchoolRounded,
 } from "@mui/icons-material";
-import {
-  Timeline,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineDot,
-  TimelineContent,
-  TimelineConnector,
-} from "@mui/lab";
+import CustomDivider from "../Components/common/CustomDivider";
+import DevEduTimeline from "../Components/Pages/DevEduTimeline";
+import DevExpTimeline from "../Components/Pages/DevExpTimeline";
 
 const Resume = ({ helmetTitle }) => {
-  const [loding, setloding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setloding(true);
+    setLoading(true);
+
     return () => {
-      setloding(false);
+      setLoading(false);
     };
   }, []);
+
   return (
     <Card
       sx={{
@@ -47,202 +34,36 @@ const Resume = ({ helmetTitle }) => {
         <title>{helmetTitle}</title>
       </Helmet>
       <CardContent>
-        <Slide
-          direction="down"
-          in={loding}
-          style={{
-            transitionDelay: loding ? "300ms" : "0ms",
-          }}
-        >
-          <Divider
-            textAlign="center"
-            sx={{
-              mt: 2,
-              "&::before, &::after": {
-                borderColor: "error.main",
-              },
-            }}
-          >
-            <Chip
-              icon={<SettingsEthernetRounded />}
-              color="error"
-              label={
-                <Typography
-                  variant="body1"
-                  color="black"
-                  sx={{ textAlign: "center" }}
-                >
-                  رزومه من
-                </Typography>
-              }
-              sx={{ p: 3 }}
-            />
-          </Divider>
-        </Slide>
+        <CustomDivider
+          bColor="error.main"
+          cColor="error"
+          icon={<SettingsEthernetRounded />}
+          align="center"
+          text="رزومه من"
+        />
         <Grid container sx={{ mt: 4 }}>
           <Grid xs={6}>
-   
-            <Divider
-              textAlign="center"
-              sx={{
-                m: 2,
-                "&::before, &::after": {
-                  borderColor: "warning.main",
-                },
-              }}
-            >
-              <Chip
-                icon={<HomeRepairServiceRounded />}
-                color="warning"
-                label={
-                  <Typography
-                    variant="body1"
-                    color="black"
-                    sx={{ textAlign: "center" }}
-                  >
-                    تحصیلات
-                  </Typography>
-                }
-                sx={{ p: 3 }}
-              />
-            </Divider>
+            <CustomDivider
+              bColor="warning.main"
+              cColor="warning"
+              icon={<HomeRepairServiceRounded />}
+              align="center"
+              text="تجربیات"
+            />
 
-            <Timeline position="alternate" sx={{ direction: "ltr" }}>
-              {DevEdu.map((item, index) => (
-                <Slide
-                  direction="up"
-                  in={loding}
-                  style={{
-                    transitionDelay: loding ? `${index + 3}99ms` : "0ms",
-                  }}
-                >
-                  <TimelineItem key={index}>
-                    <TimelineSeparator>
-                      <TimelineDot color="warning" variant="outlined">
-                        <HomeRepairServiceRounded color="warning" />
-                      </TimelineDot>
-                      {index != 3 ? <TimelineConnector /> : null}
-                    </TimelineSeparator>
-                    <TimelineContent>
-                      <Typography variant="caption" color="gray">
-                        {item.year}
-                      </Typography>
-                      <Typography variant="body1" color="black">
-                        {item.cert}
-                      </Typography>
-                      <Typography variant="body2" color="black">
-                        {item.major}
-                      </Typography>
-                      <Typography variant="body2" color="black">
-                        {item.place}
-                      </Typography>
-                    </TimelineContent>
-                  </TimelineItem>
-                </Slide>
-              ))}
-            </Timeline>
+            <DevExpTimeline loading={loading} />
           </Grid>
-          <Grid xs={6}>
-            <Divider
-              textAlign="center"
-              sx={{
-                marginTop: 2,
-                "&::before, &::after": {
-                  borderColor: "info.main",
-                },
-              }}
-            >
-              <Chip
-                icon={<SchoolRounded />}
-                color="info"
-                label={
-                  <Typography
-                    variant="body1"
-                    color="block"
-                    sx={{ textAlign: "center" }}
-                  >
-                    تحصیلات
-                  </Typography>
-                }
-                sx={{ p: 3 }}
-              />
-            </Divider>
-            {/* <Timeline position="alternate" >
-              {DevEdu.map((item, index) => (
-                <TimelineItem  key={index}>
-                  <TimelineSeparator>
-                    <TimelineDot color="info" variant=" ">
-                      <SchoolRounded color="info" />
-                    </TimelineDot>
-                    {index != 3 ? <TimelineConnector /> : null}
-                  </TimelineSeparator>
-                  <TimelineContent>
-                    <Typography
-                      variant="inherit"
-                      color="gray"
-                      sx={{ textAlign: "center" }}
-                    >
-                      {item.year}
-                    </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="black"
-                      sx={{ textAlign: "center" }}
-                    >
-                      {item.cert}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="black"
-                      sx={{ textAlign: "center", mt: 1 }}
-                    >
-                      {item.major}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="black"
-                      sx={{ textAlign: "center", mt: 1 }}
-                    >
-                      {item.place}
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem>
-              ))}
-            </Timeline> */}{" "}
-            <Timeline position="alternate" sx={{ direction: "ltr" }}>
-              {DevEdu.map((item, index) => (
-                   <Slide
-                   direction="up"
-                   in={loding}
-                   style={{
-                     transitionDelay: loding ? `${index + 3}99ms` : "0ms",
-                   }}
-                 >
-                <TimelineItem key={index}>
-                  <TimelineSeparator>
-                    <TimelineDot color="info" variant="outlined">
-                      <SchoolRounded color="info" />
-                    </TimelineDot>
-                    {index != 3 ? <TimelineConnector /> : null}
-                  </TimelineSeparator>
-                  <TimelineContent>
-                    <Typography variant="caption" color="gray">
-                      {item.year}
-                    </Typography>
-                    <Typography variant="body1" color="black">
-                      {item.cert}
-                    </Typography>
-                    <Typography variant="body2" color="black">
-                      {item.major}
-                    </Typography>
-                    <Typography variant="body2" color="black">
-                      {item.place}
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem></Slide>
-              ))}
-            </Timeline>
+          <Grid xs={6}>
+            <CustomDivider
+              bColor="info.main"
+              cColor="info"
+              icon={<SchoolRounded />}
+              align="center"
+              text="تحصیلات"
+            />
+
+            <DevEduTimeline loading={loading} />
           </Grid>
         </Grid>
       </CardContent>

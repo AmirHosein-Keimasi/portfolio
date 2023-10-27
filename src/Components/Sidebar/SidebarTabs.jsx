@@ -1,7 +1,7 @@
 import { Tab, Tabs } from "@mui/material";
 import { useContext } from "react";
 import MainContext from "../../Context";
-import { tabsData } from "../data/tabsData";
+import { tabsData } from "../../constants/TabsData";
 
 const SidebarTabs = () => {
   const { setDrawerOpen, handelPageNumber, pageNumber } =

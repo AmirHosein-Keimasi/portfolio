@@ -1,41 +1,31 @@
-import { Avatar, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { RandomReveal } from "react-random-reveal";
 import { alphabetPersian } from "../../constants/alphabetPersian";
-import ThemeActionBtn from '../../layouts/Themes/ThemeActionBtn'
+import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
+import avatar from "../../Assets/logo.jpg";
+import CustomAvatar from "../common/CustomAvatar";
+import SocialMediaIcons from "../SocialMediaIcons";
 
 const SidebarHeader = () => {
   const [start, setStart] = useState(false);
   return (
     <>
-<ThemeActionBtn/>
-      <Avatar
-        src={require("../../Assets/logo.jpg")}
-        sx={{
-          display: {
-            xs: "none",
-            sm: "none",
-            md: "block",
-            lg: "block",
-            xl: "block",
-          },
-          width: 200,
-          height: 200,
-          margin: " 0 auto",
-        }}
-      />{" "}
-      
+      <ThemeActionBtn />
+      <CustomAvatar size={200} fallback="A.K" avatar={avatar} />
+
       <Typography color="whitesmoke" sx={{ textAlign: "center" }} variant="h5">
         <RandomReveal
           characterSet={alphabetPersian}
           isPlaying
           duration={4}
           characters="امیرحسین کیماسی"
-          onComplete={()=>{setStart(true)}}
+          onComplete={() => {
+            setStart(true);
+          }}
         />
       </Typography>
-      {start &&
-      (
+      {start && (
         <Typography
           color="whitesmoke"
           sx={{ textAlign: "center" }}
@@ -50,6 +40,7 @@ const SidebarHeader = () => {
           />
         </Typography>
       )}
+      <SocialMediaIcons />
     </>
   );
 };
