@@ -10,7 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 
-import { DevEdu } from "../../Containers/DevSkills";
+import { DevEdu } from "../Containers/DevSkills";
 
 import {
   SettingsEthernetRounded,

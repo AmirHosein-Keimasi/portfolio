@@ -2,11 +2,13 @@ import { Avatar, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { RandomReveal } from "react-random-reveal";
 import { alphabetPersian } from "../../constants/alphabetPersian";
+import ThemeActionBtn from '../../layouts/Themes/ThemeActionBtn'
 
 const SidebarHeader = () => {
   const [start, setStart] = useState(false);
   return (
     <>
+<ThemeActionBtn/>
       <Avatar
         src={require("../../Assets/logo.jpg")}
         sx={{
@@ -22,6 +24,7 @@ const SidebarHeader = () => {
           margin: " 0 auto",
         }}
       />{" "}
+      
       <Typography color="whitesmoke" sx={{ textAlign: "center" }} variant="h5">
         <RandomReveal
           characterSet={alphabetPersian}
