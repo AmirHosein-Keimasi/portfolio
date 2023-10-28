@@ -29,7 +29,7 @@ const DevEduTimeline = ({ loading }) => {
                             <TimelineDot color="info" variant="outlined">
                                 <SchoolRounded color="info" />
                             </TimelineDot>
-                            {index != 3 ? <TimelineConnector /> : null}
+                            {index !== 3 ? <TimelineConnector /> : null}
                         </TimelineSeparator>
                         <TimelineContent>
                             <Typography variant="caption" color="gray">
