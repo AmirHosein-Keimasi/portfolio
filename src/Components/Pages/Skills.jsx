@@ -18,32 +18,32 @@ const Skills = () => {
     const timer = setInterval(() => {
       setHtml((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 90);
+        return Math.min(oldProgress + rondomNumber, 80);
       });
 
       setCss((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 50);
+        return Math.min(oldProgress + rondomNumber, 60);
       });
 
       setJavascript((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 60);
+        return Math.min(oldProgress + rondomNumber, 70);
       });
 
       setNodeJs((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 5);
+        return Math.min(oldProgress + rondomNumber, 0);
       });
 
       setReact((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 40);
+        return Math.min(oldProgress + rondomNumber, 60);
       });
 
       setGit((oldProgress) => {
         const rondomNumber = Math.random() * 10;
-        return Math.min(oldProgress + rondomNumber, 60);
+        return Math.min(oldProgress + rondomNumber, 45);
       });
     }, 200);
     return () => {
@@ -77,16 +77,16 @@ const Skills = () => {
         value={react}
       />
       <Skill
-        name={nodeSkill.name}
-        icon={nodeSkill.icon}
-        color={nodeSkill.color}
-        value={nodeJs}
-      />
-      <Skill
         name={gitSkill.name}
         icon={gitSkill.icon}
         color={gitSkill.color}
         value={git}
+      />{" "}
+      <Skill
+        name={nodeSkill.name}
+        icon={nodeSkill.icon}
+        color={nodeSkill.color}
+        value={nodeJs}
       />
     </>
   );

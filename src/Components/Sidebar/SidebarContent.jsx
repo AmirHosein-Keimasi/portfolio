@@ -11,13 +11,13 @@ const SidebarContent = () => {
       sx={{
         justifyContent: "center",
         textAlign: "center",
-        mt: 2,
+        mt: 1,
       }}
     >
      <SidebarHeader/>
-      <Divider variant="middle" sx={{ mt: 2 }} />
+      <Divider variant="middle" sx={{ mt: 1 }} />
    <SidebarTabs />
-      <Divider variant="middle"  sx={{ mt: 2 }} />
+      <Divider variant="middle"  sx={{ mt: 1 }} />
       <SidebarFooter/>
     </Box>
   );

@@ -35,8 +35,8 @@ const Resume = ({ helmetTitle }) => {
       </Helmet>
       <CardContent>
         <CustomDivider
-          bColor="error.main"
-          cColor="error"
+          bColor="warning.main"
+          cColor="warning"
           icon={<SettingsEthernetRounded />}
           align="center"
           text="رزومه من"
@@ -56,8 +56,8 @@ const Resume = ({ helmetTitle }) => {
 
           <Grid xs={6}>
             <CustomDivider
-              bColor="info.main"
-              cColor="info"
+               bColor="warning.main"
+               cColor="warning"
               icon={<SchoolRounded />}
               align="center"
               text="تحصیلات"

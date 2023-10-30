@@ -5,15 +5,15 @@ import Typed from "typed.js";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import { links } from "../constants/particles";
-import bg02 from "../Assets/photo_2022-01-07_22-36-04.jpg";
+import bg02 from "../Assets/herobg.png";
 import TextTransition, { presets } from "react-text-transition";
 import { Helmet } from "react-helmet-async";
 
 const strings = [
-  "توسعه دهنده فول استک هستم",
-  " مدرس برنامه نویسی هستم",
+  "توسعه دهنده فرانت هستم",
+  " فرد در حال یادگیری و آموزش هستم",
   " فریلنسر هستم",
-  " محتواساز دنیای برنامه نویسی هستم",
+  " علاقه مند به دنیای تکنولوژی هستم",
 ];
 
 const Home = ({helmetTitle}) => {
@@ -23,7 +23,7 @@ const Home = ({helmetTitle}) => {
 
   useEffect(() => {
     const typedName = new Typed(nameEl.current, {
-      strings: ["[[ یونس قربانی ]]"],
+      strings: ["[[ امیرحسین کیماسی]]"],
       typeSpeed: 80,
       backSpeed: 50,
       backDelay: 30,
@@ -31,7 +31,7 @@ const Home = ({helmetTitle}) => {
     });
     const stiringTranision = setInterval(() => {
       setIndex((index) => index + 1);
-    }, 2000);
+    }, 3500);
 
     return () => {
       typedName.destroy();

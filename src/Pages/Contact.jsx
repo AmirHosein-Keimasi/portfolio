@@ -44,7 +44,7 @@ const Contact = ({ helmetTitle }) => {
           text="ارتباط با من "
         />
 
-        <Grid container sx={{ mt: 5 }}>
+        <Grid container sx={{ mt: 10}}>
           <Slide
             direction="up"
             in={loading}
@@ -79,14 +79,15 @@ const Contact = ({ helmetTitle }) => {
                 backgroundImage: `url(${worldMap})`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-              }}
+                mt:5
+              }} 
             >
               <Typography
                 variant="h6"
                 color="black"
                 sx={{
                   fontFamily: "vazir",
-                  mt: 4,
+                  mt: 2,
                   display: {
                     xs: "none",
                     sm: "none",
@@ -110,7 +111,7 @@ const Contact = ({ helmetTitle }) => {
               >
                 👋{" "}
                 <a
-                  href="mailto:younes.gh@chmail.ir"
+                  href="mailto:amirhosein.kiemasi@gmail.com"
                   alt="email"
                   style={{
                     color: "tomato",

@@ -26,18 +26,18 @@ const About = ({ helmetTitle }) => {
           <Grid xs={12} sm={12} md={8} lg={8} xl={8}>
             
             <CustomDivider
-              bColor="primary.main"
-              cColor="primary"
+           bColor="#warning.main"
+           cColor="warning"
               icon={<CodeRounded />}
               align="right"
               text="توسعه دهنده فول استک و مدرس برنامه نویسی"
             />
 
-            <Infos>نام و نام خانوادگی : یونس قربانی</Infos>
-            <Infos>سن : ۳۰</Infos>
-            <Infos>شهر : کلاله</Infos>
-            <Infos>Younes.Gh@Chmail.ir : آدرس ایمیل</Infos>
-            <Infos>شماره موبایل : ۰۹۳۵۰۰۰۱۱۲۲</Infos>
+            <Infos>نام و نام خانوادگی : امیرحسین کیماسی </Infos>
+            <Infos>سن : 24</Infos>
+            <Infos>شهر : اصفهان</Infos>
+            <Infos>amirhosein.kiemasi@gmail.com : آدرس ایمیل</Infos>
+            <Infos>شماره موبایل : 0933</Infos>
 
             
           </Grid>
@@ -48,8 +48,8 @@ const About = ({ helmetTitle }) => {
         <Grid container>
           <Grid sx={{ width: 1, mt: 1 }}>
             <CustomDivider
-              bColor="secondary.main"
-              cColor="secondary"
+              bColor="#warning.main"
+              cColor="warning"
               icon={<SelfImprovementRounded />}
               align="center"
               text="مهات های من"

@@ -7,11 +7,9 @@ const SidebarTabs = () => {
   const { setDrawerOpen, handelPageNumber, pageNumber } =
     useContext(MainContext);
 
-
-    const data=tabsData()
+  const data = tabsData();
   return (
     <>
-
       <Tabs
         orientation="vertical"
         variant="scrollabel"
@@ -27,6 +25,15 @@ const SidebarTabs = () => {
             icon={tab.icon}
             label={tab.label}
             sx={{
+              "&:hover": {
+                color: "text.main",
+                opacity: 3,
+              },
+              "&.Mui-selected": {
+                color: "text.main",
+               fontWeight:"bold"
+                
+              },
               my: 0.5,
               mx: 1,
               "&.MuiTab-root": {

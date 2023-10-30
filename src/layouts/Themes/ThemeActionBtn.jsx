@@ -10,11 +10,11 @@ const ThemeActionBtn = () => {
 
   return (
     <Box
+    
       position="absolute"
       sx={{
         display: {
           xs: "none",
-
           md: "block",
         },
       }}
@@ -23,8 +23,13 @@ const ThemeActionBtn = () => {
         variant="extended"
         aria-label="ThemeChenge"
         size="small"
+        color="error"
         onClick={() => handelThemeCheng(true)}
-        sx={{ backgroundColor: "whitesmoke", ml: 2 }}
+        sx={{
+          backgroundColor:
+            theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+          ml: 2,
+        }}
       >
         {theme.palette.mode === "dark" ? (
           <WbSunnyOutlined sx={{ mr: 1 }} />

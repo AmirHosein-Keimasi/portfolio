@@ -21,11 +21,11 @@ const Comments = ({ helmetTitle }) => {
             </Helmet>
             <CardContent>
                 <CustomDivider
-                    bColor="success.main"
-                    cColor="success"
+                    bColor="warning.main"
+                    cColor="warning"
                     icon={<ForumRounded />}
                     align="center"
-                    text="نظ‍رات دانشجویان دوره های من"
+                    text="نظ‍رات و رضایت کارفرماها"
                 />
                 <CommentSlider />
             </CardContent>

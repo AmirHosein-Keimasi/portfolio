@@ -11,7 +11,7 @@ const Skill = ({icon,color,name,value}) => {
         variant="fullWidth"
         sx={{
           "&::before , &::after": {
-            borderColor: `${color}.main`,
+            borderColor: "primari.main",
           },
           mt:1
         }}
@@ -24,7 +24,7 @@ const Skill = ({icon,color,name,value}) => {
         ></Chip>
       </Divider>
 
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", mt:0.60 }}>
         <Box sx={{ minWidth: 35 }}>
         <Typography variant="body2" color="black">
                         <Badge

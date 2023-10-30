@@ -1,7 +1,8 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-
+import { useTheme } from "@mui/material/styles";
 const PagesContainer = ({ children }) => {
+  const theme = useTheme();
   return (
     <Grid
       xs={12}
@@ -9,7 +10,10 @@ const PagesContainer = ({ children }) => {
       md={9}
       ls={10}
       xl={10}
-      sx={{ backgroundColor: "gray" }}
+      sx={{
+        backgroundColor:
+          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+      }}
     >
       {children}
     </Grid>
