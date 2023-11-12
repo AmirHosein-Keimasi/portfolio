@@ -16,7 +16,7 @@ const strings = [
   " علاقه مند به دنیای تکنولوژی هستم",
 ];
 
-const Home = ({helmetTitle}) => {
+const Home = ({ helmetTitle }) => {
   const [index, setIndex] = useState(0);
   const nameEl = useRef(null);
   const infoEl = useRef(null);
@@ -48,8 +48,9 @@ const Home = ({helmetTitle}) => {
   }, []);
   return (
     <Box
+      //  `url(${bg02})`
       sx={{
-        backgroundImage: `url(${bg02})`,
+        backgroundColor: "gray",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -60,10 +61,10 @@ const Home = ({helmetTitle}) => {
         alignItems: "center",
       }}
     >
-<Helmet>
-  <title>{helmetTitle}</title>
-</Helmet>
- 
+      <Helmet>
+        <title>{helmetTitle}</title>
+      </Helmet>
+
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -71,7 +72,7 @@ const Home = ({helmetTitle}) => {
         options={links}
       />
       <Typography ref={nameEl} variant="h3" color="tomato"></Typography>
-      <Box component={"div"} sx={{ display: "flex", mt:3 }}>
+      <Box component={"div"} sx={{ display: "flex", mt: 3 }}>
         <TextTransition springConfig={presets.wobbly}>
           <Typography
             ref={infoEl}

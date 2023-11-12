@@ -9,7 +9,7 @@ const CustomAvatar = ({avatar,size,fallback})=>{
               sx={{
                 height: size,
                 width: size,
-                margin: "0 auto",
+               
                 display: {
                   xl: "block",
                   lg: "block",

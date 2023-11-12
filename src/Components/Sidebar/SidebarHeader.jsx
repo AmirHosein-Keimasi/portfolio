@@ -14,7 +14,7 @@ const SidebarHeader = () => {
       <ThemeActionBtn />
       <CustomAvatar size={200} fallback="A.K" avatar={avatar} />
 
-      <Typography color="text.main" sx={{ textAlign: "center" }} variant="h5">
+      <Typography color="text.main" sx={{ textAlign: "center" ,mt:2 }} variant="h5">
         <RandomReveal
           characterSet={alphabetPersian}
           isPlaying
