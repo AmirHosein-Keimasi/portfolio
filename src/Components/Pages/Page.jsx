@@ -1,9 +1,10 @@
 import React from "react";
 import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 const Page = (props) => {
   const { children, value, index, ...others } = props;
-
+  const theme = useTheme();
   return (
     <div
       role="tabpanel"
@@ -13,8 +14,15 @@ const Page = (props) => {
       {...others}
     >
       {value === index && (
-        <Box sx={{ height:"100vh", overflow:"hidden" }}>
-       {children}
+        <Box
+          sx={{
+            height: "100vh",
+            overflow: "hidden",
+            backgroundColor:
+              theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+          }}
+        >
+          {children}
         </Box>
       )}
     </div>

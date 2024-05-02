@@ -4,7 +4,6 @@ import MainContext from "../../Context";
 import { tabsData } from "../../constants/TabsData";
 import styled from "@mui/system/styled";
 import { AppBar, Toolbar, CssBaseline, Typography, Grid } from "@mui/material";
-import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
 
 const Item = styled("div")(({ theme }) => ({
   color: theme.palette.mode === "dark" ? "text.main" : "text.main",
@@ -20,7 +19,7 @@ const SidebarTabs = () => {
   return (
     <Box
       sx={{
-        mt:3,
+        height: "20vh",
         display: {
           flex: true,
           alignContent: "center",
@@ -29,11 +28,11 @@ const SidebarTabs = () => {
       }}
     >
       <Grid container>
-        <Grid xs={1}>
-          <Item></Item>
+        <Grid xs={3}>
+          <Item>xs</Item>
         </Grid>
 
-        <Grid xs={10}>
+        <Grid xs={6}>
           <Item>
             {" "}
             <Tabs
@@ -46,19 +45,20 @@ const SidebarTabs = () => {
               {data.map((tab, index) => (
                 <Tab
                   key={index}
-
+                  {...tab}
+                  icon={tab.icon}
                   label={tab.label}
                   sx={{
                     textDecoration: "none",
                     color: "text.main",
-                    fontSize: "16px",
+                    fontSize: "15px",
                     marginLeft: "70px",
                     "&:hover": {
-                      color: "success.main",
+                      color: "text.main",
                       opacity: 3,
                     },
                     "&.Mui-selected": {
-                      color: "success.main",
+                      color: "text.main",
                       fontWeight: "bold",
                     },
                     my: 0.5,
@@ -77,8 +77,8 @@ const SidebarTabs = () => {
           </Item>
         </Grid>
 
-        <Grid sx={{mt:1.5}} xs={1}>
-          <Item ><ThemeActionBtn/></Item>
+        <Grid  xs={3}>
+          <Item>xs</Item>
         </Grid>
       </Grid>
     </Box>

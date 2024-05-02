@@ -7,15 +7,16 @@ import { Helmet } from "react-helmet-async";
 import CustomAvatar from "../Components/common/CustomAvatar";
 import CustomDivider from "../Components/common/CustomDivider";
 import Skills from "../Components/Pages/Skills";
-
+import { useTheme } from "@mui/material/styles";
 const About = ({ helmetTitle }) => {
-
+  const theme = useTheme();
   return (
     <Card
       sx={{
         height: "100vh",
-        backgroundColor: "whitesmoke",
         overflowY: "scroll",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
     >
       <Helmet>
@@ -24,10 +25,9 @@ const About = ({ helmetTitle }) => {
       <CardContent>
         <Grid container sx={{ mx: 3 }}>
           <Grid xs={12} sm={12} md={8} lg={8} xl={8}>
-            
             <CustomDivider
-           bColor="#warning.main"
-           cColor="warning"
+              bColor="#warning.main"
+              cColor="warning"
               icon={<CodeRounded />}
               align="right"
               text="توسعه دهنده فول استک و مدرس برنامه نویسی"
@@ -38,8 +38,6 @@ const About = ({ helmetTitle }) => {
             <Infos>شهر : اصفهان</Infos>
             <Infos>amirhosein.kiemasi@gmail.com : آدرس ایمیل</Infos>
             <Infos>شماره موبایل : 0933</Infos>
-
-            
           </Grid>
           <Grid xs={0} sm={0} md={4} lg={4} xl={4}>
             <CustomAvatar size={200} fallback="A.K" avatar={avatar} />

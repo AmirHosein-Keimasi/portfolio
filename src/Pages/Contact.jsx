@@ -26,7 +26,7 @@ const Contact = ({ helmetTitle }) => {
     <Card
       sx={{
         height: "100vh",
-        backgroundColor: "whitesmoke",
+        backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         overflowY: "scroll",
         display: "flex",
         flexDirection: "column",
@@ -76,6 +76,7 @@ const Contact = ({ helmetTitle }) => {
               md={4}
               sx={{
                 textAlign: "center",
+                // backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
                 backgroundImage: `url(${worldMap})`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",

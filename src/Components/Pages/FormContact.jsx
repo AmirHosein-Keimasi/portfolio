@@ -14,6 +14,7 @@ import {
   Face6Rounded,
   SubjectRounded,
 } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
 
 const FormContact = () => {
   const contactInputNames = {
@@ -30,10 +31,11 @@ const FormContact = () => {
     },
     validationSchema: contactValidationSchema,
   });
+  const theme = useTheme();
 
   return (
     <form autoComplete="off" onSubmit={formik.handleSubmit}>
-      <CardContent sx={{backgroundColor:"#fffff1"}}>
+      <CardContent sx={{   backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",}}>
         <Grid container>
           <Grid xs={12} sx={{ direction: "ltr", p:4 }}>
             <Grid container spacing={2}>

@@ -1,6 +1,6 @@
 import Mainlayouts from "../layouts/Mainlayouts";
 import PagesContainer from "./PagesContainer";
-import {Page} from "../Components/Pages/index";
+import { Page } from "../Components/Pages/index";
 import SidebarContainer from "./SidebarContainer";
 import MainContext from "../Context/index";
 import DrawerActionButton from "../Components/drawer/DrawerActionButton";
@@ -65,15 +65,10 @@ function AppContainer() {
               <Resume helmetTitle=" وب سایت شخصی |رزومه من" />
             </Page>
             <Page value={pageNumber} index={3}>
-              <Typography>
-                {" "}
-                <Comment helmetTitle=" وب سایت شخصی | کامنت های من" />
-              </Typography>
+              <Comment helmetTitle=" وب سایت شخصی | کامنت های من" />
             </Page>
             <Page value={pageNumber} index={4}>
-              <Typography>
-                <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
-              </Typography>
+              <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
             </Page>
           </SwipeableViews>
         </PagesContainer>

@@ -8,7 +8,7 @@ import { links } from "../constants/particles";
 import bg02 from "../Assets/herobg.png";
 import TextTransition, { presets } from "react-text-transition";
 import { Helmet } from "react-helmet-async";
-
+import { useTheme } from "@mui/material/styles";
 const strings = [
   "توسعه دهنده فرانت هستم",
   " فرد در حال یادگیری و آموزش هستم",
@@ -20,7 +20,7 @@ const Home = ({ helmetTitle }) => {
   const [index, setIndex] = useState(0);
   const nameEl = useRef(null);
   const infoEl = useRef(null);
-
+  const theme = useTheme();
   useEffect(() => {
     const typedName = new Typed(nameEl.current, {
       strings: ["[[ امیرحسین کیماسی]]"],
@@ -50,7 +50,8 @@ const Home = ({ helmetTitle }) => {
     <Box
       //  `url(${bg02})`
       sx={{
-        backgroundColor: "gray",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -65,12 +66,12 @@ const Home = ({ helmetTitle }) => {
         <title>{helmetTitle}</title>
       </Helmet>
 
-      <Particles
+      {/* <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
         options={links}
-      />
+      /> */}
       <Typography ref={nameEl} variant="h3" color="tomato"></Typography>
       <Box component={"div"} sx={{ display: "flex", mt: 3 }}>
         <TextTransition springConfig={presets.wobbly}>

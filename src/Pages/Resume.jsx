@@ -10,10 +10,10 @@ import {
 import CustomDivider from "../Components/common/CustomDivider";
 import DevEduTimeline from "../Components/Pages/DevEduTimeline";
 import DevExpTimeline from "../Components/Pages/DevExpTimeline";
-
+import { useTheme } from "@mui/material/styles";
 const Resume = ({ helmetTitle }) => {
   const [loading, setLoading] = useState(false);
-
+  const theme = useTheme();
   useEffect(() => {
     setLoading(true);
 
@@ -26,8 +26,8 @@ const Resume = ({ helmetTitle }) => {
     <Card
       sx={{
         height: "100vh",
-        backgroundColor: "whitesmoke",
         overflowY: "scroll",
+        backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
     >
       <Helmet>
@@ -56,8 +56,8 @@ const Resume = ({ helmetTitle }) => {
 
           <Grid xs={6}>
             <CustomDivider
-               bColor="warning.main"
-               cColor="warning"
+              bColor="warning.main"
+              cColor="warning"
               icon={<SchoolRounded />}
               align="center"
               text="تحصیلات"

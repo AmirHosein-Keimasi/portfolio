@@ -23,12 +23,12 @@ const ThemeActionBtn = () => {
         variant="extended"
         aria-label="ThemeChenge"
         size="small"
-        color="error"
+        color="text.main"
         onClick={() => handelThemeCheng(true)}
         sx={{
           backgroundColor:
-            theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-          ml: 2,
+            theme.palette.mode === "dark" ? "primary.dark" : "primary.dark",
+          ml: 2,padding:2
         }}
       >
         {theme.palette.mode === "dark" ? (
