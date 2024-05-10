@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Divider } from "@mui/material";
-import { SidebarHeader, SidebarFooter, SidebarTabs } from ".";
+import { Box } from "@mui/material";
+import { SidebarTabs } from ".";
 import { useTheme } from "@mui/material/styles";
+import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
 
 const SidebarContent = () => {
   const theme = useTheme();
@@ -15,6 +16,7 @@ const SidebarContent = () => {
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
     >
+      <ThemeActionBtn />
       {/* <SidebarHeader/> */}
       {/* <Divider variant="middle" sx={{ mt: 1 }} /> */}
       <SidebarTabs />

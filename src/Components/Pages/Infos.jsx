@@ -6,7 +6,7 @@ const Infoos =  ({ children }) => {
   return (
     <Typography
             variant="body1"
-            color="black"
+            color="info"
             textAlign="left"
             sx={{ mt: 2 }}
         >
@@ -17,7 +17,7 @@ const Infoos =  ({ children }) => {
                     color: "primary.main",
                 }}
             />
-        </Typography>
+        --</Typography>
   );
 };
 

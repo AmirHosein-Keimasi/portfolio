@@ -8,6 +8,7 @@ import CustomAvatar from "../Components/common/CustomAvatar";
 import CustomDivider from "../Components/common/CustomDivider";
 import Skills from "../Components/Pages/Skills";
 import { useTheme } from "@mui/material/styles";
+import SocialMediaIcons from "../Components/SocialMediaIcons";
 const About = ({ helmetTitle }) => {
   const theme = useTheme();
   return (
@@ -24,9 +25,10 @@ const About = ({ helmetTitle }) => {
       </Helmet>
       <CardContent>
         <Grid container sx={{ mx: 3 }}>
-          <Grid xs={12} sm={12} md={8} lg={8} xl={8}>
+          {/* md={8} lg={8} xl={8} */}
+          <Grid xs={12} sm={12} >
             <CustomDivider
-              bColor="#warning.main"
+              bColor="text.main"
               cColor="warning"
               icon={<CodeRounded />}
               align="right"
@@ -34,19 +36,17 @@ const About = ({ helmetTitle }) => {
             />
 
             <Infos>نام و نام خانوادگی : امیرحسین کیماسی </Infos>
+            <Infos>شهر :  اصفهان , نجف آباد , مشهد</Infos>
             <Infos>سن : 24</Infos>
-            <Infos>شهر : اصفهان</Infos>
             <Infos>amirhosein.kiemasi@gmail.com : آدرس ایمیل</Infos>
-            <Infos>شماره موبایل : 0933</Infos>
+            <Infos>شماره موبایل : 09333788421</Infos>
           </Grid>
-          <Grid xs={0} sm={0} md={4} lg={4} xl={4}>
-            <CustomAvatar size={200} fallback="A.K" avatar={avatar} />
-          </Grid>
+          <Grid xs={12} sm={12} ></Grid>
         </Grid>
         <Grid container>
           <Grid sx={{ width: 1, mt: 1 }}>
             <CustomDivider
-              bColor="#warning.main"
+             bColor="text.main"
               cColor="warning"
               icon={<SelfImprovementRounded />}
               align="center"

@@ -11,6 +11,8 @@ const DrawerActionButton = () => {
     <Box
       position="absolute"
       sx={{
+        top: "20px",
+        left: "20px",
         display: {
           xs: "block",
           sm: "block",
@@ -26,7 +28,7 @@ const DrawerActionButton = () => {
         onClick={() => setDrawerOpen(true)}
         sx={{
           backgroundColor:
-            theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+            theme.palette.mode === "dark" ? "primary.dark" : "success.dark",
           m: 2,
         }}
       >

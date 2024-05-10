@@ -9,22 +9,34 @@ import bg02 from "../Assets/herobg.png";
 import TextTransition, { presets } from "react-text-transition";
 import { Helmet } from "react-helmet-async";
 import { useTheme } from "@mui/material/styles";
+import { Grid } from "@mui/material";
+import SocialMediaIcons from "../Components/SocialMediaIcons";
+
 const strings = [
-  "توسعه دهنده فرانت هستم",
-  " فرد در حال یادگیری و آموزش هستم",
-  " فریلنسر هستم",
-  " علاقه مند به دنیای تکنولوژی هستم",
+  "توسعه دهنده فرانت ",
+  "  در حال یادگیری وآموزش ",
+  " فریلنسر ",
+  " علاقه مند به دنیای تکنولوژی ",
 ];
 
 const Home = ({ helmetTitle }) => {
   const [index, setIndex] = useState(0);
   const nameEl = useRef(null);
   const infoEl = useRef(null);
+  const nameEl2 = useRef(null);
   const theme = useTheme();
   useEffect(() => {
     const typedName = new Typed(nameEl.current, {
-      strings: ["[[ امیرحسین کیماسی]]"],
-      typeSpeed: 80,
+      strings: ["      امیرحسین کیماسی    "],
+      typeSpeed: 50,
+      backSpeed: 50,
+      backDelay: 30,
+      showCursor: false,
+    });
+
+    const typed2 = new Typed(nameEl2.current, {
+      strings: [" هستم "],
+      typeSpeed: 400,
       backSpeed: 50,
       backDelay: 30,
       showCursor: false,
@@ -34,7 +46,9 @@ const Home = ({ helmetTitle }) => {
     }, 3500);
 
     return () => {
+      typed2.destroy();
       typedName.destroy();
+
       clearInterval(stiringTranision);
     };
   }, []);
@@ -47,51 +61,79 @@ const Home = ({ helmetTitle }) => {
     await console.log(container);
   }, []);
   return (
-    <Box
-      //  `url(${bg02})`
-      sx={{
-        backgroundColor:
-          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Helmet>
-        <title>{helmetTitle}</title>
-      </Helmet>
-
-      {/* <Particles
+    <Grid container>
+      {" "}
+      <Grid  xs={0} sm={2} md={4} ls={4} xl={3}></Grid>
+      <Grid xs={12} sm={10} md={8} ls={8} xl={8}>
+        <Box
+          //  `url(${bg02})`
+          sx={{
+            backgroundColor:
+              theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            height: "50vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "end",
+            ml:2
+          }}
+        >
+          <Helmet>
+            <title>{helmetTitle}</title>
+          </Helmet>
+          {/* <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
         options={links}
       /> */}
-      <Typography ref={nameEl} variant="h3" color="tomato"></Typography>
-      <Box component={"div"} sx={{ display: "flex", mt: 3 }}>
-        <TextTransition springConfig={presets.wobbly}>
-          <Typography
-            ref={infoEl}
-            variant="h4"
-            color="whitesmoke"
+          <Typography variant="h4" color={"text.main"}>
+            سلام من
+          </Typography>
+          <Box
             sx={{
-              textDecoration: "underline",
-              textDecorationColor: "primari",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {strings[index % strings.length]}
-          </Typography>
-        </TextTransition>
-        <Typography variant="h4" color="whitesmoke" sx={{ mr: 2 }}>
-          من یک
-        </Typography>
-      </Box>
-    </Box>
+            <Typography
+              variant="h3"
+              ref={nameEl2}
+              sx={{ paddingLeft: 2 }}
+              color={"text.main"}
+            >
+              هستم
+            </Typography>
+            <Typography
+              ref={nameEl}
+              variant="h3"
+              color={"success.main"}
+            ></Typography>{" "}
+          </Box>
+
+          <Box component={"div"} sx={{ display: "flex", mt: 3 }}>
+            <TextTransition springConfig={presets.wobbly}>
+              <Typography
+                ref={infoEl}
+                variant="h4"
+                color="text.main"
+                sx={{
+                  textDecoration: "underline",
+                  textDecorationColor: "primari",
+                }}
+              >
+                {strings[index % strings.length]}
+              </Typography>
+            </TextTransition>
+          </Box>
+        </Box>
+        <SocialMediaIcons textAlign={'end'}sx={{ mt: 20 }} />
+      </Grid>
+    </Grid>
   );
 };
 

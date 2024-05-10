@@ -10,13 +10,10 @@ const ThemeActionBtn = () => {
 
   return (
     <Box
-    
-      position="absolute"
+      position="fixed"
       sx={{
-        display: {
-          xs: "none",
-          md: "block",
-        },
+        top: "40px",
+        right: "40px",
       }}
     >
       <Fab
@@ -27,8 +24,9 @@ const ThemeActionBtn = () => {
         onClick={() => handelThemeCheng(true)}
         sx={{
           backgroundColor:
-            theme.palette.mode === "dark" ? "primary.dark" : "primary.dark",
-          ml: 2,padding:2
+            theme.palette.mode === "dark" ? "primary.dark" : "success.dark",
+          ml: 2,
+          padding: 2,
         }}
       >
         {theme.palette.mode === "dark" ? (

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { RandomReveal } from "react-random-reveal";
 import { alphabetPersian } from "../../constants/alphabetPersian";
@@ -11,10 +11,13 @@ const SidebarHeader = () => {
   const [start, setStart] = useState(false);
   return (
     <>
-      <ThemeActionBtn />
       <CustomAvatar size={200} fallback="A.K" avatar={avatar} />
 
-      <Typography color="text.main" sx={{ textAlign: "center" ,mt:2 }} variant="h5">
+      <Typography
+        color="text.main"
+        sx={{ textAlign: "center", mt: 10 }}
+        variant="h5"
+      >
         <RandomReveal
           characterSet={alphabetPersian}
           isPlaying
@@ -28,7 +31,7 @@ const SidebarHeader = () => {
       {start && (
         <Typography
           color="error.main"
-          sx={{ textAlign: "center" }}
+          sx={{ textAlign: "center", mt: 10 }}
           variant="caption"
         >
           <RandomReveal
@@ -39,7 +42,8 @@ const SidebarHeader = () => {
           />
         </Typography>
       )}
-      <SocialMediaIcons />
+
+      <SocialMediaIcons textAlign={"center"} />
     </>
   );
 };

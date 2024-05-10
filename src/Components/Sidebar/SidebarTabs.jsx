@@ -20,7 +20,7 @@ const SidebarTabs = () => {
   return (
     <Box
       sx={{
-        mt:3,
+        mt: 3,
         display: {
           flex: true,
           alignContent: "center",
@@ -29,11 +29,25 @@ const SidebarTabs = () => {
       }}
     >
       <Grid container>
-        <Grid xs={1}>
-          <Item></Item>
-        </Grid>
+      
 
-        <Grid xs={10}>
+        <Grid
+         xs={8}
+         sm={8}
+         md={8}
+         ls={9}
+         xl={9}
+          sx={{
+            ml:20,
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "block",
+              lg: "block",
+              xl: "block",
+            },
+          }}
+        >
           <Item>
             {" "}
             <Tabs
@@ -46,7 +60,6 @@ const SidebarTabs = () => {
               {data.map((tab, index) => (
                 <Tab
                   key={index}
-
                   label={tab.label}
                   sx={{
                     textDecoration: "none",
@@ -77,8 +90,19 @@ const SidebarTabs = () => {
           </Item>
         </Grid>
 
-        <Grid sx={{mt:1.5}} xs={1}>
-          <Item ><ThemeActionBtn/></Item>
+        <Grid
+          sx={{
+            mt: 1.5,
+          }}
+          xs={12}
+          sm={12}
+          md={1}
+          ls={1}
+          xl={1}
+        >
+          <Item>
+            <ThemeActionBtn />
+          </Item>
         </Grid>
       </Grid>
     </Box>

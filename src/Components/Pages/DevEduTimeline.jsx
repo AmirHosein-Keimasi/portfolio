@@ -1,5 +1,4 @@
 import { Slide, Typography } from "@mui/material";
-
 import {
     Timeline,
     TimelineItem,
@@ -9,7 +8,6 @@ import {
     TimelineConnector,
 } from "@mui/lab";
 import { SchoolRounded } from "@mui/icons-material";
-
 import { devEdu } from "../../constants/DevSkills";
 
 
@@ -26,8 +24,8 @@ const DevEduTimeline = ({ loading }) => {
                 >
                     <TimelineItem key={index}>
                         <TimelineSeparator>
-                            <TimelineDot color="info" variant="outlined">
-                                <SchoolRounded color="info" />
+                            <TimelineDot color="warning" variant="outlined">
+                                <SchoolRounded color="warning" />
                             </TimelineDot>
                             {index !== 3 ? <TimelineConnector /> : null}
                         </TimelineSeparator>
@@ -35,13 +33,13 @@ const DevEduTimeline = ({ loading }) => {
                             <Typography variant="caption" color="gray">
                                 {item.year}
                             </Typography>
-                            <Typography variant="body1" color="black">
+                            <Typography variant="body1" color="text.main">
                                 {item.cert}
                             </Typography>
-                            <Typography variant="body2" color="black">
+                            <Typography variant="body2" color="text.main">
                                 {item.major}
                             </Typography>
-                            <Typography variant="body2" color="black">
+                            <Typography variant="body2" color="text.main">
                                 {item.place}
                             </Typography>
                         </TimelineContent>

@@ -38,7 +38,7 @@ const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
             label={
               <Typography
                 variant="body1"
-                color="black"
+                color="text.main"
                 sx={{ textAlign: "center" }}
               >
                 {text}

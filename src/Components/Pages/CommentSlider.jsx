@@ -48,7 +48,7 @@ const CommentSlider = () => {
               </Typography>
               <Card
                 sx={{
-                  backgroundColor: "warning.main",
+                  backgroundColor: "success.main",
                   width: 1 / 2,
                   m: "0 auto",
                   borderRadius: 5,

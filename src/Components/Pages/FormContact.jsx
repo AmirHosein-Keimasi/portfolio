@@ -35,12 +35,19 @@ const FormContact = () => {
 
   return (
     <form autoComplete="off" onSubmit={formik.handleSubmit}>
-      <CardContent sx={{   backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",}}>
+      <CardContent
+        sx={{
+          backgroundColor:
+            theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+          boxShadow: "none",
+        }}
+      >
         <Grid container>
-          <Grid xs={12} sx={{ direction: "ltr", p:4 }}>
+          <Grid xs={12} sx={{ direction: "ltr", p: 4 }}>
             <Grid container spacing={2}>
-              <Grid xs={12} md={6} >
-                <TextField  sx={{p:0.5}}
+              <Grid xs={12} md={6}>
+                <TextField
+                  sx={{ p: 0.5 }}
                   fullWidth
                   size="small"
                   color="warning"
@@ -65,7 +72,8 @@ const FormContact = () => {
                 />
               </Grid>
               <Grid xs={12} md={6}>
-                <TextField  sx={{p:0.5}}
+                <TextField
+                  sx={{ p: 0.5 }}
                   fullWidth
                   size="small"
                   color="warning"
@@ -86,7 +94,8 @@ const FormContact = () => {
                 />
               </Grid>
               <Grid xs={12} md={12}>
-                <TextField  sx={{p:0.5}}
+                <TextField
+                  sx={{ p: 0.5 }}
                   fullWidth
                   size="small"
                   color="warning"
@@ -111,7 +120,8 @@ const FormContact = () => {
                 />
               </Grid>
               <Grid xs={12} md={12}>
-                <TextField  sx={{p:0.5}}
+                <TextField
+                  sx={{ p: 0.5 }}
                   fullWidth
                   multiline
                   rows={6}
@@ -138,9 +148,11 @@ const FormContact = () => {
         sx={{
           alignItems: "end",
           flexDirection: "column",
+          backgroundColor:
+            theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         }}
       >
-        <Button 
+        <Button
           type="submit"
           color="success"
           variant="contained"

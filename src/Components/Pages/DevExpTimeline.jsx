@@ -1,5 +1,4 @@
 import { Slide, Typography } from "@mui/material";
-
 import {
     Timeline,
     TimelineItem,
@@ -9,7 +8,6 @@ import {
     TimelineConnector,
 } from "@mui/lab";
 import { HomeRepairServiceRounded } from "@mui/icons-material";
-
 import { devEdu } from "../../constants/DevSkills";
 
 const DevExpTimeline = ({ loading }) => {
@@ -34,13 +32,13 @@ const DevExpTimeline = ({ loading }) => {
                             <Typography variant="caption" color="gray">
                                 {item.year}
                             </Typography>
-                            <Typography variant="body1" color="black">
+                            <Typography variant="body1" color="text.main">
                                 {item.cert}
                             </Typography>
-                            <Typography variant="body2" color="black">
+                            <Typography variant="body2" color="text.main">
                                 {item.major}
                             </Typography>
-                            <Typography variant="body2" color="black">
+                            <Typography variant="body2" color="text.main">
                                 {item.place}
                             </Typography>
                         </TimelineContent>

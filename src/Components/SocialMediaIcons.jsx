@@ -1,13 +1,19 @@
 import { Box, IconButton } from "@mui/material";
-import { GitHub, Telegram, Instagram, WhatsApp, LinkedIn } from "@mui/icons-material";
+import {
+  GitHub,
+  Telegram,
+  Instagram,
+  WhatsApp,
+  LinkedIn,
+} from "@mui/icons-material";
 
-const SocialMediaIcons = () => {
+const SocialMediaIcons = ({textAlign}) => {
   return (
     <Box
       component="div"
       sx={{
-        m: "0 auto",
-        textAlign: "center",
+      mt:10,
+        textAlign: textAlign,
       }}
     >
       <IconButton aria-label="Github">
@@ -18,10 +24,10 @@ const SocialMediaIcons = () => {
         >
           <GitHub
             sx={{
-              color: "gray",
+              color: "text.main",
+              opacity: 3,
               "&:hover": {
                 color: "text.main",
-                opacity: 3,
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -38,10 +44,11 @@ const SocialMediaIcons = () => {
         >
           <Instagram
             sx={{
-              color: "gray",
+              color: "text.main",
+              opacity: 3,
               "&:hover": {
                 color: "text.main",
-                opacity: 3,
+               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -51,13 +58,18 @@ const SocialMediaIcons = () => {
         </a>
       </IconButton>
       <IconButton aria-label="Telegram">
-        <a href="https://telegram.im/@amir1_1" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://telegram.im/@amir1_1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Telegram
             sx={{
-              color: "gray",
+              color: "text.main",
+              opacity: 3,
               "&:hover": {
                 color: "text.main",
-                opacity: 3,
+               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -67,13 +79,18 @@ const SocialMediaIcons = () => {
         </a>
       </IconButton>
       <IconButton aria-label="WhatsApp">
-        <a href="https://telegram.im/@amir1_1" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://telegram.im/@amir1_1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <WhatsApp
             sx={{
-              color: "gray",
+              color: "text.main",
+              opacity: 3,
               "&:hover": {
                 color: "text.main",
-                opacity: 3,
+               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -83,13 +100,18 @@ const SocialMediaIcons = () => {
         </a>
       </IconButton>
       <IconButton aria-label="Linkdin">
-        <a href="https://www.linkedin.com/in/amir-hosein-keimasi-1b6849212/" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.linkedin.com/in/amir-hosein-keimasi-1b6849212/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <LinkedIn
             sx={{
-              color: "gray",
+              color: "text.main",
+              opacity: 3,
               "&:hover": {
                 color: "text.main",
-                opacity: 3,
+               
               },
               "&.Mui-selected": {
                 color: "text.main",
