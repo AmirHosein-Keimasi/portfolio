@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Card } from "@mui/material";
 import Typed from "typed.js";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
@@ -11,6 +11,9 @@ import { Helmet } from "react-helmet-async";
 import { useTheme } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import SocialMediaIcons from "../Components/SocialMediaIcons";
+import { Image } from "mui-image";
+import image from "../Assets/1.png";
+import Imgs from "./Imgs";
 
 const strings = [
   "توسعه دهنده فرانت ",
@@ -62,9 +65,12 @@ const Home = ({ helmetTitle }) => {
   }, []);
   return (
     <Grid container>
-      {" "}
-      <Grid  xs={0} sm={2} md={4} ls={4} xl={3}></Grid>
-      <Grid xs={12} sm={10} md={8} ls={8} xl={8}>
+      {/*   */}
+
+      <Grid xs={0} sm={4} md={6} ls={7} xl={6}>
+        <Imgs/>
+      </Grid>
+      <Grid xs={12} sm={8} md={6} ls={5} xl={5}>
         <Box
           //  `url(${bg02})`
           sx={{
@@ -73,12 +79,12 @@ const Home = ({ helmetTitle }) => {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            height: "50vh",
+            height: "65vh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "end",
-            ml:2
+            ml: 2,
           }}
         >
           <Helmet>
@@ -90,7 +96,7 @@ const Home = ({ helmetTitle }) => {
         loaded={particlesLoaded}
         options={links}
       /> */}
-          <Typography variant="h4" color={"text.main"}>
+          <Typography variant="h5" color={"text.main"}>
             سلام من
           </Typography>
           <Box
@@ -131,7 +137,7 @@ const Home = ({ helmetTitle }) => {
             </TextTransition>
           </Box>
         </Box>
-        <SocialMediaIcons textAlign={'end'}sx={{ mt: 20 }} />
+        <SocialMediaIcons textAlign={"end"} sx={{ mb: 10 }} />
       </Grid>
     </Grid>
   );
