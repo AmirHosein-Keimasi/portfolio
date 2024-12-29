@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# پروژه پورتفولیو PWA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![بنر پورتفولیو PWA](https://via.placeholder.com/1000x300?text=Portfolio+PWA)
 
-## Available Scripts
+به **پروژه پورتفولیو PWA** خوش آمدید. این اپلیکیشن وب پیشرفته (PWA) برای نمایش پورتفولیو شما با ویژگی‌های مدرن و تعاملی طراحی شده است. این پروژه از React، Material-UI و کتابخانه‌های پیشرفته دیگر استفاده می‌کند تا تجربه کاربری جذابی ارائه دهد.
 
-In the project directory, you can run:
+## ویژگی‌ها
 
-### `npm start`
+- **Progressive Web App**: Works offline and supports installation on devices.
+- **Responsive Design**: Optimized for all screen sizes.
+- **Modern Libraries**: Built using React 18, Material-UI, and more.
+- **Custom Animations**: Interactive UI elements with animations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Live Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Visit the Live Site](http://amirhosein.kiemasi.whi.ir)
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend**: React, Material-UI, Formik, Typed.js
+- **Routing**: React Router DOM
+- **Animations**: React Particles, React Text Transition
+- **Build Tools**: React Scripts, Web Vitals
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these steps to set up the project locally:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/portfolio-pwa.git
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate to the project directory:
+   ```bash
+   cd portfolio-pwa
+   ```
 
-### `npm run eject`
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This project is configured for deployment using GitHub Pages. To deploy, run:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run deploy
+```
 
-## Learn More
+## Scripts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Start Development Server**: `npm start`
+- **Build for Production**: `npm run build`
+- **Run Tests**: `npm test`
+- **Deploy to GitHub Pages**: `npm run deploy`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Dependencies
 
-### Code Splitting
+Here is the list of key dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```json
+{
+  "@mui/material": "^5.14.15",
+  "react": "^18.0.0",
+  "formik": "^2.2.9",
+  "react-router-dom": "^6.3.0"
+}
+```
 
-### Analyzing the Bundle Size
+For the full list, see [package.json](./package.json).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contributing
 
-### Making a Progressive Web App
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
+This project is licensed under the [MIT License](./LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed with ❤️ by [Amirhosein Kiemasi](http://amirhosein.kiemasi.whi.ir).
