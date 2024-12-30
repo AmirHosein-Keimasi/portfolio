@@ -44,7 +44,7 @@ const Contact = ({ helmetTitle }) => {
           text="ارتباط با من "
         />
 
-        <Grid container sx={{ mt: 10 }}>
+        <Grid container sx={{ mt: 4 }}>
           <Slide
             direction="up"
             in={loading}
