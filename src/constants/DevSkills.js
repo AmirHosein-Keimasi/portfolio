@@ -117,7 +117,7 @@ export const devEdu = [
 export const devEx = [
   {
     year: " ",
-    cert: "GymTemplate(24)",
+    cert: "Gym",
     major: "with NextJs",
     place: "https://github.com/AmirHosein-Keimasi/GymTemplate.git",
   },
@@ -247,7 +247,6 @@ export const projects = [
     features: `
       طراحی مینیمال و واکنش‌گرا
 انیمیشن‌های جذاب برای تعامل بهتر
-تجربه کاربری سریع و حرفه‌ای
     `,
     imgSrc: img2,
     websiteLink: "",

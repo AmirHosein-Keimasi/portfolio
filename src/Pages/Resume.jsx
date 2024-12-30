@@ -25,9 +25,10 @@ const Resume = ({ helmetTitle }) => {
   return (
     <Card
       sx={{
-        height: "100vh",
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+        height: "100vh",
+        overflowY: "auto",
       }}
     >
       <Helmet>

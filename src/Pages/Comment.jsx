@@ -10,11 +10,13 @@ const Comments = ({ helmetTitle }) => {
   return (
     <Card
       sx={{
-        height: "100vh",
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         display: "flex",
         flexDirection: "column",
+        minHeight: "60vh", // حداقل ارتفاع کارت برای اطمینان از فضای مناسب
+        marginBottom: { xs: "16px", sm: "32px", md: "40px" }, // فاصله پایین برای صفحات کوچک‌تر
+        paddingBottom: "16px", // فاصله داخلی پایین برای کارت
       }}
     >
       <Helmet>

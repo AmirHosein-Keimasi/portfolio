@@ -39,7 +39,7 @@ const ContactCard = () => {
       <CustomDivider
         bColor="text.main"
         cColor="warning"
-        icon={<AccountCircle />}
+        icon={<PhoneIcon />}
         align="center"
         text="تماس با من "
       />

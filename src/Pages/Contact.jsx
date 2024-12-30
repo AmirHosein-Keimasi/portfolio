@@ -122,7 +122,6 @@ const Contact = ({ helmetTitle }) => {
                 </a>{" "}
                 بزن به من
               </Typography>
-              <SocialMediaIcons />
             </Grid>
           </Slide>
         </Grid>

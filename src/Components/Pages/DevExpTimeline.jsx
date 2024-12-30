@@ -38,14 +38,7 @@ const DevExpTimeline = ({ loading }) => {
               <Typography variant="body2" color="text.main">
                 {item.major}
               </Typography>
-              <Typography variant="caption" color="text.main">
-                <a
-                  href={item.place}
-                  style={{ textDecoration: "none", color: "gray" }}
-                >
-                  لینک گیت
-                </a>
-              </Typography>
+              
             </TimelineContent>
           </TimelineItem>
         </Slide>

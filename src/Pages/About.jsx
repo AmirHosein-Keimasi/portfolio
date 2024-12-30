@@ -1,12 +1,12 @@
 import { Card, CardContent } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { CodeRounded, SelfImprovementRounded } from "@mui/icons-material";
-import { Infos } from "../Components/Pages";
+import {  SelfImprovementRounded } from "@mui/icons-material";
 import { Helmet } from "react-helmet-async";
 import CustomDivider from "../Components/common/CustomDivider";
 import Skills from "../Components/Pages/Skills";
 import { useTheme } from "@mui/material/styles";
 import SuftSkills from "../Components/Pages/SuftSkills";
+
 const About = ({ helmetTitle }) => {
   const theme = useTheme();
   return (
@@ -14,6 +14,8 @@ const About = ({ helmetTitle }) => {
       sx={{
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+        height: "100vh", 
+        overflowY: "auto",
       }}
     >
       <Helmet>
@@ -22,20 +24,7 @@ const About = ({ helmetTitle }) => {
       <CardContent>
         <Grid container sx={{ mx: 3 }}>
           {/* md={8} lg={8} xl={8} */}
-          <Grid xs={12} sm={12}>
-            <CustomDivider
-              bColor="text.main"
-              cColor="warning"
-              icon={<CodeRounded />}
-              align="center"
-              text="توسعه دهنده فول استک  "
-            />
-
-            <Infos> امیرحسین کیماسی </Infos>
-            <Infos> اصفهان , نجف آباد , مشهد</Infos>
-            <Infos>amirhosein.kiemasi@gmail.com</Infos>
-            <Infos> 09333788421</Infos>
-          </Grid>
+          <Grid xs={12} sm={12}></Grid>
           <Grid xs={12} sm={12}></Grid>
         </Grid>
         <Grid container>

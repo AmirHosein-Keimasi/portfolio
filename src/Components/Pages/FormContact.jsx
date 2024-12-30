@@ -39,7 +39,6 @@ const FormContact = () => {
         sx={{
           backgroundColor:
             theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-          boxShadow: "none",
         }}
       >
         <Grid container>

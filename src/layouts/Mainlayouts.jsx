@@ -22,7 +22,6 @@ const Mainlayouts = ({ children, mode }) => {
             <Helmet>
               <title>وب سایت شخصی امیرحسین کیماسی</title>
             </Helmet>
-            {/* grid System */}
 
             {children}
           </HelmetProvider>

@@ -4,12 +4,12 @@ import { Page } from "../Components/Pages/index";
 import SidebarContainer from "./SidebarContainer";
 import MainContext from "../Context/index";
 import DrawerActionButton from "../Components/Drawer/DrawerActionButton";
-import SwipeableViews from "react-swipeable-views-react-18-fix";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Home, About, Comment, Resume, Contact } from "../Pages/index";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { Sidebar } from "../Components/Sidebar";
+import ContactCard from "../Pages/ContactCard";
 function AppContainer() {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -50,25 +50,25 @@ function AppContainer() {
           <Sidebar />
         </SidebarContainer>
         <DrawerActionButton />
-
+        <Page value={pageNumber} index={0}>
+          <Home helmetTitle=" وب سایت شخصی امیرحسین کیماسی" />
+        </Page>
         <PagesContainer>
-          <SwipeableViews index={pageNumber} onchengeIndex={handelPageNumber}>
-            <Page value={pageNumber} index={0}>
-              <Home helmetTitle=" وب سایت شخصی امیرحسین کیماسی" />
-            </Page>
-            <Page value={pageNumber} index={1}>
-              <About helmetTitle=" وب سایت شخصی |درباره من" />
-            </Page>
-            <Page value={pageNumber} index={2}>
-              <Resume helmetTitle=" وب سایت شخصی |رزومه من" />
-            </Page>
-            <Page value={pageNumber} index={3}>
-              <Comment helmetTitle=" وب سایت شخصی | کامنت های من" />
-            </Page>
-            <Page value={pageNumber} index={4}>
-              <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
-            </Page>
-          </SwipeableViews>
+          <Page value={pageNumber} index={1}>
+            <About helmetTitle=" وب سایت شخصی |درباره من" />
+          </Page>
+          <Page value={pageNumber} index={2}>
+            <Resume helmetTitle=" وب سایت شخصی |رزومه من" />
+          </Page>
+          <Page value={pageNumber} index={3}>
+            <Comment helmetTitle=" وب سایت شخصی | کامنت های من" />
+          </Page>
+          <Page value={pageNumber} index={4}>
+            <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
+          </Page>
+          <Page value={pageNumber} index={5}>
+            <ContactCard helmetTitle=" وب سایت شخصی |  تماس با من" />
+          </Page>
         </PagesContainer>
       </Mainlayouts>
     </MainContext.Provider>
