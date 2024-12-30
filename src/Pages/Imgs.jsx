@@ -1,3 +1,4 @@
+
 import Image from "mui-image";
 import React, { useState, useEffect } from "react";
 import src1 from "../Assets/1.png";
@@ -10,6 +11,7 @@ const Imgs = () => {
   const [randomImage, setRandomImage] = useState("");
 
   useEffect(() => {
+
     const randomIndex = Math.floor(Math.random() * ImageList.length);
     setRandomImage(ImageList[randomIndex]);
   }, []);
@@ -17,10 +19,19 @@ const Imgs = () => {
   return (
     <Image
       src={randomImage}
+      height="60%"
+      width="105%"
       shift="top"
+      fit="cover"
       sx={{
-        borderRadius: "999px",
-        top: "-100px",
+        mr: 10,
+        display: {
+          xs: "none",
+          sm: "none",
+          md: "none",
+          lg: "block",
+          xl: "block",
+        },
       }}
     />
   );

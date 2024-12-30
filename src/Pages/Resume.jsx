@@ -26,8 +26,8 @@ const Resume = ({ helmetTitle }) => {
     <Card
       sx={{
         height: "100vh",
-        backgroundColor:
-          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+        overflowY: "scroll",
+        backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
     >
       <Helmet>
@@ -35,8 +35,8 @@ const Resume = ({ helmetTitle }) => {
       </Helmet>
       <CardContent>
         <CustomDivider
-          bColor="text.main"
-        cColor="warning"
+          bColor="warning.main"
+          cColor="warning"
           icon={<SettingsEthernetRounded />}
           align="center"
           text="رزومه من"

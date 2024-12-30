@@ -8,7 +8,6 @@ import worldMap from "../Assets/map.svg";
 import CustomDivider from "../Components/common/CustomDivider";
 import FormContact from "../Components/Pages/FormContact";
 import SocialMediaIcons from "../Components/SocialMediaIcons";
-import ContactCard from "./ContactCard";
 
 const Contact = ({ helmetTitle }) => {
   const [loading, setLoading] = useState(false);
