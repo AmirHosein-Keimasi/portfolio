@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, Typography, Grid, IconButton, Link } from "@mui/material";
+import { Box, Card, Typography, IconButton } from "@mui/material";
 import {
   Email as EmailIcon,
   Telegram as TelegramIcon,

@@ -1,5 +1,5 @@
 import { CopyrightRounded } from "@mui/icons-material";
-import { Box, Typography, Link, Chip } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 const SidebarFooter = () => {

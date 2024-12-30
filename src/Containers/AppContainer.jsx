@@ -4,7 +4,7 @@ import { Page } from "../Components/Pages/index";
 import SidebarContainer from "./SidebarContainer";
 import MainContext from "../Context/index";
 import DrawerActionButton from "../Components/Drawer/DrawerActionButton";
-import SwipeableViews from "react-swipeable-views";
+import SwipeableViews from "react-swipeable-views-react-18-fix";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Home, About, Comment, Resume, Contact } from "../Pages/index";
 import { useTheme } from "@mui/material/styles";

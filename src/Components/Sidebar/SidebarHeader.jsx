@@ -1,8 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { RandomReveal } from "react-random-reveal";
 import { alphabetPersian } from "../../constants/alphabetPersian";
-import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
 import avatar from "../../Assets/logo.jpg";
 import CustomAvatar from "../common/CustomAvatar";
 import SocialMediaIcons from "../SocialMediaIcons";
