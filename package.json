@@ -1,7 +1,7 @@
 {
   "name": "portfolio-pwa",
   "version": "0.1.0",
-  "homepage": "http://amirhosein.kiemasi.whi.ir",
+  "homepage": "",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -24,7 +24,6 @@
     "react-random-reveal": "^2.0.0",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0",
-    "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-react-18-fix": "^0.14.1",
     "react-text-transition": "^3.1.0",
     "slick-carousel": "^1.8.1",
