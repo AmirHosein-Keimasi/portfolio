@@ -1,12 +1,9 @@
 import { SidebarContent } from "./";
-import SidebarDrawer from '../drawer/SidebarDrawer'
-
+import SidebarDrawer from "../Drawer/SidebarDrawer";
 
 const Sidebar = () => {
-
   return (
     <>
-  
       <SidebarContent />
       <SidebarDrawer />
     </>
