@@ -38,7 +38,6 @@ const DevExpTimeline = ({ loading }) => {
               <Typography variant="body2" color="text.main">
                 {item.major}
               </Typography>
-              
             </TimelineContent>
           </TimelineItem>
         </Slide>

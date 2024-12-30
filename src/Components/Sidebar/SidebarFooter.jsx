@@ -31,7 +31,7 @@ const SidebarFooter = () => {
           </Link>
           <Typography sx={{ mt: 1 }}>
             {" "}
-            کپی رایت 1402{" "}
+            کپی رایت 1403{" "}
             <CopyrightRounded sx={{ verticalAlign: "middle", height: 10 }} />
           </Typography>
         </Typography>

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import {  SelfImprovementRounded } from "@mui/icons-material";
+import { SelfImprovementRounded } from "@mui/icons-material";
 import { Helmet } from "react-helmet-async";
 import CustomDivider from "../Components/common/CustomDivider";
 import Skills from "../Components/Pages/Skills";
@@ -14,7 +14,7 @@ const About = ({ helmetTitle }) => {
       sx={{
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-        height: "100vh", 
+        height: "100vh",
         overflowY: "auto",
       }}
     >

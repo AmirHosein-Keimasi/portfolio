@@ -68,7 +68,7 @@ const ContactCard = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: 5,
+                padding: 3,
                 boxShadow: 1,
                 borderRadius: 2,
                 backgroundColor: "warning.main",

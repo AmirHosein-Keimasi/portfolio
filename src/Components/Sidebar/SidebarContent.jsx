@@ -12,6 +12,7 @@ const SidebarContent = () => {
         justifyContent: "center",
         textAlign: "center",
         mt: 1,
+        py: 3,
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
