@@ -1,0 +1,23 @@
+{
+  "short_name": "پورتفولیو",
+  "name": "پورتفولیوی امیرحسین کیماسی - توسعه‌دهنده وب و طراح رابط کاربری",
+  "description": "پروژه‌های حرفه‌ای طراحی وب، توسعه React و بهینه‌سازی رابط کاربری (UI/UX). آماده همکاری در پروژه‌های خلاقانه و نوآورانه هستم.",
+  "icons": [
+    {
+      "src": "images/192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation": "portrait"
+}
