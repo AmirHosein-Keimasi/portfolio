@@ -26,7 +26,7 @@ const contactData = [
     label: "GitHub",
     value: "amirhosein-keimasi",
   },
-  { icon: <LanguageIcon />, label: "Website", value: "BijanProgrammer.com" },
+  { icon: <LanguageIcon />, label: "Website", value: "https://www.amirhoseinkeimasi.ir" },
 ];
 
 const ContactCard = () => {
