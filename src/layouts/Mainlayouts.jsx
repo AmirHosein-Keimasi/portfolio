@@ -6,8 +6,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { darkTheme, lightTheme } from "./Themes/theme";
 import { CacheProvider } from "@emotion/react";
 
-
-
 const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],

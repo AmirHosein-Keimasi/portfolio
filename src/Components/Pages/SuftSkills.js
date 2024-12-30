@@ -26,7 +26,7 @@ const skills = [
 
 function SoftSkills() {
   return (
-    <Box sx={{ padding: 5,  textAlign: "center" }}>
+    <Box sx={{ padding: 5, textAlign: "center" }}>
       <CustomDivider
         bColor="text.main"
         cColor="warning"

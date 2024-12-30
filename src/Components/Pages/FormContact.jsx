@@ -58,7 +58,7 @@ const FormContact = () => {
                     formik.touched.fullname ? formik.errors.fullname : null
                   }
                   error={Boolean(
-                    formik.touched.fullname && formik.errors.fullname
+                    formik.touched.fullname && formik.errors.fullname,
                   )}
                   value={formik.values?.fullname}
                   onChange={formik.handleChange}
@@ -106,7 +106,7 @@ const FormContact = () => {
                     formik.touched.subject ? formik.errors.subject : null
                   }
                   error={Boolean(
-                    formik.touched.subject && formik.errors.subject
+                    formik.touched.subject && formik.errors.subject,
                   )}
                   value={formik.values?.subjectj}
                   onChange={formik.handleChange}
@@ -134,7 +134,7 @@ const FormContact = () => {
                     formik.touched.message ? formik.errors.message : null
                   }
                   error={Boolean(
-                    formik.touched.message && formik.errors.message
+                    formik.touched.message && formik.errors.message,
                   )}
                   value={formik.values?.message}
                   onChange={formik.handleChange}

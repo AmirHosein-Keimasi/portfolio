@@ -4,8 +4,6 @@ import { Divider, Chip, Typography, Slide } from "@mui/material";
 const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
   const [loading, setLoading] = useState(false);
 
-
-
   useEffect(() => {
     setLoading(true);
 

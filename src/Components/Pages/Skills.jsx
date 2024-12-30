@@ -41,30 +41,30 @@ const Skills = () => {
       setHtml((oldProgress) => Math.min(oldProgress + Math.random() * 10, 99));
       setCss((oldProgress) => Math.min(oldProgress + Math.random() * 10, 90));
       setJavascript((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 85)
+        Math.min(oldProgress + Math.random() * 10, 85),
       );
       setReact((oldProgress) => Math.min(oldProgress + Math.random() * 10, 85));
       setNextJs((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 85)
+        Math.min(oldProgress + Math.random() * 10, 85),
       );
       setRedux((oldProgress) => Math.min(oldProgress + Math.random() * 10, 75));
       setReactQuery((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 80)
+        Math.min(oldProgress + Math.random() * 10, 80),
       );
 
       setTailwind((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 85)
+        Math.min(oldProgress + Math.random() * 10, 85),
       );
       setBootstrap((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 85)
+        Math.min(oldProgress + Math.random() * 10, 85),
       );
       setMui((oldProgress) => Math.min(oldProgress + Math.random() * 10, 80));
       setGit((oldProgress) => Math.min(oldProgress + Math.random() * 10, 80));
       setWebpack((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 75)
+        Math.min(oldProgress + Math.random() * 10, 75),
       );
       setRestApi((oldProgress) =>
-        Math.min(oldProgress + Math.random() * 10, 75)
+        Math.min(oldProgress + Math.random() * 10, 75),
       );
     }, 200);
 

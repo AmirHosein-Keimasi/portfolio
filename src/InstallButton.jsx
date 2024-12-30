@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Snackbar, Button, Slide } from "@mui/material";
+import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import InstallMobileIcon from "@mui/icons-material/InstallMobile";
 
 const InstallButton = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -8,9 +9,8 @@ const InstallButton = () => {
   const theme = useTheme();
 
   useEffect(() => {
-    // چک می‌کنیم که آیا پنل قبلاً نشان داده شده یا نه
     if (localStorage.getItem("installButtonShown") === "true") {
-      setShowInstallButton(false); // اگر قبلاً نشان داده شده باشد، دکمه را نمایش نمی‌دهیم
+      setShowInstallButton(false);
     } else {
       const handleBeforeInstallPrompt = (e) => {
         e.preventDefault();
@@ -21,7 +21,10 @@ const InstallButton = () => {
       window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
       return () => {
-        window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+        window.removeEventListener(
+          "beforeinstallprompt",
+          handleBeforeInstallPrompt,
+        );
       };
     }
   }, []);
@@ -32,48 +35,39 @@ const InstallButton = () => {
       deferredPrompt.userChoice.then((result) => {
         if (result.outcome === "accepted") {
           console.log("User accepted the install prompt");
-          // ذخیره وضعیت نصب موفق در localStorage
           localStorage.setItem("installButtonShown", "true");
         } else {
           console.log("User dismissed the install prompt");
-          // ذخیره وضعیت رد نصب در localStorage
           localStorage.setItem("installButtonShown", "true");
         }
-
         setDeferredPrompt(null);
         setShowInstallButton(false);
       });
     }
   };
 
-  if (!showInstallButton) {
-    return null;
-  }
-
   return (
-    <Snackbar
-      open={showInstallButton}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      autoHideDuration={60000000} // نمایش پنل برای مدت طولانی (محدودیت دلخواه)
-      sx={{
-        position: "fixed", // پنل در موقعیت ثابت قرار می‌گیرد
-        top: 0, // در بالای صفحه قرار می‌گیرد
-        left: "50%", // برای وسط صفحه قرار گرفتن
-        transform: "translateX(-50%)", // جابجایی برای دقیقاً وسط بودن
-        zIndex: 9999, // اطمینان از اینکه پنل روی همه چیز قرار بگیرد
-      }}
-      message={
+    <>
+      {showInstallButton && (
         <Button
-          type="submit"
-          color="success"
           variant="contained"
-          sx={{ mt: 2 }}
+          color="success"
+          size="medium"
+          startIcon={<InstallMobileIcon />}
+          sx={{
+            borderRadius: "25px",
+            fontSize: { xs: "12px", md: "14px" },
+            backgroundColor: theme.palette.success.main,
+            "&:hover": {
+              backgroundColor: theme.palette.success.dark,
+            },
+          }}
           onClick={handleInstallClick}
         >
           نصب اپلیکیشن
         </Button>
-      }
-    />
+      )}
+    </>
   );
 };
 

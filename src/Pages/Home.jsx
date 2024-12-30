@@ -1,6 +1,4 @@
-
 import { Box, Typography, Button, Avatar, Container } from "@mui/material";
-import About from "./About";
 import Resume from "./Resume";
 import { Contact } from ".";
 import SocialMediaIcons from "../Components/SocialMediaIcons";
@@ -10,12 +8,14 @@ import src1 from "../Assets/1.png";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Comments from "./Comment";
 import ContactCard from "./ContactCard";
+import InstallButton from "../InstallButton";
 const Header = ({ helmetTitle }) => {
   return (
     <>
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>
+      <InstallButton />
       <Container
         maxWidth="lg"
         sx={{

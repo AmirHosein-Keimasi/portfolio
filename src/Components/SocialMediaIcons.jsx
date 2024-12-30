@@ -7,12 +7,12 @@ import {
   LinkedIn,
 } from "@mui/icons-material";
 
-const SocialMediaIcons = ({textAlign}) => {
+const SocialMediaIcons = ({ textAlign }) => {
   return (
     <Box
       component="div"
       sx={{
-      mt:10,
+        mt: 10,
         textAlign: textAlign,
       }}
     >
@@ -48,7 +48,6 @@ const SocialMediaIcons = ({textAlign}) => {
               opacity: 3,
               "&:hover": {
                 color: "text.main",
-               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -69,7 +68,6 @@ const SocialMediaIcons = ({textAlign}) => {
               opacity: 3,
               "&:hover": {
                 color: "text.main",
-               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -90,7 +88,6 @@ const SocialMediaIcons = ({textAlign}) => {
               opacity: 3,
               "&:hover": {
                 color: "text.main",
-               
               },
               "&.Mui-selected": {
                 color: "text.main",
@@ -111,7 +108,6 @@ const SocialMediaIcons = ({textAlign}) => {
               opacity: 3,
               "&:hover": {
                 color: "text.main",
-               
               },
               "&.Mui-selected": {
                 color: "text.main",

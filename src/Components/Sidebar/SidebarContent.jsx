@@ -17,11 +17,8 @@ const SidebarContent = () => {
       }}
     >
       <ThemeActionBtn />
-      {/* <SidebarHeader/> */}
-      {/* <Divider variant="middle" sx={{ mt: 1 }} /> */}
+
       <SidebarTabs />
-      {/* <Divider variant="middle"  sx={{ mt: 1 }} /> */}
-      {/* <SidebarFooter/> */}
     </Box>
   );
 };

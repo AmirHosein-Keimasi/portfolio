@@ -26,8 +26,8 @@ const Resume = ({ helmetTitle }) => {
     <Card
       sx={{
         height: "100vh",
-        overflowY: "scroll",
-        backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}
     >
       <Helmet>

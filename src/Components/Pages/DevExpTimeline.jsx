@@ -43,7 +43,7 @@ const DevExpTimeline = ({ loading }) => {
                   href={item.place}
                   style={{ textDecoration: "none", color: "gray" }}
                 >
-                لینک گیت
+                  لینک گیت
                 </a>
               </Typography>
             </TimelineContent>

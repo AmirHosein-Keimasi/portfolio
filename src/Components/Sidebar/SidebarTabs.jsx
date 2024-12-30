@@ -3,7 +3,7 @@ import { useContext } from "react";
 import MainContext from "../../Context";
 import { tabsData } from "../../constants/TabsData";
 import styled from "@mui/system/styled";
-import {  Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
 
 const Item = styled("div")(({ theme }) => ({
@@ -29,16 +29,14 @@ const SidebarTabs = () => {
       }}
     >
       <Grid container>
-      
-
         <Grid
-         xs={8}
-         sm={8}
-         md={8}
-         ls={9}
-         xl={9}
+          xs={8}
+          sm={8}
+          md={8}
+          ls={9}
+          xl={9}
           sx={{
-            ml:20,
+            ml: 20,
             display: {
               xs: "none",
               sm: "none",

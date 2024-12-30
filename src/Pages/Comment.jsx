@@ -11,7 +11,8 @@ const Comments = ({ helmetTitle }) => {
     <Card
       sx={{
         height: "100vh",
-        backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         display: "flex",
         flexDirection: "column",
       }}
@@ -22,10 +23,10 @@ const Comments = ({ helmetTitle }) => {
       <CardContent>
         <CustomDivider
           bColor="text.main"
-        cColor="warning"
+          cColor="warning"
           icon={<ForumRounded />}
           align="center"
-         text="پروژه ها"
+          text="پروژه ها"
         />
         <CommentSlider />
       </CardContent>

@@ -43,7 +43,6 @@ const Contact = ({ helmetTitle }) => {
           align="center"
           text="ارتباط با من "
         />
-    
 
         <Grid container sx={{ mt: 10 }}>
           <Slide

@@ -1,34 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
   <head>
-    
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <meta name="theme-color" content="#000000" />
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="پورتفولیوی حرفه‌ای امیرحسین کیماسی - توسعه‌دهنده وب و طراح رابط کاربری. پروژه‌های مدرن من در طراحی وب‌سایت، React و بهینه‌سازی تجربه کاربری (UX). آماده همکاری برای پروژه‌های خلاقانه و نوآورانه هستم.">
-    <meta name="keywords" content="پورتفولیو, توسعه‌دهنده وب, React, طراحی UI/UX, پروژه‌های مدرن, امیرحسین کیماسی, بهینه‌سازی UX, برنامه‌نویسی وب" />
+    <meta
+      name="description"
+      content="پورتفولیوی حرفه‌ای امیرحسین کیماسی - توسعه‌دهنده وب و طراح رابط کاربری. پروژه‌های مدرن من در طراحی وب‌سایت، React و بهینه‌سازی تجربه کاربری (UX). آماده همکاری برای پروژه‌های خلاقانه و نوآورانه هستم."
+    />
+    <meta
+      name="keywords"
+      content="پورتفولیو, توسعه‌دهنده وب, React, طراحی UI/UX, پروژه‌های مدرن, امیرحسین کیماسی, بهینه‌سازی UX, برنامه‌نویسی وب"
+    />
     <meta name="author" content="امیرحسین کیماسی" />
 
     <!-- Open Graph Tags (برای اشتراک‌گذاری بهتر در شبکه‌های اجتماعی) -->
-    <meta property="og:title" content="پورتفولیوی امیرحسین کیماسی | توسعه‌دهنده وب و طراح رابط کاربری" />
-    <meta property="og:description" content="مشاهده پروژه‌های من در طراحی وب‌سایت، React و بهینه‌سازی تجربه کاربری (UX)." />
+    <meta
+      property="og:title"
+      content="پورتفولیوی امیرحسین کیماسی | توسعه‌دهنده وب و طراح رابط کاربری"
+    />
+    <meta
+      property="og:description"
+      content="مشاهده پروژه‌های من در طراحی وب‌سایت، React و بهینه‌سازی تجربه کاربری (UX)."
+    />
     <meta property="og:image" content="%PUBLIC_URL%/images/512.png" />
     <meta property="og:url" content="https://your-portfolio-url.com" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card (برای بهینه‌سازی اشتراک‌گذاری در توییتر) -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="پورتفولیوی امیرحسین کیماسی | توسعه‌دهنده وب" />
-    <meta name="twitter:description" content="مشاهده پروژه‌های طراحی وب و React من. آماده همکاری هستم!" />
+    <meta
+      name="twitter:title"
+      content="پورتفولیوی امیرحسین کیماسی | توسعه‌دهنده وب"
+    />
+    <meta
+      name="twitter:description"
+      content="مشاهده پروژه‌های طراحی وب و React من. آماده همکاری هستم!"
+    />
     <meta name="twitter:image" content="%PUBLIC_URL%/images/512.png" />
 
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/images/512.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/images/192.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="%PUBLIC_URL%/images/512.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="192x192"
+      href="%PUBLIC_URL%/images/192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="512x512"
+      href="%PUBLIC_URL%/images/512.png"
+    />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!-- Web App Manifest -->
@@ -42,15 +70,18 @@
 
     <!-- Service Worker Registration -->
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register('%PUBLIC_URL%/service-worker.js')
+            .register("%PUBLIC_URL%/service-worker.js")
             .then((registration) => {
-              console.log('ServiceWorker registration successful:', registration.scope);
+              console.log(
+                "ServiceWorker registration successful:",
+                registration.scope,
+              );
             })
             .catch((error) => {
-              console.log('ServiceWorker registration failed:', error);
+              console.log("ServiceWorker registration failed:", error);
             });
         });
       }

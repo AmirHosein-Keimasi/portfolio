@@ -13,7 +13,11 @@ import {
 import CustomDivider from "../Components/common/CustomDivider";
 
 const contactData = [
-  { icon: <EmailIcon />, label: "Email", value: "amirhosein.kiemasi@gmail.com" },
+  {
+    icon: <EmailIcon />,
+    label: "Email",
+    value: "amirhosein.kiemasi@gmail.com",
+  },
   { icon: <TelegramIcon />, label: "Telegram", value: "@amir1_1" },
   { icon: <LinkedInIcon />, label: "LinkedIn", value: "amirhossein-keimasi" },
   { icon: <PhoneIcon />, label: "Phone", value: "+98 933 378 84 21" },

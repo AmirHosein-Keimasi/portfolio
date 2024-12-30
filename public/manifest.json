@@ -14,6 +14,19 @@
       "sizes": "512x512"
     }
   ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-desktop-wide.png",
+      "type": "image/png",
+      "sizes": "1920x1080",
+      "form_factor": "wide"
+    },
+    {
+      "src": "images/screenshot-mobile.png",
+      "type": "image/png",
+      "sizes": "375x667"
+    }
+  ],
   "start_url": ".",
   "scope": "/",
   "display": "standalone",
