@@ -93,7 +93,7 @@ const App = () => {
   return (
     <Box sx={{ overflowY: "auto", height: "100vh" }}>
       <Header />
-      <About />
+      {/* <About /> */}
       <Resume />
       <Comments />
       <ContactCard />
