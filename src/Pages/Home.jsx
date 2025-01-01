@@ -106,6 +106,7 @@ const App = () => {
       <About helmetTitle=" وب سایت شخصی |درباره من" singleView={false} />
       <Resume helmetTitle=" وب سایت شخصی |رزومه من" singleView={false} />
       <Comments helmetTitle=" وب سایت شخصی | پروژه های من" singleView={false} />
+      <ContactCard helmetTitle=" وب سایت شخصی |  ارتباط با من" />
       <Contact helmetTitle=" وب سایت شخصی |  تماس با من" />
     </Box>
   );
