@@ -3,6 +3,7 @@ import { Fab, Box } from "@mui/material";
 import { NightlightOutlined, WbSunnyOutlined } from "@mui/icons-material";
 import MainContext from "../../Context/index";
 import { useTheme } from "@emotion/react";
+import InstallButton from "../../InstallButton";
 
 const ThemeActionBtn = () => {
   const { handelThemeCheng } = useContext(MainContext);
@@ -16,6 +17,7 @@ const ThemeActionBtn = () => {
         right: "40px",
       }}
     >
+      <InstallButton />
       <Fab
         variant="extended"
         aria-label="ThemeChenge"

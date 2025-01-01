@@ -55,19 +55,23 @@ function AppContainer() {
         </Page>
         <PagesContainer>
           <Page value={pageNumber} index={1}>
-            <About helmetTitle=" وب سایت شخصی |درباره من" />
+            <About helmetTitle=" وب سایت شخصی |درباره من" singleView={true} />
           </Page>
           <Page value={pageNumber} index={2}>
-            <Resume helmetTitle=" وب سایت شخصی |رزومه من" />
+            <Resume helmetTitle=" وب سایت شخصی |رزومه من" singleView={true} />
           </Page>
           <Page value={pageNumber} index={3}>
-            <Comment helmetTitle=" وب سایت شخصی | کامنت های من" />
+            <Comment
+              helmetTitle=" وب سایت شخصی | پروژه های من"
+              singleView={true}
+            />
           </Page>
+
           <Page value={pageNumber} index={4}>
-            <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
+            <ContactCard helmetTitle=" وب سایت شخصی |  تماس با من" />
           </Page>
           <Page value={pageNumber} index={5}>
-            <ContactCard helmetTitle=" وب سایت شخصی |  تماس با من" />
+            <Contact helmetTitle=" وب سایت شخصی |  ارتباط با من" />
           </Page>
         </PagesContainer>
       </Mainlayouts>

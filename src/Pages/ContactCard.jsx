@@ -8,9 +8,9 @@ import {
   GitHub as GitHubIcon,
   Language as LanguageIcon,
   ContentCopy as CopyIcon,
-  AccountCircle,
 } from "@mui/icons-material";
 import CustomDivider from "../Components/common/CustomDivider";
+import { useTheme } from "@mui/material/styles";
 
 const contactData = [
   {
@@ -18,21 +18,42 @@ const contactData = [
     label: "Email",
     value: "amirhosein.kiemasi@gmail.com",
   },
-  { icon: <TelegramIcon />, label: "Telegram", value: "@amir1_1" },
+  {
+    icon: <TelegramIcon />,
+    label: "Telegram",
+    value: (
+      <span style={{ direction: "ltr", unicodeBidi: "bidi-override" }}>
+        @amir1_1
+      </span>
+    ),
+  },
   { icon: <LinkedInIcon />, label: "LinkedIn", value: "amirhossein-keimasi" },
-  { icon: <PhoneIcon />, label: "Phone", value: "+98 933 378 84 21" },
+  {
+    icon: <PhoneIcon />,
+    label: "Phone",
+    value: (
+      <span style={{ direction: "ltr", unicodeBidi: "bidi-override" }}>
+        +98 933 378 8421
+      </span>
+    ),
+  },
   {
     icon: <GitHubIcon />,
     label: "GitHub",
     value: "amirhosein-keimasi",
   },
-  { icon: <LanguageIcon />, label: "Website", value: "https://www.amirhoseinkeimasi.ir" },
+  {
+    icon: <LanguageIcon />,
+    label: "Website",
+    value: "www.amirhoseinkeimasi.ir",
+  },
 ];
 
 const ContactCard = () => {
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
   };
+  const theme = useTheme();
 
   return (
     <>
@@ -76,7 +97,13 @@ const ContactCard = () => {
               }}
             >
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                {item.icon}
+                <Box
+                  sx={{
+                    color: theme.palette.mode === "light" ? "#fff" : "inherit",
+                  }}
+                >
+                  {item.icon}
+                </Box>
                 <Box>
                   <Typography
                     variant="body2"

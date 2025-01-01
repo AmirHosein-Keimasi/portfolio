@@ -1,8 +1,8 @@
 import React from "react";
-import { Box } from "@mui/material";
 import { SidebarTabs } from ".";
 import { useTheme } from "@mui/material/styles";
 import ThemeActionBtn from "../../layouts/Themes/ThemeActionBtn";
+import { Box } from "@mui/material";
 
 const SidebarContent = () => {
   const theme = useTheme();
@@ -11,8 +11,7 @@ const SidebarContent = () => {
       sx={{
         justifyContent: "center",
         textAlign: "center",
-        mt: 1,
-        py: 3,
+        pb: { xs: 5, sm: 2 },
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
       }}

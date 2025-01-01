@@ -29,9 +29,7 @@ export const lightTheme = createTheme({
   typography: {
     fontFamily: ["Tanha, Vazir, roboto"],
   },
-  // typography: {
-  //   fontFamily: ["Tanha, Vazir, roboto"],
-  // },
+
   components: {
     MuiPaper: {
       styleOverrides: {
@@ -70,9 +68,7 @@ export const darkTheme = createTheme({
   typography: {
     fontFamily: ["Tanha, Vazir, roboto"],
   },
-  // typography: {
-  //   fontFamily: ["tanha, vazir, roboto"],
-  // },
+
   components: {
     MuiPaper: {
       styleOverrides: {

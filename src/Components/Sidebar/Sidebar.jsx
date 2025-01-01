@@ -5,6 +5,7 @@ const Sidebar = () => {
   return (
     <>
       <SidebarContent />
+
       <SidebarDrawer />
     </>
   );

@@ -40,6 +40,7 @@ function SoftSkills() {
             <Card
               sx={{
                 mt: 2,
+
                 backgroundColor: "success.main",
                 color: "#ffffff",
                 display: "flex",

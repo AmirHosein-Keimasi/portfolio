@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
 const PagesContainer = ({ children }) => {
   const theme = useTheme();

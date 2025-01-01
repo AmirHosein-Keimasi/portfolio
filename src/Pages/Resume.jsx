@@ -11,7 +11,7 @@ import CustomDivider from "../Components/common/CustomDivider";
 import DevEduTimeline from "../Components/Pages/DevEduTimeline";
 import DevExpTimeline from "../Components/Pages/DevExpTimeline";
 import { useTheme } from "@mui/material/styles";
-const Resume = ({ helmetTitle }) => {
+const Resume = ({ helmetTitle, singleView = false }) => {
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   useEffect(() => {
@@ -25,10 +25,11 @@ const Resume = ({ helmetTitle }) => {
   return (
     <Card
       sx={{
+        minHeight: singleView ? "auto" : "100vh",
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-        height: "100vh",
-        overflowY: "auto",
+        height: singleView ? "100vh" : "auto",
+        overflowY: singleView ? "auto" : "unset",
       }}
     >
       <Helmet>

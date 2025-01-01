@@ -48,7 +48,6 @@ export const firefly = {
       options: {
         particles: {
           color: {
-            // value: "#75075E"
             value: "#FD4495",
           },
         },

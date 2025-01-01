@@ -7,15 +7,16 @@ import Skills from "../Components/Pages/Skills";
 import { useTheme } from "@mui/material/styles";
 import SuftSkills from "../Components/Pages/SuftSkills";
 
-const About = ({ helmetTitle }) => {
+const About = ({ helmetTitle, singleView = false }) => {
   const theme = useTheme();
   return (
     <Card
       sx={{
         backgroundColor:
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
-        height: "100vh",
-        overflowY: "auto",
+        minHeight: singleView ? "auto" : "100vh",
+        height: singleView ? "100vh" : "auto",
+        overflowY: singleView ? "auto" : "unset",
       }}
     >
       <Helmet>
@@ -23,12 +24,11 @@ const About = ({ helmetTitle }) => {
       </Helmet>
       <CardContent>
         <Grid container sx={{ mx: 3 }}>
-          {/* md={8} lg={8} xl={8} */}
           <Grid xs={12} sm={12}></Grid>
           <Grid xs={12} sm={12}></Grid>
         </Grid>
         <Grid container>
-          <Grid sx={{ width: 1, mt: 1, minWidth: 50 }}>
+          <Grid sx={{ width: 1, mt: 1, my: singleView ? 7 : "" }}>
             <CustomDivider
               bColor="text.main"
               cColor="warning"

@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import AppContainer from "./Containers/AppContainer";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-//React Slick Css File
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

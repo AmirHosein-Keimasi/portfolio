@@ -76,7 +76,6 @@ const Contact = ({ helmetTitle }) => {
               md={4}
               sx={{
                 textAlign: "center",
-                // backgroundColor: theme.palette.mode === "dark" ? "primary.main" : "primary.main",
                 backgroundImage: `url(${worldMap})`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -85,7 +84,7 @@ const Contact = ({ helmetTitle }) => {
             >
               <Typography
                 variant="h6"
-                color="black"
+                color="text.main"
                 sx={{
                   fontFamily: "vazir",
                   mt: 2,
@@ -100,7 +99,7 @@ const Contact = ({ helmetTitle }) => {
               </Typography>
               <Typography
                 variant="body1"
-                color="black"
+                color="text.main"
                 sx={{
                   mt: 2,
                   display: {

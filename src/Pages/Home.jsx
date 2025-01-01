@@ -1,21 +1,26 @@
 import { Box, Typography, Button, Avatar, Container } from "@mui/material";
 import Resume from "./Resume";
-import { Contact } from ".";
+import { About, Contact } from ".";
 import SocialMediaIcons from "../Components/SocialMediaIcons";
 import { Helmet } from "react-helmet-async";
 import src1 from "../Assets/1.png";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
 import Comments from "./Comment";
 import ContactCard from "./ContactCard";
-import InstallButton from "../InstallButton";
+
 const Header = ({ helmetTitle }) => {
+  const [showContactCard, setShowContactCard] = useState(false);
+
+  const handleContactButtonClick = () => {
+    setShowContactCard(true);
+  };
+
   return (
     <>
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>
-      <InstallButton />
       <Container
         maxWidth="lg"
         sx={{
@@ -51,7 +56,7 @@ const Header = ({ helmetTitle }) => {
               <Typography
                 component="span"
                 variant="h4"
-                sx={{ color: "success.main", fontWeight: "bold" }} // اعمال رنگ و استایل
+                sx={{ color: "success.main", fontWeight: "bold" }}
               >
                 شگفت‌زده
               </Typography>{" "}
@@ -77,6 +82,7 @@ const Header = ({ helmetTitle }) => {
                 borderRadius: "25px",
                 fontSize: { xs: "14px", md: "16px" },
               }}
+              onClick={handleContactButtonClick}
             >
               <ExpandMoreIcon />
               شروع یک همکاری خاطره‌انگیز
@@ -85,6 +91,10 @@ const Header = ({ helmetTitle }) => {
           </Box>
         </Box>
       </Container>
+
+      {showContactCard && (
+        <ContactCard helmetTitle=" وب سایت شخصی |  ارتباط با من" />
+      )}
     </>
   );
 };
@@ -93,11 +103,10 @@ const App = () => {
   return (
     <Box sx={{ overflowY: "auto", height: "100vh" }}>
       <Header />
-      {/* <About /> */}
-      <Resume />
-      <Comments />
-      <ContactCard />
-      <Contact />
+      <About helmetTitle=" وب سایت شخصی |درباره من" singleView={false} />
+      <Resume helmetTitle=" وب سایت شخصی |رزومه من" singleView={false} />
+      <Comments helmetTitle=" وب سایت شخصی | پروژه های من" singleView={false} />
+      <Contact helmetTitle=" وب سایت شخصی |  تماس با من" />
     </Box>
   );
 };

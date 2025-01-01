@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import CustomDivider from "../Components/common/CustomDivider";
 import CommentSlider from "../Components/Pages/CommentSlider";
 
-const Comments = ({ helmetTitle }) => {
+const Comments = ({ helmetTitle, singleView = false }) => {
   const theme = useTheme();
   return (
     <Card
@@ -14,9 +14,11 @@ const Comments = ({ helmetTitle }) => {
           theme.palette.mode === "dark" ? "primary.main" : "primary.main",
         display: "flex",
         flexDirection: "column",
-        minHeight: "60vh", // حداقل ارتفاع کارت برای اطمینان از فضای مناسب
-        marginBottom: { xs: "16px", sm: "32px", md: "40px" }, // فاصله پایین برای صفحات کوچک‌تر
-        paddingBottom: "16px", // فاصله داخلی پایین برای کارت
+        minHeight: singleView ? "auto" : "100vh",
+        marginBottom: { xs: "16px", sm: "32px", md: "40px" },
+        paddingBottom: "16px",
+        height: singleView ? "100vh" : "auto",
+        overflowY: singleView ? "auto" : "unset",
       }}
     >
       <Helmet>

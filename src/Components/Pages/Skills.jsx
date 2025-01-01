@@ -20,7 +20,6 @@ const Skills = () => {
     restApiSkill,
   } = DevSkills;
 
-  // استیت‌ها برای هر مهارت
   const [html, setHtml] = useState(0);
   const [css, setCss] = useState(0);
   const [javascript, setJavascript] = useState(0);
@@ -37,7 +36,6 @@ const Skills = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      // برای هر مهارت مقدار تصادفی اضافه می‌شود
       setHtml((oldProgress) => Math.min(oldProgress + Math.random() * 10, 99));
       setCss((oldProgress) => Math.min(oldProgress + Math.random() * 10, 90));
       setJavascript((oldProgress) =>
@@ -74,11 +72,10 @@ const Skills = () => {
   return (
     <Box
       display="flex"
-      flexDirection={{ xs: "column", md: "row" }} // در صفحات کوچک (xs) یک ستون و در صفحات بزرگتر (md) دو ستون
-      alignItems="flex-start" // تغییر از 'center' به 'flex-start' برای شروع از بالا
+      flexDirection={{ xs: "column", md: "row" }}
+      alignItems="flex-start"
       gap={6}
     >
-      {/* در صفحات کوچک هر Box تمام عرض صفحه را می‌گیرد */}
       <Box flex={{ xs: 1, md: "auto" }} width={{ xs: "100%", md: "auto" }}>
         <Skill
           name={reactSkill.name}
