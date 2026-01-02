@@ -1,8 +1,8 @@
-import { Suspense } from "react";
 import { CommentPage } from "@/components/pages/comment-page";
 import type { Metadata } from "next";
 
 // ISR - Incremental Static Regeneration (هر 24 ساعت یکبار revalidate)
+export const dynamic = "force-static";
 export const revalidate = 86400; // 24 hours
 
 export const metadata: Metadata = {
@@ -16,18 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-function ProjectsLoading() {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-gray-100"></div>
-    </div>
-  );
-}
-
 export default function Projects() {
-  return (
-    <Suspense fallback={<ProjectsLoading />}>
-      <CommentPage />
-    </Suspense>
-  );
+  return <CommentPage />;
 }

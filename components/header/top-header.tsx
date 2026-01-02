@@ -3,7 +3,6 @@
 import { useMemo, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTransition } from "react";
 import { tabsData } from "@/lib/constants/tabs-data";
 import { InstallButton } from "@/components/install-button";
 import { ThemeActionBtn } from "@/components/theme-action-btn";
@@ -12,7 +11,6 @@ import { useApp } from "@/lib/context/app-context";
 export function TopHeader() {
   const { mode } = useApp();
   const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
   const data = useMemo(() => tabsData(), []);
 
   const colors = useMemo(
@@ -36,12 +34,6 @@ export function TopHeader() {
     [pathname]
   );
 
-  const handleLinkClick = useCallback(() => {
-    startTransition(() => {
-      // Navigation will happen
-    });
-  }, []);
-
   return (
     <header
       className={`
@@ -49,8 +41,6 @@ export function TopHeader() {
         ${colors.bg}
         border-b ${colors.border}
         shadow-md
-        ${isPending ? "opacity-75" : "opacity-100"}
-        transition-opacity duration-200
       `}
       role="banner"
     >
@@ -65,7 +55,6 @@ export function TopHeader() {
                   key={index}
                   href={tab.href}
                   prefetch={true}
-                  onClick={handleLinkClick}
                   className={`
                     flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg
                     transition-colors duration-200 whitespace-nowrap
@@ -75,7 +64,6 @@ export function TopHeader() {
                         ? `${colors.active} font-bold`
                         : `${colors.text} ${colors.hover}`
                     }
-                    ${isPending ? "pointer-events-none" : ""}
                   `}
                   aria-current={active ? "page" : undefined}
                 >
