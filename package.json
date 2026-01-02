@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "critters": "^0.0.20",
     "formik": "^2.2.9",
     "framer-motion": "^12.23.26",
     "gsap": "^3.14.2",
