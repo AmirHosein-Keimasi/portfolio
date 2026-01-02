@@ -6,6 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { CustomDivider } from "@/components/common/custom-divider";
 import { useApp } from "@/lib/context/app-context";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { PremiumBackground } from "@/components/animations/premium-background";
 
 // Dynamic import برای کامپوننت‌های سنگین
 const Skills = dynamic(
@@ -38,8 +39,9 @@ export function AboutPage() {
     mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main";
 
   return (
-    <div className={`${bgColor} min-h-screen`}>
-      <div className="p-4">
+    <div className={`${bgColor} min-h-screen relative`}>
+      <PremiumBackground />
+      <div className="p-4 relative z-10">
       <div className="w-full mt-1 mb-4">
         <ScrollReveal direction="fade" delay={0.2}>
           <CustomDivider

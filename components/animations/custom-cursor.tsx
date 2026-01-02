@@ -36,7 +36,7 @@ export function CustomCursor() {
     };
   }, []);
 
-  const cursorColor = mode === "dark" ? "rgba(34, 197, 94, 0.5)" : "rgba(34, 197, 94, 0.3)";
+  const cursorColor = mode === "dark" ? "rgba(16, 185, 129, 0.5)" : "rgba(16, 185, 129, 0.3)";
 
   return (
     <>

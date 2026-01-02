@@ -5,47 +5,48 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
-        'tanha': ['Tanha', 'Vazir', 'roboto', 'sans-serif'],
+        tanha: ["Tanha", "Vazir", "roboto", "sans-serif"],
       },
       colors: {
-        'light-text-main': '#0000009e',
-        'light-text-dark': '#3a3c3f',
-        'light-primary-main': '#F6F5F2',
-        'light-primary-dark': '#38414A',
-        'light-error': '#d2d3db',
-        'light-info': '#9394a5',
-        'light-warning': '#6096B4',
-        'light-success': '#93BFCF',
-        'dark-text-dark': '#141516',
-        'dark-text-main': '#d8e4e1',
-        'dark-primary-dark': '#F6F5F2',
-        'dark-primary-main': '#38414A',
-        'dark-error': '#1A2837',
-        'dark-info': '#2B4052',
-        'dark-warning': '#445C6D',
-        'dark-success': '#367275',
+        // Light Mode - Modern Elegant Palette (Soft & Clean)
+        "light-text-main": "#1e293b",
+        "light-text-dark": "#0f172a",
+        "light-primary-main": "#ffffff",
+        "light-primary-dark": "#f1f5f9",
+        "light-error": "#ef4444",
+        "light-info": "#3b82f6",
+        "light-warning": "#f59e0b",
+        "light-success": "#10b981",
+
+        // Dark Mode - Modern Rich Palette (Deep & Vibrant)
+        "dark-text-dark": "#020617",
+        "dark-text-main": "#f1f5f9",
+        "dark-primary-dark": "#334155",
+        "dark-primary-main": "#0f172a",
+        "dark-error": "#ef4444",
+        "dark-info": "#3b82f6",
+        "dark-warning": "#f59e0b",
+        "dark-success": "#10b981",
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        float: "float 6s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite alternate",
       },
       keyframes: {
         float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
         },
         glow: {
-          '0%': { boxShadow: '0 0 5px rgba(34, 197, 94, 0.5)' },
-          '100%': { boxShadow: '0 0 20px rgba(34, 197, 94, 0.8)' },
+          "0%": { boxShadow: "0 0 5px rgba(16, 185, 129, 0.5)" },
+          "100%": { boxShadow: "0 0 20px rgba(16, 185, 129, 0.8)" },
         },
       },
     },
   },
   plugins: [],
-}
-
-
+};

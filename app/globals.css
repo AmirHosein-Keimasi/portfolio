@@ -64,22 +64,22 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 197, 94, 0.5);
+  background: rgba(16, 185, 129, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 197, 94, 0.7);
+  background: rgba(16, 185, 129, 0.7);
 }
 
 /* Toast variables */
 :root {
-  --toast-bg: #fff;
-  --toast-color: #000;
+  --toast-bg: #ffffff;
+  --toast-color: #1e293b;
 }
 
 .dark {
-  --toast-bg: #1f2937;
-  --toast-color: #fff;
+  --toast-bg: #0f172a;
+  --toast-color: #f1f5f9;
 }
 

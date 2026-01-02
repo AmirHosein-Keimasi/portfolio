@@ -41,8 +41,8 @@ export function ParticlesBackground() {
       });
     }
 
-    const particleColor = mode === "dark" ? "rgba(34, 197, 94, 0.3)" : "rgba(34, 197, 94, 0.2)";
-    const lineColor = mode === "dark" ? "rgba(34, 197, 94, 0.1)" : "rgba(34, 197, 94, 0.05)";
+    const particleColor = mode === "dark" ? "rgba(16, 185, 129, 0.3)" : "rgba(16, 185, 129, 0.2)";
+    const lineColor = mode === "dark" ? "rgba(16, 185, 129, 0.1)" : "rgba(16, 185, 129, 0.05)";
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);

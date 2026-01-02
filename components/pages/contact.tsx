@@ -7,6 +7,7 @@ import { FormContact } from "./form-contact";
 import { SocialMediaIcons } from "@/components/social-media-icons";
 import { useApp } from "@/lib/context/app-context";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { PremiumBackground } from "@/components/animations/premium-background";
 
 export function Contact() {
   const { mode } = useApp();
@@ -35,8 +36,12 @@ export function Contact() {
   const sidebarOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
 
   return (
-    <div ref={containerRef} className={`min-h-screen ${bgColor} flex flex-col`}>
-      <div className="p-4">
+    <div
+      ref={containerRef}
+      className={`min-h-screen ${bgColor} flex flex-col relative`}
+    >
+      <PremiumBackground />
+      <div className="p-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}

@@ -10,6 +10,7 @@ import { CustomDivider } from "@/components/common/custom-divider";
 import { DevEduTimeline } from "@/components/pages/dev-edu-timeline";
 import { DevExpTimeline } from "@/components/pages/dev-exp-timeline";
 import { useApp } from "@/lib/context/app-context";
+import { PremiumBackground } from "@/components/animations/premium-background";
 
 export function ResumePage() {
   const [loading, setLoading] = useState(false);
@@ -25,8 +26,9 @@ export function ResumePage() {
   }, []);
 
   return (
-    <div className={`${bgColor} min-h-screen py-12 md:py-16`}>
-      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+    <div className={`${bgColor} min-h-screen py-12 md:py-16 relative`}>
+      <PremiumBackground />
+      <div className="p-4 md:p-8 max-w-7xl mx-auto relative z-10">
         <div className="mb-12">
           <CustomDivider
             bColor={warningColor}

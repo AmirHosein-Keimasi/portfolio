@@ -10,6 +10,7 @@ import { GradientText } from "@/components/animations/gradient-text";
 import { TextReveal } from "@/components/animations/text-reveal";
 import { AutoRotate, AutoPulse, AutoBounce } from "@/components/animations";
 import { CustomDivider } from "@/components/common/custom-divider";
+import { PremiumBackground } from "@/components/animations/premium-background";
 import { FaCode, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -41,8 +42,9 @@ export function ProjectsPage() {
   };
 
   return (
-    <div className={`${bgColor} min-h-screen py-12 md:py-16`}>
-      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+    <div className={`${bgColor} min-h-screen py-12 md:py-16 relative`}>
+      <PremiumBackground />
+      <div className="p-4 md:p-8 max-w-7xl mx-auto relative z-10">
         <TextReveal delay={0.2}>
           <div className="mb-12">
             <CustomDivider

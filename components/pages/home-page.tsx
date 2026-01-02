@@ -14,6 +14,7 @@ import { NumberCounter } from "@/components/animations/number-counter";
 import { TextReveal } from "@/components/animations/text-reveal";
 import { ShimmerEffect } from "@/components/animations/shimmer-effect";
 import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
+import { PremiumBackground } from "@/components/animations/premium-background";
 
 export function HomePage() {
   const { mode } = useApp();
@@ -48,6 +49,8 @@ export function HomePage() {
         mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
       }`}
     >
+      {/* Premium Animated Background */}
+      <PremiumBackground />
       {/* Vertical Text - Left Side */}
       <motion.div
         style={{ opacity: verticalTextOpacity }}
