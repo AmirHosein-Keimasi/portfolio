@@ -52,12 +52,12 @@ export const HeroSection = memo(function HeroSection() {
       {/* Left Section - Text Content */}
       <motion.div
         style={{ y: textY }}
-        className="flex-1 flex flex-col justify-center md:justify-start md:pt-20 z-10 relative"
+        className="flex-1 flex flex-col justify-center md:justify-start md:pt-14 z-10 relative"
       >
         {/* Main Heading */}
         <TextReveal delay={0.2}>
           <h1
-            className={`text-6xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 ${
+            className={`text-6xl md:text-8xl lg:text-6xl font-bold leading-none mb-6 ${
               mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
             }`}
           >
