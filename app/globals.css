@@ -48,6 +48,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Vertical text writing */
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
