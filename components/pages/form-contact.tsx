@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { contactValidationSchema } from "@/lib/validation/contact-validation";
+import toast from "react-hot-toast";
 import {
   FaEnvelope,
   FaUser,
@@ -42,18 +43,18 @@ export function FormContact() {
         const data = await response.json();
 
         if (response.ok) {
-          setSubmitStatus({
-            type: "success",
-            message: data.message || "پیام شما با موفقیت ارسال شد!",
-          });
+          toast.success(data.message || "پیام شما با موفقیت ارسال شد!");
           resetForm();
+          setSubmitStatus({ type: null, message: "" });
         } else {
+          toast.error(data.error || "خطایی در ارسال پیام رخ داد.");
           setSubmitStatus({
             type: "error",
             message: data.error || "خطایی در ارسال پیام رخ داد.",
           });
         }
       } catch (error) {
+        toast.error("خطایی در ارسال پیام رخ داد. لطفا دوباره تلاش کنید.");
         setSubmitStatus({
           type: "error",
           message: "خطایی در ارسال پیام رخ داد. لطفا دوباره تلاش کنید.",

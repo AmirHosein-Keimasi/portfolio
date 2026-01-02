@@ -43,3 +43,37 @@ body {
   box-sizing: border-box;
 }
 
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.7);
+}
+
+/* Toast variables */
+:root {
+  --toast-bg: #fff;
+  --toast-color: #000;
+}
+
+.dark {
+  --toast-bg: #1f2937;
+  --toast-color: #fff;
+}
+

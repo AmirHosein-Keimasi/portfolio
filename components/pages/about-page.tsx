@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { FaUserCircle } from "react-icons/fa";
 import { CustomDivider } from "@/components/common/custom-divider";
 import { useApp } from "@/lib/context/app-context";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 
 // Dynamic import برای کامپوننت‌های سنگین
 const Skills = dynamic(
@@ -39,7 +40,8 @@ export function AboutPage() {
   return (
     <div className={`${bgColor} min-h-screen`}>
       <div className="p-4">
-        <div className="w-full mt-1 mb-4">
+      <div className="w-full mt-1 mb-4">
+        <ScrollReveal direction="fade" delay={0.2}>
           <CustomDivider
             bColor={
               mode === "dark"
@@ -51,17 +53,22 @@ export function AboutPage() {
             align="center"
             text="مهات های من"
           />
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
-              </div>
-            }
-          >
+        </ScrollReveal>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
+            </div>
+          }
+        >
+          <ScrollReveal direction="up" delay={0.4}>
             <Skills />
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.6}>
             <SuftSkills />
-          </Suspense>
-        </div>
+          </ScrollReveal>
+        </Suspense>
+      </div>
       </div>
     </div>
   );

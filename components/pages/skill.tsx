@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface SkillProps {
   icon: string;
@@ -47,17 +48,19 @@ export const Skill = memo(function Skill({ icon, color, name, value }: SkillProp
         </div>
         <div className="flex-1 mr-3">
           <div 
-            className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2"
+            className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden"
             role="progressbar"
             aria-valuenow={value}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-label={`${name} skill level: ${Math.round(value)}%`}
           >
-            <div
-              className={`${progressColor} h-2 rounded-full transition-all duration-300`}
-              style={{ width: `${value}%` }}
-            ></div>
+            <motion.div
+              className={`${progressColor} h-2 rounded-full`}
+              initial={{ width: 0 }}
+              animate={{ width: `${value}%` }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            />
           </div>
         </div>
       </div>
