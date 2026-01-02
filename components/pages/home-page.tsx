@@ -8,6 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { FaCode, FaRocket } from "react-icons/fa";
+import { GradientText } from "@/components/animations/gradient-text";
+import { MagneticButton } from "@/components/animations/magnetic-button";
+import { NumberCounter } from "@/components/animations/number-counter";
+import { TextReveal } from "@/components/animations/text-reveal";
+import { ShimmerEffect } from "@/components/animations/shimmer-effect";
+import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
 
 export function HomePage() {
   const { mode } = useApp();
@@ -31,8 +37,8 @@ export function HomePage() {
   const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
   const stats = [
-    { number: "50+", label: "پروژه انجام شده" },
-    { number: "30+", label: "مشتری راضی" },
+    { number: 50, suffix: "+", label: "پروژه انجام شده" },
+    { number: 30, suffix: "+", label: "مشتری راضی" },
   ];
 
   return (
@@ -102,14 +108,26 @@ export function HomePage() {
                 }
                 transition={{ delay: index * 0.2, duration: 0.5 }}
               >
-                <motion.div
-                  className={`text-4xl md:text-5xl font-bold ${
-                    mode === "dark" ? "text-dark-success" : "text-light-success"
-                  }`}
-                  whileHover={{ scale: 1.1 }}
-                >
-                  {stat.number}
-                </motion.div>
+                <ShimmerEffect>
+                  <motion.div
+                    className={`text-4xl md:text-5xl font-bold ${
+                      mode === "dark"
+                        ? "text-dark-success"
+                        : "text-light-success"
+                    }`}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <NumberCounter
+                      value={stat.number}
+                      suffix={stat.suffix}
+                      className={
+                        mode === "dark"
+                          ? "text-dark-success"
+                          : "text-light-success"
+                      }
+                    />
+                  </motion.div>
+                </ShimmerEffect>
                 <p
                   className={`text-sm md:text-base mt-1 ${
                     mode === "dark"
@@ -124,72 +142,76 @@ export function HomePage() {
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h1
-            className={`text-6xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 ${
-              mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
-            }`}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
-          >
-            سلام
-          </motion.h1>
+          <TextReveal delay={0.2}>
+            <h1
+              className={`text-6xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 ${
+                mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
+              }`}
+            >
+              <GradientText
+                gradient={
+                  mode === "dark"
+                    ? "from-green-400 via-green-500 to-green-600"
+                    : "from-green-500 via-green-600 to-green-700"
+                }
+              >
+                سلام
+              </GradientText>
+            </h1>
+          </TextReveal>
 
           {/* Subtitle */}
-          <motion.p
-            className={`text-lg md:text-xl lg:text-2xl mb-8 ${
-              mode === "dark"
-                ? "text-dark-text-main/70"
-                : "text-light-text-main/70"
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
-            — من امیرحسین کیماسی هستم، یک فرانت دولوپر و طراح رابط کاربری
-          </motion.p>
+          <TextReveal delay={0.4}>
+            <p
+              className={`text-lg md:text-xl lg:text-2xl mb-8 ${
+                mode === "dark"
+                  ? "text-dark-text-main/70"
+                  : "text-light-text-main/70"
+              }`}
+            >
+              — من امیرحسین کیماسی هستم، یک فرانت دولوپر و طراح رابط کاربری
+            </p>
+          </TextReveal>
 
           {/* Description */}
-          <motion.p
-            className={`text-base md:text-lg lg:text-xl mb-8 max-w-2xl leading-relaxed ${
-              mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-          >
-            من یا مسئولیتی رو نمی‌پذیرم یا اگه بپذیرم به بهترین شکل ممکن انجامش
-            میدم. وقتی با من کار کنید همیشه مطمئن هستید که پروژه‌ها با بهترین
-            کیفیت و در زمان مقرر انجام میشن.
-          </motion.p>
+          <TextReveal delay={0.6}>
+            <p
+              className={`text-base md:text-lg lg:text-xl mb-8 max-w-2xl leading-relaxed ${
+                mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
+              }`}
+            >
+              من یا مسئولیتی رو نمی‌پذیرم یا اگه بپذیرم به بهترین شکل ممکن
+              انجامش میدم. وقتی با من کار کنید همیشه مطمئن هستید که پروژه‌ها با
+              بهترین کیفیت و در زمان مقرر انجام میشن.
+            </p>
+          </TextReveal>
 
           {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col items-start gap-4"
-          >
-            <Link href="/connect" prefetch={true}>
-              <motion.div
-                className={`
-                  flex items-center gap-2 px-6 py-3 rounded-full text-base md:text-lg font-medium
-                  ${
-                    mode === "dark"
-                      ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90"
-                      : "bg-light-success text-light-text-main hover:bg-light-success/90"
-                  }
-                  shadow-lg
-                `}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>شروع یک همکاری خاطره‌انگیز</span>
-                <MdExpandMore className="text-xl" />
-              </motion.div>
-            </Link>
-            <SocialMediaIcons textAlign="left" />
-          </motion.div>
+          <TextReveal delay={0.8}>
+            <div className="flex flex-col items-start gap-4">
+              <Link href="/connect" prefetch={true}>
+                <MagneticButton strength={0.2}>
+                  <motion.div
+                    className={`
+                      flex items-center gap-2 px-6 py-3 rounded-full text-base md:text-lg font-medium
+                      ${
+                        mode === "dark"
+                          ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90"
+                          : "bg-light-success text-light-text-main hover:bg-light-success/90"
+                      }
+                      shadow-lg transition-all duration-300
+                    `}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span>شروع یک همکاری خاطره‌انگیز</span>
+                    <MdExpandMore className="text-xl" />
+                  </motion.div>
+                </MagneticButton>
+              </Link>
+              <SocialMediaIcons textAlign="left" />
+            </div>
+          </TextReveal>
 
           {/* Scroll Indicator */}
           <motion.div
@@ -310,13 +332,23 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
         }`}
       >
         <div className="max-w-7xl mx-auto">
-          <motion.h2
-            className={`text-4xl md:text-5xl font-bold mb-12 text-center ${
-              mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
-            }`}
-          >
-            خدمات من
-          </motion.h2>
+          <TextReveal delay={0.2}>
+            <h2
+              className={`text-4xl md:text-5xl font-bold mb-12 text-center ${
+                mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
+              }`}
+            >
+              <GradientText
+                gradient={
+                  mode === "dark"
+                    ? "from-green-400 via-green-500 to-green-600"
+                    : "from-green-500 via-green-600 to-green-700"
+                }
+              >
+                خدمات من
+              </GradientText>
+            </h2>
+          </TextReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -341,9 +373,9 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                whileHover={{ scale: 1.05, y: -10, rotateY: 5 }}
                 className={`
-                  p-8 rounded-2xl text-center
+                  p-8 rounded-2xl text-center relative overflow-hidden
                   ${
                     mode === "dark"
                       ? "bg-dark-primary-main"
@@ -351,6 +383,7 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
                   }
                 `}
               >
+                <ShimmerOverlay />
                 <div
                   className={`mb-4 ${
                     mode === "dark" ? "text-dark-success" : "text-light-success"
@@ -398,15 +431,25 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2
-                className={`text-4xl md:text-5xl font-bold mb-6 ${
-                  mode === "dark"
-                    ? "text-dark-text-main"
-                    : "text-light-text-main"
-                }`}
-              >
-                درباره من
-              </h2>
+              <TextReveal delay={0.2}>
+                <h2
+                  className={`text-4xl md:text-5xl font-bold mb-6 ${
+                    mode === "dark"
+                      ? "text-dark-text-main"
+                      : "text-light-text-main"
+                  }`}
+                >
+                  <GradientText
+                    gradient={
+                      mode === "dark"
+                        ? "from-green-400 via-green-500 to-green-600"
+                        : "from-green-500 via-green-600 to-green-700"
+                    }
+                  >
+                    درباره من
+                  </GradientText>
+                </h2>
+              </TextReveal>
               <p
                 className={`text-lg leading-relaxed ${
                   mode === "dark"
@@ -445,17 +488,23 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
         }`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            className={`text-4xl md:text-5xl font-bold mb-6 ${
-              mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            آماده شروع پروژه بعدی هستید؟
-          </motion.h2>
+          <TextReveal delay={0.2}>
+            <h2
+              className={`text-4xl md:text-5xl font-bold mb-6 ${
+                mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
+              }`}
+            >
+              <GradientText
+                gradient={
+                  mode === "dark"
+                    ? "from-green-400 via-green-500 to-green-600"
+                    : "from-green-500 via-green-600 to-green-700"
+                }
+              >
+                آماده شروع پروژه بعدی هستید؟
+              </GradientText>
+            </h2>
+          </TextReveal>
           <motion.p
             className={`text-lg mb-8 ${
               mode === "dark"
@@ -469,27 +518,27 @@ function ScrollSections({ mode }: { mode: "light" | "dark" }) {
           >
             بیایید با هم یک پروژه فوق‌العاده بسازیم
           </motion.p>
-          <Link href="/connect" prefetch={true}>
-            <motion.button
-              className={`
-                px-8 py-4 rounded-full text-lg font-medium
-                ${
-                  mode === "dark"
-                    ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90"
-                    : "bg-light-success text-light-text-main hover:bg-light-success/90"
-                }
-                shadow-lg
-              `}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              شروع همکاری
-            </motion.button>
-          </Link>
+          <TextReveal delay={0.4}>
+            <Link href="/connect" prefetch={true}>
+              <MagneticButton strength={0.2}>
+                <motion.button
+                  className={`
+                    px-8 py-4 rounded-full text-lg font-medium
+                    ${
+                      mode === "dark"
+                        ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90"
+                        : "bg-light-success text-light-text-main hover:bg-light-success/90"
+                    }
+                    shadow-lg transition-all duration-300
+                  `}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  شروع همکاری
+                </motion.button>
+              </MagneticButton>
+            </Link>
+          </TextReveal>
         </div>
       </motion.section>
     </>
