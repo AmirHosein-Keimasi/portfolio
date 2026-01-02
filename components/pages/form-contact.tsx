@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, memo } from "react";
-import { useFormik } from "formik";
+import { useFormik, FormikHelpers } from "formik";
 import { contactValidationSchema } from "@/lib/validation/contact-validation";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
@@ -47,7 +47,10 @@ export const FormContact = memo(function FormContact() {
   );
 
   const handleSubmit = useCallback(
-    async (values: typeof contactInputNames, { resetForm }: any) => {
+    async (
+      values: typeof contactInputNames,
+      { resetForm }: FormikHelpers<typeof contactInputNames>
+    ) => {
       setIsSubmitting(true);
       setSubmitStatus({ type: null, message: "" });
 

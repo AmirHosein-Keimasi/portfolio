@@ -17,12 +17,13 @@ export function PixelCard({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    const element = ref.current;
+    if (!element) return;
 
     const handleMouseEnter = () => {
-      if (!ref.current) return;
+      if (!element) return;
 
-      gsap.to(ref.current, {
+      gsap.to(element, {
         filter: "contrast(1.2) brightness(1.1)",
         duration: 0.3,
         ease: "power2.out",
@@ -30,20 +31,20 @@ export function PixelCard({
     };
 
     const handleMouseLeave = () => {
-      if (!ref.current) return;
-      gsap.to(ref.current, {
+      if (!element) return;
+      gsap.to(element, {
         filter: "contrast(1) brightness(1)",
         duration: 0.3,
         ease: "power2.out",
       });
     };
 
-    ref.current.addEventListener("mouseenter", handleMouseEnter);
-    ref.current.addEventListener("mouseleave", handleMouseLeave);
+    element.addEventListener("mouseenter", handleMouseEnter);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      ref.current?.removeEventListener("mouseenter", handleMouseEnter);
-      ref.current?.removeEventListener("mouseleave", handleMouseLeave);
+      element.removeEventListener("mouseenter", handleMouseEnter);
+      element.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 

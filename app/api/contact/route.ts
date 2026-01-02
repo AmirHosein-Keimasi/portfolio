@@ -47,10 +47,17 @@ export async function POST(request: NextRequest) {
       { message: "پیام شما با موفقیت ارسال شد!" },
       { status: 200 }
     );
-  } catch (error: any) {
-    if (error.name === "ValidationError") {
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.name === "ValidationError" &&
+      "errors" in error
+    ) {
       return NextResponse.json(
-        { error: "اطلاعات وارد شده معتبر نیست", details: error.errors },
+        {
+          error: "اطلاعات وارد شده معتبر نیست",
+          details: (error as { errors: string[] }).errors,
+        },
         { status: 400 }
       );
     }
