@@ -19,7 +19,7 @@ export function StatsSection() {
   return (
     <motion.div
       ref={statsRef}
-      className="flex gap-8 mb-8 md:mb-12"
+      className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-12"
       initial={{ opacity: 0, x: -50 }}
       animate={statsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
       transition={{ duration: 0.6 }}
@@ -36,7 +36,7 @@ export function StatsSection() {
         >
           <ShimmerEffect>
             <motion.div
-              className={`text-4xl md:text-5xl font-bold ${
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold ${
                 mode === "dark" ? "text-dark-success" : "text-light-success"
               }`}
               whileHover={{ scale: 1.1 }}
@@ -51,7 +51,7 @@ export function StatsSection() {
             </motion.div>
           </ShimmerEffect>
           <p
-            className={`text-sm md:text-base mt-2 transition-colors ${
+            className={`text-xs sm:text-sm md:text-base mt-1 sm:mt-2 transition-colors ${
               mode === "dark"
                 ? "text-dark-text-main/70 group-hover:text-dark-text-main"
                 : "text-light-text-main/70 group-hover:text-light-text-main"

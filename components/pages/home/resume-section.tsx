@@ -41,12 +41,12 @@ export function ResumeSection() {
     <motion.section
       ref={sectionRef}
       style={{ opacity, y }}
-      className={`py-32 px-4 md:px-8 relative ${
+      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
         mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
       }`}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-10 md:mb-12">
           <CustomDivider
             bColor={warningColor}
             cColor="warning"
@@ -56,10 +56,10 @@ export function ResumeSection() {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* بخش تجربیات */}
-          <div className="space-y-6">
-            <div className="mb-8">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="mb-6 sm:mb-8">
               <CustomDivider
                 bColor={warningColor}
                 cColor="warning"
@@ -72,8 +72,8 @@ export function ResumeSection() {
           </div>
 
           {/* بخش تحصیلات */}
-          <div className="space-y-6">
-            <div className="mb-8">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="mb-6 sm:mb-8">
               <CustomDivider
                 bColor={warningColor}
                 cColor="warning"

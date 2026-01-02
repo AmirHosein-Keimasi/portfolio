@@ -69,13 +69,13 @@ export const ProjectsSection = memo(function ProjectsSection() {
     <motion.section
       ref={sectionRef}
       style={{ opacity, y }}
-      className={`py-32 px-4 md:px-8 relative ${
+      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
         mode === "dark" ? "bg-dark-primary-dark" : "bg-gray-50"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         <TextReveal delay={0.2}>
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-10 md:mb-12">
             <CustomDivider
               bColor={
                 mode === "dark"
@@ -90,7 +90,7 @@ export const ProjectsSection = memo(function ProjectsSection() {
           </div>
         </TextReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-stretch">
           {projects.map((project, index) => (
             <ScrollReveal key={index} delay={index * 0.1} direction="up">
               <SpotlightCard className="h-full">
@@ -100,7 +100,7 @@ export const ProjectsSection = memo(function ProjectsSection() {
                     relative overflow-hidden
                     rounded-2xl
                     h-full
-                    min-h-[600px]
+                    min-h-[400px] sm:min-h-[500px] md:min-h-[600px]
                     flex flex-col
                     shadow-xl
                     group
@@ -127,7 +127,7 @@ export const ProjectsSection = memo(function ProjectsSection() {
 
                   {/* Image Section */}
                   {project.imgSrc && (
-                    <div className="relative w-full h-48 overflow-hidden">
+                    <div className="relative w-full h-40 sm:h-44 md:h-48 overflow-hidden">
                       <motion.div
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.5 }}
@@ -158,7 +158,7 @@ export const ProjectsSection = memo(function ProjectsSection() {
                   )}
 
                   {/* Content Section */}
-                  <div className="relative z-10 flex-1 flex flex-col p-6">
+                  <div className="relative z-10 flex-1 flex flex-col p-4 sm:p-5 md:p-6">
                     {!project.imgSrc && (
                       <h3 className={`text-xl font-bold ${textColor} mb-3`}>
                         <GradientText gradient={gradient}>

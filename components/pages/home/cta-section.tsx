@@ -13,12 +13,12 @@ export function CTASection() {
 
   return (
     <TextReveal delay={0.8}>
-      <div className="flex flex-col items-start gap-6">
-        <Link href="/connect" prefetch={true}>
+      <div className="flex flex-col items-start gap-4 sm:gap-6 w-full sm:w-auto">
+        <Link href="/connect" prefetch={true} className="w-full sm:w-auto">
           <MagneticButton strength={0.2}>
             <motion.div
               className={`
-                flex items-center gap-3 px-8 py-4 rounded-full text-base md:text-lg font-semibold
+                flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-semibold w-full sm:w-auto
                 ${
                   mode === "dark"
                     ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90"
@@ -29,8 +29,8 @@ export function CTASection() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>شروع یک همکاری خاطره‌انگیز</span>
-              <MdExpandMore className="text-xl" />
+              <span className="text-center">بیا با هم کار کنیم</span>
+              <MdExpandMore className="text-lg sm:text-xl flex-shrink-0" />
             </motion.div>
           </MagneticButton>
         </Link>

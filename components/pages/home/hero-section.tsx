@@ -47,17 +47,17 @@ export const HeroSection = memo(function HeroSection() {
   return (
     <motion.div
       ref={containerRef}
-      className="flex-1 flex flex-col md:flex-row relative px-4 md:px-8 py-8 md:py-12 min-h-screen items-center md:items-start"
+      className="flex-1 flex flex-col md:flex-row relative px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 min-h-screen items-center md:items-start"
     >
       {/* Left Section - Text Content */}
       <motion.div
         style={{ y: textY }}
-        className="flex-1 flex flex-col justify-center md:justify-start md:pt-14 z-10 relative"
+        className="flex-1 flex flex-col justify-center md:justify-start md:pt-14 z-10 relative w-full md:w-auto order-1 md:order-1"
       >
         {/* Main Heading */}
         <TextReveal delay={0.2}>
           <h1
-            className={`text-6xl md:text-8xl lg:text-6xl font-bold leading-none mb-6 ${
+            className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-tight sm:leading-none mb-4 sm:mb-6 ${
               mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
             }`}
           >
@@ -68,7 +68,7 @@ export const HeroSection = memo(function HeroSection() {
         {/* Subtitle */}
         <TextReveal delay={0.4}>
           <p
-            className={`text-lg md:text-xl lg:text-2xl mb-4 font-medium ${
+            className={`text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 font-medium ${
               mode === "dark"
                 ? "text-dark-text-main/80"
                 : "text-light-text-main/80"
@@ -81,7 +81,7 @@ export const HeroSection = memo(function HeroSection() {
         {/* Description */}
         <TextReveal delay={0.6}>
           <p
-            className={`text-base md:text-lg lg:text-xl mb-8 max-w-2xl leading-relaxed ${
+            className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6  max-w-2xl leading-relaxed ${
               mode === "dark"
                 ? "text-dark-text-main/70"
                 : "text-light-text-main/70"
@@ -94,18 +94,57 @@ export const HeroSection = memo(function HeroSection() {
         </TextReveal>
 
         {/* Stats Section */}
-        <div className="mb-8">
+        <div className="mb-6 ">
           <StatsSection />
         </div>
+
+        {/* Profile Image - Mobile (after Stats, before CTA) */}
+        <motion.div
+          style={{ y: imageY, opacity: imageOpacity }}
+          className="relative flex items-center justify-center md:hidden pointer-events-none z-0 mb-6 "
+        >
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            {/* Glow Effect */}
+            <motion.div
+              className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${glowColor}`}
+              style={{ transform: "scale(1.3)" }}
+              animate={{
+                scale: [1.3, 1.4, 1.3],
+                opacity: [0.3, 0.4, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <Image
+              src="/assets/1.png"
+              alt="امیرحسین کیماسی - فرانت دولوپر"
+              width={600}
+              height={600}
+              className="w-[200px] h-[200px] xs:w-[240px] xs:h-[240px] sm:w-[280px] sm:h-[280px] rounded-full object-cover relative z-10 shadow-2xl"
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              sizes="(max-width: 475px) 200px, (max-width: 640px) 240px, 280px"
+            />
+          </motion.div>
+        </motion.div>
 
         {/* CTA Section */}
         <CTASection />
       </motion.div>
 
-      {/* Right Section - Profile Image */}
+      {/* Right Section - Profile Image (Desktop only) */}
       <motion.div
         style={{ y: imageY, opacity: imageOpacity }}
-        className="absolute md:relative top-[40%] sm:top-[35%] md:top-auto -translate-y-1/2 md:translate-y-0 right-0 sm:right-4 md:right-0 flex items-center justify-center md:items-end md:justify-end md:w-1/2 lg:w-2/5 pointer-events-none z-0"
+        className="hidden md:flex relative top-0 -translate-y-0 right-0 items-end justify-end w-1/2 lg:w-2/5 pointer-events-none z-0"
       >
         <motion.div
           className="relative"
@@ -132,11 +171,11 @@ export const HeroSection = memo(function HeroSection() {
             alt="امیرحسین کیماسی - فرانت دولوپر"
             width={600}
             height={600}
-            className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full object-cover relative z-10 shadow-2xl"
+            className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] rounded-full object-cover relative z-10 shadow-2xl"
             priority
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-            sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 500px"
+            sizes="(max-width: 1024px) 400px, 500px"
           />
         </motion.div>
       </motion.div>

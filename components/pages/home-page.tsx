@@ -18,7 +18,7 @@ export const HomePage = memo(function HomePage() {
 
   const containerClassName = useMemo(
     () =>
-      `min-h-screen flex flex-col relative overflow-hidden ${
+      `min-h-screen flex flex-col relative overflow-x-hidden ${
         mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
       }`,
     [mode],
@@ -38,6 +38,7 @@ export const HomePage = memo(function HomePage() {
       </div>
 
       {/* Scroll Indicator - Fixed at bottom center of viewport */}
+      {/* در موبایل بعد از تصویر پروفایل نمایش داده می‌شود */}
       <ScrollIndicator />
 
       {/* Scroll-based Sections */}

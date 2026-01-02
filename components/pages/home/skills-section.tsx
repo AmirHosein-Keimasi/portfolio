@@ -55,12 +55,12 @@ export function SkillsSection() {
     <motion.section
       ref={sectionRef}
       style={{ opacity, y }}
-      className={`py-32 px-4 md:px-8 relative ${
+      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
         mode === "dark" ? "bg-dark-primary-dark" : "bg-gray-50"
       }`}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="w-full mb-8">
+        <div className="w-full mb-6 sm:mb-8">
           <ScrollReveal direction="fade" delay={0.2}>
             <CustomDivider
               bColor={

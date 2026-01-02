@@ -113,13 +113,13 @@ export const ContactSection = memo(function ContactSection() {
     <motion.section
       ref={sectionRef}
       style={{ opacity, y }}
-      className={`py-32 px-4 md:px-8 relative ${
+      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
         mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         <TextReveal delay={0.2}>
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-10 md:mb-12">
             <CustomDivider
               bColor={
                 mode === "dark"
@@ -134,7 +134,7 @@ export const ContactSection = memo(function ContactSection() {
           </div>
         </TextReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
           {contactData.map((item, index) => (
             <ScrollReveal key={index} delay={index * 0.1} direction="up">
               <SpotlightCard>
@@ -143,7 +143,7 @@ export const ContactSection = memo(function ContactSection() {
                       ${cardBg}
                       relative overflow-hidden
                       rounded-2xl
-                      p-6
+                      p-4 sm:p-5 md:p-6
                       shadow-lg
                       group
                       transition-all duration-300
@@ -173,10 +173,10 @@ export const ContactSection = memo(function ContactSection() {
                   <ShimmerOverlay />
 
                   {/* Icon */}
-                  <div className="relative z-10 mb-4 flex items-center justify-between">
+                  <div className="relative z-10 mb-3 sm:mb-4 flex items-center justify-between">
                     <motion.div
                       className={`
-                        w-12 h-12 rounded-xl flex items-center justify-center text-2xl
+                        w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-xl sm:text-2xl
                         ${
                           mode === "dark"
                             ? "bg-dark-success/20 text-dark-success"
