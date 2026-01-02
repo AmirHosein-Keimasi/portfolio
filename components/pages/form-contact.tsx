@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback, memo } from "react";
 import { useFormik } from "formik";
 import { contactValidationSchema } from "@/lib/validation/contact-validation";
 import toast from "react-hot-toast";
@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 import { useApp } from "@/lib/context/app-context";
 
-export function FormContact() {
+export const FormContact = memo(function FormContact() {
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
@@ -28,9 +28,26 @@ export function FormContact() {
     message: "",
   };
 
-  const formik = useFormik({
-    initialValues: contactInputNames,
-    onSubmit: async (values, { resetForm }) => {
+  const { mode } = useApp();
+
+  const styles = useMemo(
+    () => ({
+      bgColor:
+        mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main",
+      inputBg: mode === "dark" ? "bg-gray-700" : "bg-white",
+      inputText: mode === "dark" ? "text-white" : "text-gray-900",
+      borderColor: mode === "dark" ? "border-gray-600" : "border-gray-300",
+      errorColor: "border-red-500",
+      buttonColor:
+        mode === "dark"
+          ? "bg-dark-success hover:bg-dark-success/90"
+          : "bg-light-success hover:bg-light-success/90",
+    }),
+    [mode],
+  );
+
+  const handleSubmit = useCallback(
+    async (values: typeof contactInputNames, { resetForm }: any) => {
       setIsSubmitting(true);
       setSubmitStatus({ type: null, message: "" });
 
@@ -64,20 +81,14 @@ export function FormContact() {
         setIsSubmitting(false);
       }
     },
+    [],
+  );
+
+  const formik = useFormik({
+    initialValues: contactInputNames,
+    onSubmit: handleSubmit,
     validationSchema: contactValidationSchema,
   });
-
-  const { mode } = useApp();
-  const bgColor =
-    mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main";
-  const inputBg = mode === "dark" ? "bg-gray-700" : "bg-white";
-  const inputText = mode === "dark" ? "text-white" : "text-gray-900";
-  const borderColor = mode === "dark" ? "border-gray-600" : "border-gray-300";
-  const errorColor = "border-red-500";
-  const buttonColor =
-    mode === "dark"
-      ? "bg-dark-success hover:bg-dark-success/90"
-      : "bg-light-success hover:bg-light-success/90";
 
   return (
     <motion.form
@@ -89,7 +100,7 @@ export function FormContact() {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className={`${bgColor} p-4 rounded-2xl shadow-lg`}
+        className={`${styles.bgColor} p-4 rounded-2xl shadow-lg`}
         whileHover={{
           boxShadow:
             mode === "dark"
@@ -157,8 +168,8 @@ export function FormContact() {
                   }
                   className={`
                     w-full px-3 py-2 pr-10 rounded-lg border
-                    ${inputBg} ${inputText}
-                    ${formik.touched.fullname && formik.errors.fullname ? errorColor : borderColor}
+                    ${styles.inputBg} ${styles.inputText}
+                    ${formik.touched.fullname && formik.errors.fullname ? styles.errorColor : styles.borderColor}
                     focus:outline-none focus:ring-2 focus:ring-yellow-500
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
@@ -215,8 +226,8 @@ export function FormContact() {
                   }
                   className={`
                     w-full px-3 py-2 pr-10 rounded-lg border
-                    ${inputBg} ${inputText}
-                    ${formik.touched.email && formik.errors.email ? errorColor : borderColor}
+                    ${styles.inputBg} ${styles.inputText}
+                    ${formik.touched.email && formik.errors.email ? styles.errorColor : styles.borderColor}
                     focus:outline-none focus:ring-2 focus:ring-yellow-500
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
@@ -274,8 +285,8 @@ export function FormContact() {
                   }
                   className={`
                     w-full px-3 py-2 pr-10 rounded-lg border
-                    ${inputBg} ${inputText}
-                    ${formik.touched.subject && formik.errors.subject ? errorColor : borderColor}
+                    ${styles.inputBg} ${styles.inputText}
+                    ${formik.touched.subject && formik.errors.subject ? styles.errorColor : styles.borderColor}
                     focus:outline-none focus:ring-2 focus:ring-yellow-500
                     disabled:opacity-50 disabled:cursor-not-allowed
                   `}
@@ -331,13 +342,13 @@ export function FormContact() {
                     : undefined
                 }
                 className={`
-                  w-full px-3 py-2 rounded-lg border
-                  ${inputBg} ${inputText}
-                  ${formik.touched.message && formik.errors.message ? errorColor : borderColor}
-                  focus:outline-none focus:ring-2 focus:ring-yellow-500
-                  resize-none
-                  disabled:opacity-50 disabled:cursor-not-allowed
-                `}
+                    w-full px-3 py-2 rounded-lg border
+                    ${styles.inputBg} ${styles.inputText}
+                    ${formik.touched.message && formik.errors.message ? styles.errorColor : styles.borderColor}
+                    focus:outline-none focus:ring-2 focus:ring-yellow-500
+                    resize-none
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                  `}
                 placeholder="متن پیام"
               />
               {formik.touched.message && formik.errors.message && (
@@ -356,7 +367,7 @@ export function FormContact() {
         </div>
       </motion.div>
       <motion.div
-        className={`${bgColor} flex items-end flex-col p-4`}
+        className={`${styles.bgColor} flex items-end flex-col p-4`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
@@ -367,7 +378,7 @@ export function FormContact() {
           type="submit"
           disabled={isSubmitting}
           className={`
-            ${buttonColor}
+            ${styles.buttonColor}
             text-white font-medium py-2 px-6 rounded-lg
             transition-colors duration-200 mt-2 w-full
             disabled:opacity-50 disabled:cursor-not-allowed
@@ -379,4 +390,4 @@ export function FormContact() {
       </motion.div>
     </motion.form>
   );
-}
+});

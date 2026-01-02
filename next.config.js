@@ -3,24 +3,28 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [],
-    unoptimized: false, // Enable image optimization
+    unoptimized: false,
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000, // 1 year for better caching
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    optimizePackageImports: ["react-icons", "react-slick"],
+    optimizePackageImports: ["react-icons", "react-slick", "framer-motion"],
+    optimizeCss: true,
   },
-  // Compression
   compress: true,
-  // Power by header
   poweredByHeader: false,
-  // Generate ETags
   generateEtags: true,
-  // Page Extensions
   pageExtensions: ["ts", "tsx", "js", "jsx"],
-  // Headers for security and performance
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? {
+      exclude: ["error", "warn"],
+    } : false,
+  },
   async headers() {
     return [
       {
@@ -41,6 +45,28 @@ const nextConfig = {
           {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

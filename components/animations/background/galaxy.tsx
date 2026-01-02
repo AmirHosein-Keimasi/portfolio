@@ -1,24 +1,30 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { useEffect, useRef, useCallback, memo } from "react";
 
 interface GalaxyProps {
   className?: string;
 }
 
-export function Galaxy({ className = "" }: GalaxyProps) {
+export const Galaxy = memo(function Galaxy({ className = "" }: GalaxyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>();
+
+  const handleResize = useCallback(() => {
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }, []);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    handleResize();
 
     const stars: Array<{
       x: number;
@@ -27,7 +33,10 @@ export function Galaxy({ className = "" }: GalaxyProps) {
       speed: number;
     }> = [];
 
-    for (let i = 0; i < 200; i++) {
+    // Reduce star count for better performance
+    const starCount = Math.min(150, Math.floor((window.innerWidth * window.innerHeight) / 10000));
+    
+    for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -37,6 +46,7 @@ export function Galaxy({ className = "" }: GalaxyProps) {
     }
 
     const animate = () => {
+      if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ffffff";
 
@@ -49,17 +59,27 @@ export function Galaxy({ className = "" }: GalaxyProps) {
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     animate();
-  }, []);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [handleResize]);
 
   return (
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 pointer-events-none z-0 ${className}`}
+      aria-hidden="true"
     />
   );
-}
+});
 

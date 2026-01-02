@@ -3,7 +3,8 @@ export { StatsSection } from "./stats-section";
 export { CTASection } from "./cta-section";
 export { VerticalText } from "./vertical-text";
 export { ScrollIndicator } from "./scroll-indicator";
-export { ServicesSection } from "./services-section";
-export { AboutSection } from "./about-section";
-export { FinalCTASection } from "./final-cta-section";
+export { SkillsSection } from "./skills-section";
+export { ResumeSection } from "./resume-section";
+export { ProjectsSection } from "./projects-section";
+export { ContactSection } from "./contact-section";
 

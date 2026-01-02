@@ -1,25 +1,31 @@
 "use client";
 
+import { useMemo, memo } from "react";
 import { useApp } from "@/lib/context/app-context";
 import { PremiumBackground } from "@/components/animations/premium-background";
 import {
   HeroSection,
   VerticalText,
-  ServicesSection,
-  AboutSection,
-  FinalCTASection,
+  SkillsSection,
+  ResumeSection,
+  ProjectsSection,
+  ContactSection,
   ScrollIndicator,
 } from "./home";
 
-export function HomePage() {
+export const HomePage = memo(function HomePage() {
   const { mode } = useApp();
 
-  return (
-    <div
-      className={`min-h-screen flex flex-col relative overflow-hidden ${
+  const containerClassName = useMemo(
+    () =>
+      `min-h-screen flex flex-col relative overflow-hidden ${
         mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
-      }`}
-    >
+      }`,
+    [mode],
+  );
+
+  return (
+    <div className={containerClassName}>
       {/* Premium Animated Background */}
       <PremiumBackground />
 
@@ -35,9 +41,10 @@ export function HomePage() {
       <ScrollIndicator />
 
       {/* Scroll-based Sections */}
-      <ServicesSection />
-      <AboutSection />
-      <FinalCTASection />
+      <SkillsSection />
+      <ResumeSection />
+      <ProjectsSection />
+      <ContactSection />
     </div>
   );
-}
+});

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useEffect, useState, useMemo, memo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useApp } from "@/lib/context/app-context";
 import { GradientText } from "@/components/animations/gradient-text";
@@ -9,7 +9,7 @@ import { TextReveal } from "@/components/animations/text-reveal";
 import { StatsSection } from "./stats-section";
 import { CTASection } from "./cta-section";
 
-export function HeroSection() {
+export const HeroSection = memo(function HeroSection() {
   const { mode } = useApp();
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
@@ -31,6 +31,19 @@ export function HeroSection() {
   );
   const textY = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
+  const gradient = useMemo(
+    () =>
+      mode === "dark"
+        ? "from-green-400 via-green-500 to-green-600"
+        : "from-green-500 via-green-600 to-green-700",
+    [mode],
+  );
+
+  const glowColor = useMemo(
+    () => (mode === "dark" ? "bg-dark-success" : "bg-light-success"),
+    [mode],
+  );
+
   return (
     <motion.div
       ref={containerRef}
@@ -48,15 +61,7 @@ export function HeroSection() {
               mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
             }`}
           >
-            <GradientText
-              gradient={
-                mode === "dark"
-                  ? "from-green-400 via-green-500 to-green-600"
-                  : "from-green-500 via-green-600 to-green-700"
-              }
-            >
-              سلام
-            </GradientText>
+            <GradientText gradient={gradient}>سلام</GradientText>
           </h1>
         </TextReveal>
 
@@ -110,9 +115,7 @@ export function HeroSection() {
         >
           {/* Glow Effect */}
           <motion.div
-            className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${
-              mode === "dark" ? "bg-dark-success" : "bg-light-success"
-            }`}
+            className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${glowColor}`}
             style={{ transform: "scale(1.3)" }}
             animate={{
               scale: [1.3, 1.4, 1.3],
@@ -133,9 +136,10 @@ export function HeroSection() {
             priority
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 500px"
           />
         </motion.div>
       </motion.div>
     </motion.div>
   );
-}
+});

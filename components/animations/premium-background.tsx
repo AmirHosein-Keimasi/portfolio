@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, memo } from "react";
 import { useApp } from "@/lib/context/app-context";
 import { Beams } from "@/components/animations/background/beams";
 import { ParticlesBg } from "@/components/animations/background/particles-bg";
@@ -7,53 +8,57 @@ import { GridMotion } from "@/components/animations/background/grid-motion";
 import { DotGrid } from "@/components/animations/background/dot-grid";
 import { Galaxy } from "@/components/animations/background/galaxy";
 
-export function PremiumBackground() {
+export const PremiumBackground = memo(function PremiumBackground() {
   const { mode } = useApp();
 
   // Enhanced colors for light mode - brighter and more vibrant
-  const successColor = mode === "dark" ? "#10b981" : "#10b981";
-  const infoColor = mode === "dark" ? "#3b82f6" : "#3b82f6";
-  const orbColor1 =
-    mode === "dark"
-      ? "rgba(16, 185, 129, 0.4)"
-      : "rgba(16, 185, 129, 0.6)";
-  const orbColor2 =
-    mode === "dark"
-      ? "rgba(59, 130, 246, 0.4)"
-      : "rgba(59, 130, 246, 0.55)";
-  const particleColor =
-    mode === "dark"
-      ? "rgba(16, 185, 129, 0.4)"
-      : "rgba(16, 185, 129, 0.45)";
-  const gridColor =
-    mode === "dark"
-      ? "rgba(16, 185, 129, 0.15)"
-      : "rgba(16, 185, 129, 0.25)";
-  const dotColor =
-    mode === "dark"
-      ? "rgba(241, 245, 249, 0.3)"
-      : "rgba(30, 41, 59, 0.5)";
+  const colors = useMemo(
+    () => ({
+      successColor: "#10b981",
+      infoColor: "#3b82f6",
+      orbColor1:
+        mode === "dark" ? "rgba(16, 185, 129, 0.4)" : "rgba(16, 185, 129, 0.6)",
+      orbColor2:
+        mode === "dark"
+          ? "rgba(59, 130, 246, 0.4)"
+          : "rgba(59, 130, 246, 0.55)",
+      particleColor:
+        mode === "dark"
+          ? "rgba(16, 185, 129, 0.4)"
+          : "rgba(16, 185, 129, 0.45)",
+      gridColor:
+        mode === "dark"
+          ? "rgba(16, 185, 129, 0.15)"
+          : "rgba(16, 185, 129, 0.25)",
+      dotColor:
+        mode === "dark" ? "rgba(241, 245, 249, 0.3)" : "rgba(30, 41, 59, 0.5)",
+    }),
+    [mode],
+  );
+
+  const opacityClasses = useMemo(
+    () => ({
+      galaxy: mode === "dark" ? "opacity-30" : "opacity-55",
+      particles: mode === "dark" ? "opacity-40" : "opacity-65",
+      grid: mode === "dark" ? "opacity-20" : "opacity-40",
+      dots: mode === "dark" ? "opacity-30" : "opacity-55",
+      beams: mode === "dark" ? "opacity-25" : "opacity-45",
+    }),
+    [mode],
+  );
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Layer 1: Galaxy Stars (Deep Background) */}
-      <div
-        className={`absolute inset-0 ${
-          mode === "dark" ? "opacity-30" : "opacity-55"
-        }`}
-      >
+      <div className={`absolute inset-0 ${opacityClasses.galaxy}`}>
         <Galaxy />
       </div>
 
       {/* Layer 2: Animated Particles */}
-      <div
-        className={`absolute inset-0 ${
-          mode === "dark" ? "opacity-40" : "opacity-65"
-        }`}
-      >
+      <div className={`absolute inset-0 ${opacityClasses.particles}`}>
         <ParticlesBg
           particleCount={mode === "dark" ? 80 : 75}
-          color={particleColor}
+          color={colors.particleColor}
         />
       </div>
 
@@ -65,7 +70,7 @@ export function PremiumBackground() {
           left: "10%",
           width: "600px",
           height: "600px",
-          background: `radial-gradient(circle, ${orbColor1}, transparent 70%)`,
+          background: `radial-gradient(circle, ${colors.orbColor1}, transparent 70%)`,
           filter: "blur(100px)",
           opacity: mode === "dark" ? 0.3 : 0.4,
           transform: "translate(-50%, -50%)",
@@ -79,7 +84,7 @@ export function PremiumBackground() {
           right: "10%",
           width: "700px",
           height: "700px",
-          background: `radial-gradient(circle, ${orbColor2}, transparent 70%)`,
+          background: `radial-gradient(circle, ${colors.orbColor2}, transparent 70%)`,
           filter: "blur(100px)",
           opacity: mode === "dark" ? 0.25 : 0.35,
           transform: "translate(50%, 50%)",
@@ -106,37 +111,18 @@ export function PremiumBackground() {
       />
 
       {/* Layer 4: Animated Grid Motion */}
-      <div
-        className={`absolute inset-0 ${
-          mode === "dark" ? "opacity-20" : "opacity-40"
-        }`}
-      >
-        <GridMotion color={gridColor} />
+      <div className={`absolute inset-0 ${opacityClasses.grid}`}>
+        <GridMotion color={colors.gridColor} />
       </div>
 
       {/* Layer 5: Dot Grid Pattern */}
-      <div
-        className={`absolute inset-0 ${
-          mode === "dark" ? "opacity-30" : "opacity-55"
-        }`}
-      >
-        <DotGrid
-          color={dotColor}
-          dotSize={mode === "dark" ? 1.5 : 1.5}
-          spacing={40}
-        />
+      <div className={`absolute inset-0 ${opacityClasses.dots}`}>
+        <DotGrid color={colors.dotColor} dotSize={1.5} spacing={40} />
       </div>
 
       {/* Layer 6: Beams of Light */}
-      <div
-        className={`absolute inset-0 ${
-          mode === "dark" ? "opacity-25" : "opacity-45"
-        }`}
-      >
-        <Beams
-          beamCount={mode === "dark" ? 5 : 5}
-          color={successColor}
-        />
+      <div className={`absolute inset-0 ${opacityClasses.beams}`}>
+        <Beams beamCount={5} color={colors.successColor} />
       </div>
 
       {/* Layer 7: Multi-color Gradient Overlays */}
@@ -185,5 +171,4 @@ export function PremiumBackground() {
       />
     </div>
   );
-}
-
+});
