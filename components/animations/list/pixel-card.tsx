@@ -52,7 +52,6 @@ export function PixelCard({
       ref={ref}
       className={className}
       style={{
-        imageRendering: "pixelated",
         imageRendering: "crisp-edges",
       }}
     >
