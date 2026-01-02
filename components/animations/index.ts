@@ -24,3 +24,9 @@ export { ParticlesBackground } from "./particles-background";
 export { ScrollProgress } from "./scroll-progress";
 export { ScrollReveal } from "./scroll-reveal";
 
+// Auto animations (no action required)
+export { AutoRotate } from "./auto-rotate";
+export { AutoPulse } from "./auto-pulse";
+export { AutoBounce } from "./auto-bounce";
+export { AutoGlow } from "./auto-glow";
+

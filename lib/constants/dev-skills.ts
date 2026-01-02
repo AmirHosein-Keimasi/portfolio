@@ -202,7 +202,7 @@ export const projects = [
   {
     title: "Gym 24",
     description: `اپلیکیشن Gym 24 برای مدیریت کاربران باشگاه طراحی شده است. از تکنولوژی‌های مدرن برای ساخت رابط کاربری بهینه استفاده کردیم.`,
-    technologies: "React، Zustand، Tailwind CSS، Material UI",
+    technologies: ["React", "Zustand", "Tailwind CSS", "Material UI"],
     features: `طراحی مدرن، پشتیبانی از کاربر چندگانه، مدیریت موثر داده‌ها`,
     imgSrc: img1,
     websiteLink: "https://gym-template-ochre.vercel.app/en-us",
@@ -212,8 +212,15 @@ export const projects = [
   {
     title: "Portfolio",
     description: `این وب‌سایت رو برای نمایش پروژه‌ها و مهارت‌های برنامه‌نویسی خودم توسعه دادم. طراحی و توسعه کامل این پروژه برعهده خودم بود و تلاش کردم تا با استفاده از تکنولوژی‌های مدرن و ساختار ساده، یک تجربه کاربری منحصر به فرد و بهینه ایجاد کنم. برای این منظور از ابزارها و کتابخانه‌های مختلفی بهره بردم تا علاوه بر زیبایی، عملکرد خوبی هم داشته باشه.`,
-    technologies:
-      "React Material-UI Formik & Yup  React-Router React-Slick React-Particles Typed.js",
+    technologies: [
+      "React",
+      "Material-UI",
+      "Formik & Yup",
+      "React-Router",
+      "React-Slick",
+      "React-Particles",
+      "Typed.js",
+    ],
     features: `طراحی مینیمال و واکنش‌گرا، انیمیشن‌های جذاب برای تعامل بهتر`,
     imgSrc: img2,
     websiteLink: "",
@@ -223,8 +230,23 @@ export const projects = [
   {
     title: "Device management",
     description: `اپلیکیشن مدیریت و نگهداری دستگاه‌ها و دیوایس‌های  سازمان و شرکت`,
-    technologies:
-      "	 Axios	AOS	Yup	useImmer	TsParticles	Stylis-plugin-rtl	React-toastify	React-scripts	React-router-dom	React-router	NPM	React-lottie	moment-jalaali	framer-motion	Formik  ",
+    technologies: [
+      "Axios",
+      "AOS",
+      "Yup",
+      "useImmer",
+      "TsParticles",
+      "Stylis-plugin-rtl",
+      "React-toastify",
+      "React-scripts",
+      "React-router-dom",
+      "React-router",
+      "NPM",
+      "React-lottie",
+      "moment-jalaali",
+      "framer-motion",
+      "Formik",
+    ],
     features: `هدف این پروژه طراحی و پیاده‌سازی یک سیستم مدیریت دستگاه‌ها و دیوایس‌های سازمانی است. این سیستم اطلاعات دقیق و به‌روزی از تمام دستگاه‌ها و دیوایس‌های موجود در سازمان یا شرکت را ثبت و نگهداری می‌کند و امکان برنامه‌ریزی سرویس‌ها و تعمیرات بر اساس این اطلاعات را فراهم می‌کند.`,
     websiteLink: "",
     codeLink:
@@ -234,8 +256,16 @@ export const projects = [
   {
     title: "Sticker Shop",
     description: `این وب‌سایت رو برای فروشگاه استیکر آنلاین طراحی و توسعه دادم. طراحی و پیاده‌سازی این پروژه به‌صورت کامل توسط خودم انجام شد و سعی کردم تا با استفاده از جدیدترین تکنولوژی‌ها و طراحی مدرن، تجربه‌ای ساده، جذاب و سریع برای کاربران فراهم کنم. هدف اصلی این پروژه ارائه رابط کاربری روان و عملکرد بالا در کنار یک طراحی کاربرپسند بود. `,
-    technologies:
-      "React Redux Toolkit React-Router Tailwind CSS Axios React Toastify React Helmet Vite",
+    technologies: [
+      "React",
+      "Redux Toolkit",
+      "React-Router",
+      "Tailwind CSS",
+      "Axios",
+      "React Toastify",
+      "React Helmet",
+      "Vite",
+    ],
     features: `طراحی مینیمال و واکنش‌گرا، انیمیشن‌های روان، دسترسی آسان و ساختار شفاف`,
     imgSrc: img3,
     websiteLink: "",
@@ -245,8 +275,14 @@ export const projects = [
   {
     title: "Weblog-Reduxe",
     description: `این وب‌سایت رو برای مدیریت و ارائه وبلاگ‌های شخصی و پروژه‌های خودم طراحی و توسعه دادم. تمام مراحل طراحی و پیاده‌سازی این پروژه برعهده خودم بوده و سعی کردم با استفاده از ابزارها و تکنولوژی‌های به‌روز، تجربه‌ای ساده، روان و حرفه‌ای رو برای کاربران فراهم کنم. هدف اصلی این پروژه نمایش محتوای وبلاگ به شکلی جذاب و سریع بود. `,
-    technologies:
-      "React، Redux Toolkit، React-Router، Axios، date-fns-jalali، Vite",
+    technologies: [
+      "React",
+      "Redux Toolkit",
+      "React-Router",
+      "Axios",
+      "date-fns-jalali",
+      "Vite",
+    ],
     features: `طراحی مینیمال و واکنش‌گرا، ساختار شفاف، عملکرد سریع`,
     websiteLink: "",
     codeLink: "https://github.com/AmirHosein-Keimasi/weblog-Reduxe-",

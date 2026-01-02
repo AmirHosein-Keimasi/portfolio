@@ -9,13 +9,17 @@ import {
   FaCheckCircle,
   FaEdit,
   FaHeadphones,
-  FaSmile,
   FaHeart,
   FaCode,
 } from "react-icons/fa";
 import { CustomDivider } from "@/components/common/custom-divider";
 import { useApp } from "@/lib/context/app-context";
-import { motion, useInView } from "framer-motion";
+import { TextReveal } from "@/components/animations/text-reveal";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { SpotlightCard } from "@/components/animations/list";
+import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
+import { GradientText } from "@/components/animations/gradient-text";
+import { motion } from "framer-motion";
 
 const skills = [
   { title: "مسئولیت‌پذیری", icon: <FaCalendar /> },
@@ -25,108 +29,120 @@ const skills = [
   { title: "انتقادپذیر", icon: <FaComments /> },
   { title: "یادگیری و تدریس", icon: <FaEdit /> },
   { title: "شنونده‌ی خوب", icon: <FaHeadphones /> },
-  { title: "شوخ‌طبعی", icon: <FaSmile /> },
   { title: "همدلی و همیاری", icon: <FaHeart /> },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.8,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
-};
-
 export function SuftSkills() {
   const { mode } = useApp();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   const colors = useMemo(
     () => ({
       border: mode === "dark" ? "border-dark-text-main" : "border-light-text-main",
       successBg: mode === "dark" ? "bg-dark-success" : "bg-light-success",
+      cardBg: mode === "dark" ? "bg-dark-primary-main" : "bg-white",
+      textMain: mode === "dark" ? "text-dark-text-main" : "text-light-text-main",
+      textSecondary: mode === "dark" ? "text-dark-text-main/70" : "text-light-text-main/70",
+      successText: mode === "dark" ? "text-dark-success" : "text-light-success",
     }),
     [mode]
   );
 
   return (
-    <div className="p-5 text-center">
-      <CustomDivider
-        bColor={colors.border}
-        cColor="warning"
-        icon={<FaCode />}
-        align="center"
-        text="مهارت های نرم"
-      />
-      <motion.div
-        ref={containerRef}
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center mt-2"
-      >
-        {skills.map((skill, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            whileHover={{
-              scale: 1.1,
-              y: -10,
-              rotate: [0, -5, 5, -5, 0],
-              transition: { duration: 0.5 },
-            }}
-            className={`
-              ${colors.successBg}
-              text-white
-              flex flex-col items-center
-              p-4 rounded-lg
-              shadow-md
-              cursor-pointer
-              focus-within:ring-2 focus-within:ring-yellow-500
-            `}
-            tabIndex={0}
-            role="article"
-            aria-label={`مهارت: ${skill.title}`}
-          >
-            <motion.div
-              className="flex items-center justify-center mb-2"
-              aria-hidden="true"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
+    <div className="py-16 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
+        <TextReveal delay={0.2}>
+          <div className="text-center mb-12">
+            <CustomDivider
+              bColor={colors.border}
+              cColor="warning"
+              icon={<FaCode />}
+              align="center"
+              text="مهارت های نرم"
+            />
+          </div>
+        </TextReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {skills.map((skill, index) => (
+            <ScrollReveal
+              key={index}
+              delay={index * 0.1}
+              direction="up"
             >
-              <div className="text-5xl text-white">{skill.icon}</div>
-            </motion.div>
-            <motion.p
-              className="font-bold text-black dark:text-white"
-              whileHover={{ scale: 1.05 }}
-            >
-              {skill.title}
-            </motion.p>
-          </motion.div>
-        ))}
-      </motion.div>
+              <SpotlightCard>
+                <motion.div
+                  className={`
+                    ${colors.cardBg}
+                    relative overflow-hidden
+                    flex flex-col items-center justify-center
+                    p-8 rounded-xl
+                    shadow-lg
+                    cursor-pointer
+                    group
+                    border-2
+                    ${mode === "dark" ? "border-dark-primary-dark" : "border-gray-100"}
+                    transition-all duration-300
+                  `}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -8,
+                    transition: { duration: 0.3 },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  tabIndex={0}
+                  role="article"
+                  aria-label={`مهارت: ${skill.title}`}
+                >
+                  <ShimmerOverlay />
+                  
+                  {/* Icon Container */}
+                  <div
+                    className={`
+                      ${colors.successText}
+                      mb-4
+                      relative z-10
+                    `}
+                  >
+                    <div className="text-6xl">{skill.icon}</div>
+                  </div>
+
+                  {/* Title */}
+                  <motion.h3
+                    className={`
+                      ${colors.textMain}
+                      font-bold text-lg md:text-xl
+                      text-center
+                      relative z-10
+                      mb-2
+                    `}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <GradientText
+                      gradient={
+                        mode === "dark"
+                          ? "from-green-400 via-green-500 to-green-600"
+                          : "from-green-500 via-green-600 to-green-700"
+                      }
+                    >
+                      {skill.title}
+                    </GradientText>
+                  </motion.h3>
+
+                  {/* Decorative Element */}
+                  <motion.div
+                    className={`
+                      absolute bottom-0 left-0 right-0 h-1
+                      ${colors.successBg}
+                      transform scale-x-0 group-hover:scale-x-100
+                      transition-transform duration-300
+                    `}
+                  />
+                </motion.div>
+              </SpotlightCard>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

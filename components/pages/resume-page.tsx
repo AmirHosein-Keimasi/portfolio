@@ -25,35 +25,44 @@ export function ResumePage() {
   }, []);
 
   return (
-    <div className={`${bgColor} min-h-screen`}>
-      <div className="p-4">
-        <CustomDivider
-          bColor={warningColor}
-          cColor="warning"
-          icon={<FaNetworkWired />}
-          align="center"
-          text="رزومه من"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <div>
-            <CustomDivider
-              bColor={warningColor}
-              cColor="warning"
-              icon={<FaTools />}
-              align="center"
-              text="تجربیات"
-            />
+    <div className={`${bgColor} min-h-screen py-12 md:py-16`}>
+      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+        <div className="mb-12">
+          <CustomDivider
+            bColor={warningColor}
+            cColor="warning"
+            icon={<FaNetworkWired />}
+            align="center"
+            text="رزومه من"
+          />
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* بخش تجربیات */}
+          <div className="space-y-6">
+            <div className="mb-8">
+              <CustomDivider
+                bColor={warningColor}
+                cColor="warning"
+                icon={<FaTools />}
+                align="center"
+                text="تجربیات"
+              />
+            </div>
             <DevExpTimeline loading={loading} />
           </div>
 
-          <div>
-            <CustomDivider
-              bColor={warningColor}
-              cColor="warning"
-              icon={<FaGraduationCap />}
-              align="center"
-              text="تحصیلات"
-            />
+          {/* بخش تحصیلات */}
+          <div className="space-y-6">
+            <div className="mb-8">
+              <CustomDivider
+                bColor={warningColor}
+                cColor="warning"
+                icon={<FaGraduationCap />}
+                align="center"
+                text="تحصیلات"
+              />
+            </div>
             <DevEduTimeline loading={loading} />
           </div>
         </div>
