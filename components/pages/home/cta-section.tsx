@@ -13,7 +13,7 @@ export function CTASection() {
 
   return (
     <TextReveal delay={0.8}>
-      <div className="flex flex-col items-start gap-4 sm:gap-6 w-full sm:w-auto">
+      <div className="flex flex-col items-start gap-4 w-full sm:w-auto">
         <Link href="/connect" prefetch={true} className="w-full sm:w-auto">
           <MagneticButton strength={0.2}>
             <motion.div

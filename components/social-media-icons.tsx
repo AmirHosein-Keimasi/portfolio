@@ -64,7 +64,7 @@ export function SocialMediaIcons({ textAlign = "center" }: SocialMediaIconsProps
   );
 
   return (
-    <div className={`mt-10 ${alignClass}`} role="list" aria-label="Social media links">
+    <div className={`mt-8 ${alignClass}`} role="list" aria-label="Social media links">
       {socialLinks.map((link, index) => {
         const Icon = link.icon;
         return (
