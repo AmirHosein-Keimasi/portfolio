@@ -1,25 +1,79 @@
-# پروژه پورتفولیو PWA
+# Portfolio Website - Next.js 15 + TypeScript
 
-![image](https://github.com/user-attachments/assets/caa486eb-23ed-4a38-9c81-0121d473a765)
+پورتفولیو شخصی امیرحسین کیماسی با Next.js 15، TypeScript و Tailwind CSS
 
-به **پروژه پورتفولیو PWA** خوش آمدید. این اپلیکیشن وب پیشرفته (PWA) برای نمایش پورتفولیو شما با ویژگی‌های مدرن و تعاملی طراحی شده است. این پروژه از React، Material-UI و کتابخانه‌های پیشرفته دیگر استفاده می‌کند تا تجربه کاربری جذابی ارائه دهد.
+## 🚀 تکنولوژی‌ها
 
-## ویژگی‌ها
+- **Next.js 15** - با App Router
+- **TypeScript** - برای type safety
+- **Tailwind CSS** - برای استایل‌دهی
+- **React Icons** - برای آیکون‌ها
+- **Formik & Yup** - برای فرم‌ها و validation
+- **React Slick** - برای اسلایدرها
 
-- **Progressive Web App**: Works offline and supports installation on devices.
-- **Responsive Design**: Optimized for all screen sizes.
-- **Modern Libraries**: Built using React 18, Material-UI, and more.
-- **Custom Animations**: Interactive UI elements with animations.
+## 📁 ساختار پروژه
 
-## Live Demo
+```
+app/
+  ├── (main)/              # Route group برای صفحات اصلی
+  │   ├── layout.tsx       # Layout مشترک با TopHeader
+  │   ├── page.tsx         # صفحه اصلی (/)
+  │   ├── about/           # درباره من (/about)
+  │   ├── resume/          # رزومه (/resume)
+  │   ├── projects/        # پروژه‌ها (/projects)
+  │   ├── contact/          # تماس (/contact)
+  │   └── connect/         # ارتباط (/connect)
+  ├── layout.tsx           # Root layout
+  └── globals.css          # استایل‌های global
 
-[Visit the Live Site](http://amirhosein.kiemasi.whi.ir)
+components/
+  ├── common/              # کامپوننت‌های مشترک
+  ├── header/              # Header و Navigation
+  └── pages/               # کامپوننت‌های صفحات
 
-## Tech Stack
+lib/
+  ├── context/             # Context و State Management
+  ├── constants/           # Constants و Data
+  └── validation/          # Validation Schemas
 
-- **Frontend**: React, Material-UI, Formik, Typed.js
-- **Routing**: React Router DOM
-- **Animations**: React Particles, React Text Transition
-- **Build Tools**: React Scripts, Web Vitals
+public/
+  └── assets/              # تصاویر و فایل‌های استاتیک
+```
 
-Developed with ❤️ by [Amirhosein Kiemasi](http://amirhosein.kiemasi.whi.ir).
+## 🛠️ نصب و اجرا
+
+```bash
+# نصب وابستگی‌ها
+npm install
+
+# اجرای development server
+npm run dev
+
+# Build برای production
+npm run build
+
+# اجرای production server
+npm start
+```
+
+## 📝 Routes
+
+- `/` - صفحه اصلی
+- `/about` - درباره من
+- `/resume` - رزومه
+- `/projects` - پروژه‌ها
+- `/contact` - تماس با من
+- `/connect` - ارتباط با من
+
+## 🎨 Features
+
+- ✅ Dark/Light Mode
+- ✅ Responsive Design
+- ✅ TypeScript Support
+- ✅ SEO Optimized
+- ✅ Clean Code Structure
+- ✅ App Router Routing
+
+## 📄 License
+
+MIT
