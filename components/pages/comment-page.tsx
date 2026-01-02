@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { FaComments } from "react-icons/fa";
 import { CustomDivider } from "@/components/common/custom-divider";
 import { useApp } from "@/lib/context/app-context";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 
 // Dynamic import برای CommentSlider (سنگین است)
 const CommentSlider = dynamic(
@@ -37,13 +38,16 @@ export function CommentPage() {
       `}
     >
       <div className="p-4">
-        <CustomDivider
-          bColor={textColor}
-          cColor="warning"
-          icon={<FaComments />}
-          align="center"
-          text="پروژه ها"
-        />
+        <ScrollReveal direction="fade" delay={0.2}>
+          <CustomDivider
+            bColor={textColor}
+            cColor="warning"
+            icon={<FaComments />}
+            align="center"
+            text="پروژه ها"
+          />
+        </ScrollReveal>
+
         <Suspense
           fallback={
             <div className="flex items-center justify-center py-12">
@@ -51,7 +55,9 @@ export function CommentPage() {
             </div>
           }
         >
-          <CommentSlider />
+          <ScrollReveal direction="up" delay={0.4}>
+            <CommentSlider />
+          </ScrollReveal>
         </Suspense>
       </div>
     </div>

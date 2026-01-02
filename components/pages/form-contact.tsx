@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { contactValidationSchema } from "@/lib/validation/contact-validation";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 import {
   FaEnvelope,
   FaUser,
@@ -75,8 +76,19 @@ export function FormContact() {
   const buttonColor = mode === "dark" ? "bg-dark-success hover:bg-dark-success/90" : "bg-light-success hover:bg-light-success/90";
 
   return (
-    <form autoComplete="off" onSubmit={formik.handleSubmit} className="w-full">
-      <div className={`${bgColor} p-4`}>
+    <motion.form
+      autoComplete="off"
+      onSubmit={formik.handleSubmit}
+      className="w-full"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className={`${bgColor} p-4 rounded-2xl shadow-lg`}
+        whileHover={{ boxShadow: mode === "dark" ? "0 20px 40px rgba(54, 114, 117, 0.2)" : "0 20px 40px rgba(147, 191, 207, 0.2)" }}
+        transition={{ duration: 0.3 }}
+      >
         {/* Status Messages */}
         {submitStatus.type && (
           <div
@@ -102,12 +114,18 @@ export function FormContact() {
 
         <div className="w-full" dir="ltr">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+            >
               <label htmlFor="fullname" className="block text-sm font-medium mb-1 text-right">
                 نام و نام خانوادگی
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                   id="fullname"
                   type="text"
                   name="fullname"
@@ -129,17 +147,29 @@ export function FormContact() {
                 <FaUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" aria-hidden="true" />
               </div>
               {formik.touched.fullname && formik.errors.fullname && (
-                <p id="fullname-error" className="text-red-500 text-xs mt-1 text-right" role="alert">
+                <motion.p
+                  id="fullname-error"
+                  className="text-red-500 text-xs mt-1 text-right"
+                  role="alert"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   {formik.errors.fullname}
-                </p>
+                </motion.p>
               )}
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
               <label htmlFor="email" className="block text-sm font-medium mb-1 text-right">
                 آدرس ایمیل
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                   id="email"
                   type="email"
                   name="email"
@@ -161,17 +191,30 @@ export function FormContact() {
                 <FaEnvelope className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" aria-hidden="true" />
               </div>
               {formik.touched.email && formik.errors.email && (
-                <p id="email-error" className="text-red-500 text-xs mt-1 text-right" role="alert">
+                <motion.p
+                  id="email-error"
+                  className="text-red-500 text-xs mt-1 text-right"
+                  role="alert"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   {formik.errors.email}
-                </p>
+                </motion.p>
               )}
-            </div>
-            <div className="md:col-span-2">
+            </motion.div>
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               <label htmlFor="subject" className="block text-sm font-medium mb-1 text-right">
                 عنوان
               </label>
               <div className="relative">
-                <input
+                <motion.input
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                   id="subject"
                   type="text"
                   name="subject"
@@ -193,16 +236,29 @@ export function FormContact() {
                 <FaFileAlt className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" aria-hidden="true" />
               </div>
               {formik.touched.subject && formik.errors.subject && (
-                <p id="subject-error" className="text-red-500 text-xs mt-1 text-right" role="alert">
+                <motion.p
+                  id="subject-error"
+                  className="text-red-500 text-xs mt-1 text-right"
+                  role="alert"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   {formik.errors.subject}
-                </p>
+                </motion.p>
               )}
-            </div>
-            <div className="md:col-span-2">
+            </motion.div>
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               <label htmlFor="message" className="block text-sm font-medium mb-1 text-right">
                 متن پیام
               </label>
-              <textarea
+              <motion.textarea
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
                 id="message"
                 name="message"
                 rows={6}
@@ -223,16 +279,29 @@ export function FormContact() {
                 placeholder="متن پیام"
               />
               {formik.touched.message && formik.errors.message && (
-                <p id="message-error" className="text-red-500 text-xs mt-1 text-right" role="alert">
+                <motion.p
+                  id="message-error"
+                  className="text-red-500 text-xs mt-1 text-right"
+                  role="alert"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
                   {formik.errors.message}
-                </p>
+                </motion.p>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-      <div className={`${bgColor} flex items-end flex-col p-4`}>
-        <button
+      </motion.div>
+      <motion.div
+        className={`${bgColor} flex items-end flex-col p-4`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           type="submit"
           disabled={isSubmitting}
           className={`
@@ -244,8 +313,8 @@ export function FormContact() {
           aria-busy={isSubmitting}
         >
           {isSubmitting ? "در حال ارسال..." : "ارسال کن"}
-        </button>
-      </div>
-    </form>
+        </motion.button>
+      </motion.div>
+    </motion.form>
   );
 }

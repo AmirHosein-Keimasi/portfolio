@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import {
   FaEnvelope,
   FaTelegram,
@@ -13,6 +13,8 @@ import {
 import { CustomDivider } from "@/components/common/custom-divider";
 import { useApp } from "@/lib/context/app-context";
 import { ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
+import toast from "react-hot-toast";
 
 const contactData = [
   {
@@ -53,8 +55,39 @@ const contactData = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+      duration: 0.6,
+    },
+  },
+};
+
 export function ContactCard() {
   const { mode } = useApp();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   const colors = useMemo(
     () => ({
@@ -65,10 +98,10 @@ export function ContactCard() {
     [mode]
   );
 
-  const handleCopy = useCallback(async (text: string) => {
+  const handleCopy = useCallback(async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      // TODO: Show toast notification
+      toast.success(`${label} کپی شد!`);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement("textarea");
@@ -79,8 +112,9 @@ export function ContactCard() {
       textArea.select();
       try {
         document.execCommand("copy");
+        toast.success(`${label} کپی شد!`);
       } catch (err) {
-        // Handle error
+        toast.error("خطا در کپی کردن");
       }
       document.body.removeChild(textArea);
     }
@@ -94,75 +128,108 @@ export function ContactCard() {
   }, []);
 
   return (
-    <>
-      <CustomDivider
-        bColor={colors.border}
-        cColor="warning"
-        icon={<FaPhone />}
-        align="center"
-        text="تماس با من "
-      />
+    <div className="min-h-screen">
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <CustomDivider
+          bColor={colors.border}
+          cColor="warning"
+          icon={<FaPhone />}
+          align="center"
+          text="تماس با من "
+        />
+      </motion.div>
       <div className="flex justify-center items-center min-h-[70vh] mt-5">
-        <div className="p-2.5 grid grid-cols-1 sm:grid-cols-2 gap-4 w-4/5">
+        <motion.div
+          ref={containerRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="p-2.5 grid grid-cols-1 sm:grid-cols-2 gap-4 w-4/5"
+        >
           {contactData.map((item, index) => {
             const textValue = getTextValue(item.value);
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.05,
+                  y: -5,
+                  boxShadow: mode === "dark"
+                    ? "0 10px 30px rgba(54, 114, 117, 0.3)"
+                    : "0 10px 30px rgba(147, 191, 207, 0.3)",
+                }}
+                whileTap={{ scale: 0.95 }}
                 className={`
                   flex items-center justify-between
                   p-3 rounded-lg shadow-md
                   ${colors.warningBg}
-                  cursor-pointer hover:shadow-lg transition-shadow
+                  cursor-pointer
                   focus-within:ring-2 focus-within:ring-yellow-500
                 `}
                 role="button"
                 tabIndex={0}
-                onClick={() => handleCopy(textValue)}
+                onClick={() => handleCopy(textValue, item.label)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    handleCopy(textValue);
+                    handleCopy(textValue, item.label);
                   }
                 }}
                 aria-label={`کپی ${item.label}: ${textValue}`}
               >
-                <div className="flex items-center gap-2 flex-1">
-                  <div className={colors.icon} aria-hidden="true">
+                <motion.div
+                  className="flex items-center gap-2 flex-1"
+                  whileHover={{ x: 5 }}
+                >
+                  <motion.div
+                    className={colors.icon}
+                    aria-hidden="true"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     {item.icon}
-                  </div>
+                  </motion.div>
                   <div className="flex-1">
                     <p className="text-xs text-gray-600 dark:text-gray-300">
                       {item.label}
                     </p>
                     {item.href ? (
-                      <a
+                      <motion.a
                         href={item.href}
                         onClick={(e) => e.stopPropagation()}
                         className="font-bold text-sm hover:underline"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         {item.value}
-                      </a>
+                      </motion.a>
                     ) : (
                       <p className="font-bold text-sm">{item.value}</p>
                     )}
                   </div>
-                </div>
-                <button
+                </motion.div>
+                <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleCopy(textValue);
+                    handleCopy(textValue, item.label);
                   }}
                   className="p-2 hover:bg-black/10 rounded-full transition-colors"
                   aria-label={`کپی ${item.label}`}
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <FaCopy className="text-sm" aria-hidden="true" />
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
-    </>
+    </div>
   );
 }
