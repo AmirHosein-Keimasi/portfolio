@@ -7,8 +7,8 @@ import { NumberCounter } from "@/components/animations/number-counter";
 import { ShimmerEffect } from "@/components/animations/shimmer-effect";
 
 const stats = [
-  { number: 50, suffix: "+", label: "پروژه انجام شده" },
-  { number: 30, suffix: "+", label: "مشتری راضی" },
+  { number: 13, suffix: "+", label: "پروژه انجام شده" },
+  { number: 6, suffix: "+", label: "مشتری راضی" },
 ];
 
 export function StatsSection() {

@@ -15,8 +15,8 @@ module.exports = {
         // Light Mode - Modern Elegant Palette (Soft & Clean)
         "light-text-main": "#1e293b",
         "light-text-dark": "#0f172a",
-        "light-primary-main": "#ffffff",
-        "light-primary-dark": "#f1f5f9",
+        "light-primary-main": "#faf8f3",
+        "light-primary-dark": "#f5f3ed",
         "light-error": "#ef4444",
         "light-info": "#3b82f6",
         "light-warning": "#f59e0b",

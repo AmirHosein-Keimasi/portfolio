@@ -48,7 +48,7 @@ export function SkillsSection() {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.5, 0.8, 1, 0.8, 0.5]);
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (

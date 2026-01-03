@@ -44,11 +44,38 @@ export const HeroSection = memo(function HeroSection() {
     [mode],
   );
 
+  const backgroundStyle = useMemo(
+    () =>
+      mode === "dark"
+        ? {
+            background: `
+              radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)
+            `,
+          }
+        : {
+            background: `
+              radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.18) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+              linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+              linear-gradient(45deg, rgba(236, 72, 153, 0.04) 0%, transparent 50%)
+            `,
+          },
+    [mode],
+  );
+
   return (
     <motion.div
       ref={containerRef}
       className="flex-1 flex flex-col md:flex-row relative px-4 sm:px-6 md:px-5  py-6 sm:py-8 md:py-12 min-h-screen items-center md:items-start"
     >
+      {/* Background Overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={backgroundStyle}
+      />
       {/* Left Section - Profile Image (Desktop only) */}
       <motion.div
         style={{ y: imageY, opacity: imageOpacity }}
