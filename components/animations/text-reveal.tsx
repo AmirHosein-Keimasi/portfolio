@@ -16,19 +16,20 @@ export function TextReveal({
 }: TextRevealProps) {
   return (
     <motion.div
-      className={`overflow-hidden ${className}`}
+      className={`overflow-hidden will-change-transform ${className}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.4, delay }}
     >
       <motion.div
         initial={{ y: "100%" }}
         animate={{ y: 0 }}
         transition={{
-          duration: 0.8,
+          duration: 0.5,
           delay,
-          ease: [0.25, 0.25, 0, 1],
+          ease: [0.16, 1, 0.3, 1],
         }}
+        style={{ willChange: "transform" }}
       >
         {children}
       </motion.div>

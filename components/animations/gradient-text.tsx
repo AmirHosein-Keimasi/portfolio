@@ -16,10 +16,11 @@ export function GradientText({
 }: GradientTextProps) {
   return (
     <motion.span
-      className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent ${className}`}
+      className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent will-change-transform ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.span>

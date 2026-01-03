@@ -23,13 +23,20 @@ export const HeroSection = memo(function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -60], {
+    clamp: false,
+  });
   const imageOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1, 0.8, 0.3],
+    [1, 0.85, 0.5],
+    {
+      clamp: true,
+    },
   );
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 30], {
+    clamp: false,
+  });
 
   const gradient = useMemo(
     () =>
@@ -79,24 +86,24 @@ export const HeroSection = memo(function HeroSection() {
       {/* Left Section - Profile Image (Desktop only) */}
       <motion.div
         style={{ y: imageY, opacity: imageOpacity }}
-        className="hidden md:flex md:relative items-center md:items-start md:justify-start md:w-1/2 lg:w-2/5 pointer-events-none z-0 md:order-2"
+        className="hidden md:flex md:relative items-center md:items-start md:justify-start md:w-1/2 lg:w-2/5 pointer-events-none z-0 md:order-2 will-change-transform"
       >
         <motion.div
-          className="relative"
+          className="relative will-change-transform"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Glow Effect */}
+          {/* Glow Effect - Optimized */}
           <motion.div
-            className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${glowColor}`}
-            style={{ transform: "scale(1.3)" }}
+            className={`absolute inset-0 rounded-full blur-2xl opacity-25 ${glowColor} will-change-transform`}
+            style={{ transform: "scale(1.3) translateZ(0)" }}
             animate={{
-              scale: [1.3, 1.4, 1.3],
-              opacity: [0.3, 0.4, 0.3],
+              scale: [1.3, 1.35, 1.3],
+              opacity: [0.25, 0.3, 0.25],
             }}
             transition={{
-              duration: 3,
+              duration: 4,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -118,7 +125,7 @@ export const HeroSection = memo(function HeroSection() {
       {/* Right Section - Text Content */}
       <motion.div
         style={{ y: textY }}
-        className="flex-1 flex flex-col justify-center md:justify-start md:pt-8 z-10 relative w-full md:w-auto md:order-1"
+        className="flex-1 flex flex-col justify-center md:justify-start md:pt-8 z-10 relative w-full md:w-auto md:order-1 will-change-transform"
       >
         {/* Main Heading */}
         <TextReveal delay={0.2}>
@@ -170,21 +177,21 @@ export const HeroSection = memo(function HeroSection() {
           className="relative flex items-center justify-center md:hidden pointer-events-none z-0 mb-6 "
         >
           <motion.div
-            className="relative"
+            className="relative will-change-transform"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Glow Effect */}
+            {/* Glow Effect - Optimized */}
             <motion.div
-              className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${glowColor}`}
-              style={{ transform: "scale(1.3)" }}
+              className={`absolute inset-0 rounded-full blur-2xl opacity-25 ${glowColor} will-change-transform`}
+              style={{ transform: "scale(1.3) translateZ(0)" }}
               animate={{
-                scale: [1.3, 1.4, 1.3],
-                opacity: [0.3, 0.4, 0.3],
+                scale: [1.3, 1.35, 1.3],
+                opacity: [0.25, 0.3, 0.25],
               }}
               transition={{
-                duration: 3,
+                duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}

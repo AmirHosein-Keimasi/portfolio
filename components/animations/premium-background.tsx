@@ -49,80 +49,62 @@ export const PremiumBackground = memo(function PremiumBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Layer 1: Galaxy Stars (Deep Background) */}
-      <div className={`absolute inset-0 ${opacityClasses.galaxy}`}>
+      {/* Layer 1: Galaxy Stars (Deep Background) - Reduced for performance */}
+      <div className={`absolute inset-0 ${opacityClasses.galaxy} will-change-contents`}>
         <Galaxy />
       </div>
 
       {/* Layer 2: Animated Particles */}
       <div className={`absolute inset-0 ${opacityClasses.particles}`}>
         <ParticlesBg
-          particleCount={mode === "dark" ? 80 : 75}
+          particleCount={mode === "dark" ? 40 : 35}
           color={colors.particleColor}
         />
       </div>
 
-      {/* Layer 3: Gradient Orbs - Large Background Blobs */}
+      {/* Layer 3: Gradient Orbs - Large Background Blobs - Optimized */}
       <div
-        className="absolute rounded-full"
+        className="absolute rounded-full will-change-transform"
         style={{
           top: "15%",
           left: "10%",
           width: "600px",
           height: "600px",
           background: `radial-gradient(circle, ${colors.orbColor1}, transparent 70%)`,
-          filter: "blur(100px)",
+          filter: "blur(80px)",
           opacity: mode === "dark" ? 0.3 : 0.4,
-          transform: "translate(-50%, -50%)",
+          transform: "translate(-50%, -50%) translateZ(0)",
           animation: "float 12s ease-in-out infinite",
         }}
       />
       <div
-        className="absolute rounded-full"
+        className="absolute rounded-full will-change-transform"
         style={{
           bottom: "15%",
           right: "10%",
           width: "700px",
           height: "700px",
           background: `radial-gradient(circle, ${colors.orbColor2}, transparent 70%)`,
-          filter: "blur(100px)",
+          filter: "blur(80px)",
           opacity: mode === "dark" ? 0.25 : 0.35,
-          transform: "translate(50%, 50%)",
+          transform: "translate(50%, 50%) translateZ(0)",
           animation: "float 15s ease-in-out infinite reverse",
         }}
       />
-      <div
-        className="absolute rounded-full"
-        style={{
-          top: "50%",
-          left: "50%",
-          width: "500px",
-          height: "500px",
-          background: `radial-gradient(circle, ${
-            mode === "dark"
-              ? "rgba(245, 158, 11, 0.3)"
-              : "rgba(16, 185, 129, 0.5)"
-          }, transparent 70%)`,
-          filter: "blur(90px)",
-          opacity: mode === "dark" ? 0.2 : 0.3,
-          transform: "translate(-50%, -50%)",
-          animation: "float 18s ease-in-out infinite",
-        }}
-      />
 
-      {/* Layer 4: Animated Grid Motion */}
-      <div className={`absolute inset-0 ${opacityClasses.grid}`}>
+      {/* Layer 4: Animated Grid Motion - Disabled for better performance */}
+      {/* <div className={`absolute inset-0 ${opacityClasses.grid}`}>
         <GridMotion color={colors.gridColor} />
-      </div>
+      </div> */}
 
-      {/* Layer 5: Dot Grid Pattern */}
-      <div className={`absolute inset-0 ${opacityClasses.dots}`}>
+      {/* Layer 5: Dot Grid Pattern - Static for better performance */}
+      <div className={`absolute inset-0 ${opacityClasses.dots} will-change-contents`}>
         <DotGrid color={colors.dotColor} dotSize={1.5} spacing={40} />
       </div>
 
-      {/* Layer 6: Beams of Light */}
-      <div className={`absolute inset-0 ${opacityClasses.beams}`}>
-        <Beams beamCount={5} color={colors.successColor} />
+      {/* Layer 6: Beams of Light - Reduced for better performance */}
+      <div className={`absolute inset-0 ${opacityClasses.beams} will-change-contents`}>
+        <Beams beamCount={3} color={colors.successColor} />
       </div>
 
       {/* Layer 7: Multi-color Gradient Overlays */}

@@ -38,38 +38,49 @@ export function ParticlesBg({
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.5 + 0.8,
       });
     }
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = color;
+    let lastTime = 0;
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
 
-      particles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+    const animate = (currentTime: number) => {
+      const deltaTime = currentTime - lastTime;
+      
+      if (deltaTime >= frameInterval) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = color;
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        particles.forEach((particle) => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
 
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        lastTime = currentTime - (deltaTime % frameInterval);
+      }
 
       requestAnimationFrame(animate);
     };
 
-    animate();
+    requestAnimationFrame(animate);
   }, [particleCount, color]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-0 ${className}`}
+      className={`fixed inset-0 pointer-events-none z-0 will-change-contents ${className}`}
+      aria-hidden="true"
     />
   );
 }
