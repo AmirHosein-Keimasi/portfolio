@@ -17,7 +17,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^12.23.26",
     "gsap": "^3.14.2",
-    "next": "^15.1.0",
+    "next": "^15.5.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
