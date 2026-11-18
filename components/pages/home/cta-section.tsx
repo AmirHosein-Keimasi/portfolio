@@ -11,13 +11,13 @@ export function CTASection() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
         <MagneticButton>
-          <Link
-            href="/contact#contact-form"
+          <a
+            href="#contact"
             className="inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-xl text-sm sm:text-base font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 transition-all duration-200"
           >
             <FaPaperPlane className="text-xs" aria-hidden="true" />
             <span>بیا با هم کار کنیم</span>
-          </Link>
+          </a>
         </MagneticButton>
 
         <MagneticButton>
@@ -31,13 +31,13 @@ export function CTASection() {
           </a>
         </MagneticButton>
 
-        <Link
-          href="/projects"
+        <a
+          href="#projects"
           className="inline-flex items-center justify-center gap-2 h-12 px-4 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
         >
           <FaCode className="text-sm" aria-hidden="true" />
           <span>مشاهده پروژه‌ها</span>
-        </Link>
+        </a>
       </div>
 
       <SocialMediaIcons textAlign="right" />

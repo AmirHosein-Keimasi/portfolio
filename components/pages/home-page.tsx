@@ -4,6 +4,7 @@ import { memo } from "react";
 import { PremiumBackground } from "@/components/animations/premium-background";
 import {
   HeroSection,
+  AboutSection,
   SkillsSection,
   ResumeSection,
   ProjectsSection,
@@ -16,6 +17,7 @@ export const HomePage = memo(function HomePage() {
       <PremiumBackground />
       <main className="relative z-10 flex-1">
         <HeroSection />
+        <AboutSection />
         <SkillsSection />
         <ResumeSection />
         <ProjectsSection />

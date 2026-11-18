@@ -50,7 +50,7 @@ export const ContactSection = memo(function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/70 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.015]"
+      className="relative z-10 scroll-mt-20 md:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/70 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.015]"
     >
       <div className="max-w-7xl mx-auto">
         <SectionHeader
