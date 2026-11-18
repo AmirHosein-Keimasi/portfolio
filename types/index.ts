@@ -77,6 +77,19 @@ export interface LanguageItem {
 
 export type ProjectCategory = "all" | "production" | "nextjs" | "react";
 
+export interface ProjectCaseStudy {
+  badge: string;
+  status: string;
+  overview: string;
+  engines: Array<{
+    title: string;
+    subtitle: string;
+    summary: string;
+  }>;
+  services?: string[];
+  architectureHighlights: string[];
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -84,13 +97,17 @@ export interface ProjectItem {
   year?: string;
   category: Exclude<ProjectCategory, "all">;
   featured?: boolean;
+  badgeText?: string;
   description: string;
   features: string[];
   technologies: string[];
   imgSrc?: string;
+  mobileImgSrc?: string;
+  imageFit?: "cover" | "contain";
   accentGradient: string;
   websiteLink?: string;
   codeLink?: string;
+  caseStudy?: ProjectCaseStudy;
 }
 
 export interface ContactChannel {
@@ -100,6 +117,14 @@ export interface ContactChannel {
   value: string;
   copyValue: string;
   href: string;
-  iconKey: "email" | "phone" | "linkedin" | "github" | "telegram" | "whatsapp" | "website" | "location";
+  iconKey:
+    | "email"
+    | "phone"
+    | "linkedin"
+    | "github"
+    | "telegram"
+    | "whatsapp"
+    | "website"
+    | "location";
   isExternal?: boolean;
 }
