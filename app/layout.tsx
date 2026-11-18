@@ -1,42 +1,65 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Providers } from "@/components/providers";
-import { tanhaFont } from "@/lib/fonts";
+import { vazirFont, tanhaFont } from "@/lib/fonts";
+import { PROFILE } from "@/lib/data/portfolio";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://amirhoseinkeimasi.ir";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.amirhoseinkeimasi.ir";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#070b14" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "وب سایت شخصی امیرحسین کیماسی | فرانت دولوپر و طراح سایت",
+    default: "امیرحسین کیماسی | توسعه‌دهنده فرانت‌اند (React & Next.js)",
     template: "%s | امیرحسین کیماسی",
   },
-  description: "پورتفولیو شخصی امیرحسین کیماسی - فرانت دولوپر و طراح رابط کاربری با تخصص در React، Next.js و TypeScript. مشاهده نمونه کارها و مهارت‌ها.",
+  description:
+    "پورتفولیو و رزومه شخصی امیرحسین کیماسی — توسعه‌دهنده فرانت‌اند با بیش از ۳.۵ سال تجربه در Next.js، React و TypeScript. سابقه کار در داناجو و CastoFly.",
   keywords: [
-    "پورتفولیو",
-    "فرانت دولوپر",
-    "طراح سایت",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Frontend Developer",
-    "Web Developer",
-    "UI/UX Designer",
     "امیرحسین کیماسی",
+    "Amirhossein Keimasi",
+    "توسعه‌دهنده فرانت‌اند",
+    "فرانت دولوپر",
+    "Frontend Developer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Zustand",
+    "TanStack Query",
+    "Tailwind CSS",
+    "پورتفولیو",
   ],
-  authors: [{ name: "امیرحسین کیماسی", url: siteUrl }],
-  creator: "امیرحسین کیماسی",
-  publisher: "امیرحسین کیماسی",
+  authors: [{ name: PROFILE.fullName, url: siteUrl }],
+  creator: PROFILE.fullName,
+  publisher: PROFILE.fullName,
   applicationName: "پورتفولیو امیرحسین کیماسی",
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/images/192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "fa_IR",
     url: siteUrl,
     siteName: "پورتفولیو امیرحسین کیماسی",
-    title: "وب سایت شخصی امیرحسین کیماسی | فرانت دولوپر و طراح سایت",
-    description: "پورتفولیو شخصی امیرحسین کیماسی - فرانت دولوپر و طراح رابط کاربری با تخصص در React، Next.js و TypeScript",
+    title: "امیرحسین کیماسی | توسعه‌دهنده فرانت‌اند (React & Next.js)",
+    description:
+      "توسعه‌دهنده Frontend با بیش از ۳.۵ سال تجربه در طراحی و توسعه اپلیکیشن‌های وب مقیاس‌پذیر با Next.js، React و TypeScript.",
     images: [
       {
         url: `${siteUrl}/images/screenshot-desktop-wide.png`,
@@ -49,8 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "وب سایت شخصی امیرحسین کیماسی | فرانت دولوپر و طراح سایت",
-    description: "پورتفولیو شخصی امیرحسین کیماسی - فرانت دولوپر و طراح رابط کاربری",
+    title: "امیرحسین کیماسی | توسعه‌دهنده فرانت‌اند (React & Next.js)",
+    description:
+      "توسعه‌دهنده Frontend با بیش از ۳.۵ سال تجربه در Next.js، React و TypeScript.",
     images: [`${siteUrl}/images/screenshot-desktop-wide.png`],
     creator: "@amir_v13",
   },
@@ -75,106 +99,104 @@ export const metadata: Metadata = {
     },
   },
   category: "portfolio",
-  other: {
-    "theme-color": "#10b981",
-  },
 };
+
+const themeInitScript = `
+(function() {
+  try {
+    var raw = localStorage.getItem('theme');
+    var theme = raw ? JSON.parse(raw) : 'dark';
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {
+    document.documentElement.classList.add('dark');
+  }
+})();
+`;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: PROFILE.fullName,
+      alternateName: PROFILE.fullNameEn,
+      jobTitle: "Frontend Developer",
+      description: PROFILE.summaryShort,
+      url: siteUrl,
+      image: `${siteUrl}/assets/1.png`,
+      email: PROFILE.email,
+      telephone: "+989333788421",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Isfahan",
+        addressCountry: "IR",
+      },
+      worksFor: {
+        "@type": "Organization",
+        name: "Danajou",
+        url: "https://danajou.com",
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "University of Gonabad",
+      },
+      sameAs: [
+        PROFILE.github,
+        PROFILE.linkedin,
+        PROFILE.instagram,
+        PROFILE.website,
+      ],
+      knowsAbout: [
+        "Frontend Development",
+        "Next.js",
+        "React.js",
+        "TypeScript",
+        "JavaScript",
+        "Zustand",
+        "Redux Toolkit",
+        "TanStack Query",
+        "Tailwind CSS",
+        "SSR & SEO",
+        "Modular Architecture",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "پورتفولیو امیرحسین کیماسی",
+      url: siteUrl,
+      description: PROFILE.summaryShort,
+      author: {
+        "@type": "Person",
+        name: PROFILE.fullName,
+      },
+      inLanguage: "fa-IR",
+    },
+  ];
+
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning className={tanhaFont.variable}>
+    <html
+      lang="fa"
+      dir="rtl"
+      suppressHydrationWarning
+      className={`${vazirFont.variable} ${tanhaFont.variable} dark`}
+    >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "امیرحسین کیماسی",
-                alternateName: "Amirhossein Keimasi",
-                jobTitle: "فرانت دولوپر و طراح سایت",
-                description: "فرانت دولوپر و طراح رابط کاربری با تخصص در React، Next.js و TypeScript",
-                url: siteUrl,
-                image: `${siteUrl}/assets/1.png`,
-                email: "amirhosein.kiemasi@gmail.com",
-                telephone: "+989333788421",
-                address: {
-                  "@type": "PostalAddress",
-                  addressCountry: "IR",
-                },
-                sameAs: [
-                  "https://github.com/amirhosein-keimasi",
-                  "https://www.linkedin.com/in/amirhossein-keimasi",
-                  "https://www.instagram.com/amir_v13",
-                  "https://www.amirhoseinkeimasi.ir",
-                ],
-                knowsAbout: [
-                  "Frontend Development",
-                  "React",
-                  "Next.js",
-                  "TypeScript",
-                  "UI/UX Design",
-                  "Web Development",
-                ],
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "پورتفولیو امیرحسین کیماسی",
-                url: siteUrl,
-                description: "پورتفولیو شخصی امیرحسین کیماسی - فرانت دولوپر و طراح رابط کاربری",
-                author: {
-                  "@type": "Person",
-                  name: "امیرحسین کیماسی",
-                },
-                inLanguage: "fa-IR",
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "خانه",
-                    item: siteUrl,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "درباره من",
-                    item: `${siteUrl}/about`,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 3,
-                    name: "پروژه‌ها",
-                    item: `${siteUrl}/projects`,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 4,
-                    name: "رزومه",
-                    item: `${siteUrl}/resume`,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 5,
-                    name: "تماس",
-                    item: `${siteUrl}/contact`,
-                  },
-                ],
-              },
-            ]),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-tanha antialiased">
+      <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -1,41 +1,41 @@
 {
-  "short_name": "پورتفولیو",
-  "name": "پورتفولیوی امیرحسین کیماسی - توسعه‌دهنده وب و طراح رابط کاربری",
-  "description": "پروژه‌های حرفه‌ای طراحی وب، توسعه React و بهینه‌سازی رابط کاربری (UI/UX). آماده همکاری در پروژه‌های خلاقانه و نوآورانه هستم.",
+  "short_name": "امیرحسین کیماسی",
+  "name": "امیرحسین کیماسی | توسعه‌دهنده فرانت‌اند (React & Next.js)",
+  "description": "پورتفولیو و رزومه شخصی امیرحسین کیماسی — توسعه‌دهنده Frontend با بیش از ۳.۵ سال تجربه در Next.js، React و TypeScript.",
   "icons": [
     {
-      "src": "images/192.png",
+      "src": "/images/192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/512.png",
+      "src": "/images/512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "images/apple-touch-icon.png",
+      "src": "/images/apple-touch-icon.png",
       "type": "image/png",
       "sizes": "180x180"
     }
   ],
   "screenshots": [
     {
-      "src": "images/screenshot-desktop-wide.png",
+      "src": "/images/screenshot-desktop-wide.png",
       "type": "image/png",
       "sizes": "1920x1080",
       "form_factor": "wide"
     },
     {
-      "src": "images/screenshot-mobile.png",
+      "src": "/images/screenshot-mobile.png",
       "type": "image/png",
       "sizes": "375x667"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#070b14",
+  "background_color": "#070b14",
   "orientation": "portrait"
 }

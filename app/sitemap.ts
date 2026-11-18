@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://amirhoseinkeimasi.ir";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.amirhoseinkeimasi.ir";
   const now = new Date();
 
   return [
@@ -10,11 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
-      alternates: {
-        languages: {
-          fa: baseUrl,
-        },
-      },
     },
     {
       url: `${baseUrl}/about`,
@@ -26,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/resume`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/projects`,
@@ -40,12 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/connect`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
   ];
 }
-
