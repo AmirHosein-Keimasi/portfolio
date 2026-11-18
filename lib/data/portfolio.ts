@@ -292,6 +292,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "/assets/miz.png",
     imageFit: "contain",
     accentGradient: "from-amber-500 via-yellow-500 to-emerald-600",
+    websiteLink: "https://miz-five.vercel.app/",
     caseStudy: {
       badge: "PRD v1.0 • مدل کسب‌وکار هیبرید",
       status: "۹۰٪ تکمیل‌شده — فاز ۰ تا ۴ (زیرساخت، کاتالوگ، ویزارد رزرو، موتور قیمت‌گذاری، منو و تغذیه، پرتال مشتری، پنل عملیات، تدارکات و مالی)",
