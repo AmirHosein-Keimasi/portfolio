@@ -3,8 +3,7 @@ import {
   FaUser,
   FaFileAlt,
   FaCode,
-  FaPhone,
-  FaComment,
+  FaEnvelope,
 } from "react-icons/fa";
 
 export interface TabRoute {
@@ -13,15 +12,10 @@ export interface TabRoute {
   href: string;
 }
 
-export const tabsData = (): TabRoute[] => {
-  const tabs: TabRoute[] = [
-    { label: "صفحه اصلی", icon: <FaHome />, href: "/" },
-    { label: "درباره ی من", icon: <FaUser />, href: "/about" },
-    { label: "رزومه ی من", icon: <FaFileAlt />, href: "/resume" },
-    { label: "نمونه کار های من", icon: <FaCode />, href: "/projects" },
-    { label: "تماس با من", icon: <FaPhone />, href: "/contact" },
-    { label: "ارتباط با من", icon: <FaComment />, href: "/connect" },
-  ];
-
-  return tabs;
-};
+export const tabsData = (): TabRoute[] => [
+  { label: "صفحه اصلی", icon: <FaHome />, href: "/" },
+  { label: "درباره من", icon: <FaUser />, href: "/about" },
+  { label: "رزومه", icon: <FaFileAlt />, href: "/resume" },
+  { label: "پروژه‌ها", icon: <FaCode />, href: "/projects" },
+  { label: "تماس با من", icon: <FaEnvelope />, href: "/contact" },
+];
