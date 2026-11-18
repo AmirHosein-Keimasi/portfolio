@@ -1,262 +1,123 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 import toast from "react-hot-toast";
-import { useApp } from "@/lib/context/app-context";
-import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { SpotlightCard } from "@/components/animations/list";
-import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
-import { TextReveal } from "@/components/animations/text-reveal";
-import { CustomDivider } from "@/components/common/custom-divider";
-import { AutoRotate, AutoPulse, AutoBounce } from "@/components/animations";
 import {
   FaEnvelope,
-  FaTelegram,
-  FaLinkedin,
   FaPhone,
+  FaLinkedin,
   FaGithub,
+  FaTelegram,
+  FaWhatsapp,
   FaGlobe,
+  FaMapMarkerAlt,
   FaCopy,
-  FaPaperPlane,
   FaCheckCircle,
+  FaPaperPlane,
 } from "react-icons/fa";
-import { motion, useScroll, useTransform } from "framer-motion";
+import type { IconType } from "react-icons";
+import { CONTACT_CHANNELS } from "@/lib/data/portfolio";
+import type { ContactChannel } from "@/types";
+import { SectionHeader } from "@/components/common/section-header";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { FormContact } from "@/components/pages/form-contact";
 
-const contactData = [
-  {
-    icon: <FaEnvelope />,
-    label: "Email",
-    value: "amirhosein.kiemasi@gmail.com",
-    href: "mailto:amirhosein.kiemasi@gmail.com",
-    animation: "rotate" as const,
-  },
-  {
-    icon: <FaTelegram />,
-    label: "Telegram",
-    value: "@amir1_1",
-    href: "https://telegram.im/@amir1_1",
-    animation: "pulse" as const,
-  },
-  {
-    icon: <FaLinkedin />,
-    label: "LinkedIn",
-    value: "amirhossein-keimasi",
-    href: "https://www.linkedin.com/in/amirhossein-keimasi",
-    animation: "bounce" as const,
-  },
-  {
-    icon: <FaPhone />,
-    label: "Phone",
-    value: "+98 933 378 8421",
-    href: "tel:+989333788421",
-    animation: "rotate" as const,
-  },
-  {
-    icon: <FaGithub />,
-    label: "GitHub",
-    value: "amirhosein-keimasi",
-    href: "https://github.com/amirhosein-keimasi",
-    animation: "pulse" as const,
-  },
-  {
-    icon: <FaGlobe />,
-    label: "Website",
-    value: "www.amirhoseinkeimasi.ir",
-    href: "https://www.amirhoseinkeimasi.ir",
-    animation: "bounce" as const,
-  },
-];
+const CHANNEL_ICONS: Record<ContactChannel["iconKey"], IconType> = {
+  email: FaEnvelope,
+  phone: FaPhone,
+  linkedin: FaLinkedin,
+  github: FaGithub,
+  telegram: FaTelegram,
+  whatsapp: FaWhatsapp,
+  website: FaGlobe,
+  location: FaMapMarkerAlt,
+};
 
 export const ContactSection = memo(function ContactSection() {
-  const { mode } = useApp();
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? sectionRef : undefined,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.5, 0.8, 1, 0.8, 0.5]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  const textColor = useMemo(
-    () => mode === "dark" ? "text-dark-text-main" : "text-light-text-main",
-    [mode]
-  );
-  const cardBg = useMemo(
-    () => mode === "dark" ? "bg-dark-primary-dark/80" : "bg-white/80",
-    [mode]
-  );
-  const gridColor = useMemo(
-    () => mode === "dark" ? "#eab308" : "#facc15",
-    [mode]
-  );
-
-  const handleCopy = useCallback(async (text: string, index: number) => {
+  const handleCopy = useCallback(async (text: string, id: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success("کپی شد!");
-      setCopiedIndex(index);
-      setTimeout(() => setCopiedIndex(null), 2000);
-    } catch (error) {
+      toast.success("در کلیپ‌بورد کپی شد!");
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
       toast.error("خطا در کپی کردن");
     }
   }, []);
 
   return (
-    <motion.section
-      ref={sectionRef}
-      style={{ opacity, y }}
-      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
-        mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
-      }`}
+    <section
+      id="contact"
+      className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/70 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.015]"
     >
       <div className="max-w-7xl mx-auto">
-        <TextReveal delay={0.2}>
-          <div className="mb-8 sm:mb-10 md:mb-12">
-            <CustomDivider
-              bColor={
-                mode === "dark"
-                  ? "border-dark-text-main"
-                  : "border-light-text-main"
-              }
-              cColor="warning"
-              icon={<FaPaperPlane />}
-              align="center"
-              text="تماس با من"
-            />
-          </div>
-        </TextReveal>
+        <SectionHeader
+          eyebrow="ارتباط و همکاری"
+          title="در تماس باشیم"
+          subtitle="برای فرصت‌های شغلی، پروژه‌های جدید یا مشاوره فنی می‌توانید از طریق فرم زیر پیام بفرستید یا از راه‌های ارتباطی مستقیم استفاده کنید."
+          icon={<FaPaperPlane />}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
-          {contactData.map((item, index) => (
-            <ScrollReveal key={index} delay={index * 0.1} direction="up">
-              <SpotlightCard>
-                <motion.div
-                  className={`
-                      ${cardBg}
-                      relative overflow-hidden
-                      rounded-2xl
-                      p-4 sm:p-5 md:p-6
-                      shadow-lg
-                      group
-                      transition-all duration-300
-                      backdrop-blur-sm
-                    `}
-                  whileHover={{
-                    scale: 1.02,
-                    y: -4,
-                    transition: { duration: 0.3 },
-                  }}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                >
-                  {/* Background Pattern */}
-                  <div
-                    className="absolute inset-0 opacity-10 pointer-events-none"
-                    style={{
-                      backgroundImage: `
-                        linear-gradient(${gridColor} 1px, transparent 1px),
-                        linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
-                      `,
-                      backgroundSize: "30px 30px",
-                    }}
-                  />
-
-                  <ShimmerOverlay />
-
-                  {/* Icon */}
-                  <div className="relative z-10 mb-3 sm:mb-4 flex items-center justify-between">
-                    <motion.div
-                      className={`
-                        w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-xl sm:text-2xl
-                        ${
-                          mode === "dark"
-                            ? "bg-dark-success/20 text-dark-success"
-                            : "bg-light-success/20 text-light-success"
-                        }
-                      `}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Contact Channels */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
+            {CONTACT_CHANNELS.slice(0, 6).map((item, index) => {
+              const Icon = CHANNEL_ICONS[item.iconKey];
+              const isCopied = copiedId === item.id;
+              return (
+                <ScrollReveal key={item.id} delay={index * 0.05} direction="up">
+                  <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/40 transition-all duration-200 shadow-sm">
+                    <a
+                      href={item.href}
+                      target={item.isExternal ? "_blank" : undefined}
+                      rel={item.isExternal ? "noopener noreferrer" : undefined}
+                      className="flex items-center gap-3.5 flex-1 min-w-0 group"
                     >
-                      {item.animation === "rotate" ? (
-                        <AutoRotate duration={20} delay={index * 0.5}>
-                          {item.icon}
-                        </AutoRotate>
-                      ) : item.animation === "pulse" ? (
-                        <AutoPulse duration={2} delay={index * 0.2}>
-                          {item.icon}
-                        </AutoPulse>
-                      ) : (
-                        <AutoBounce duration={1.5} delay={index * 0.3}>
-                          {item.icon}
-                        </AutoBounce>
-                      )}
-                    </motion.div>
-                    <motion.button
-                      onClick={() => handleCopy(item.value, index)}
-                      className={`
-                        p-2 rounded-lg
-                        ${
-                          mode === "dark"
-                            ? "bg-dark-primary-main text-dark-text-main/70 hover:bg-dark-primary-dark"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }
-                        transition-all duration-200
-                      `}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
+                      <span className="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                        <Icon aria-hidden="true" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                          {item.labelFa}
+                        </p>
+                        <p
+                          className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 truncate transition-colors"
+                          dir="ltr"
+                        >
+                          {item.value}
+                        </p>
+                      </div>
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(item.copyValue, item.id)}
+                      aria-label={`کپی ${item.labelFa}`}
+                      title="کپی"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors shrink-0"
                     >
-                      {copiedIndex === index ? (
-                        <FaCheckCircle className="text-green-500" />
+                      {isCopied ? (
+                        <FaCheckCircle className="text-emerald-500 text-sm" />
                       ) : (
-                        <FaCopy />
+                        <FaCopy className="text-sm" />
                       )}
-                    </motion.button>
+                    </button>
                   </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
 
-                  {/* Label */}
-                  <h3
-                    className={`text-sm font-semibold mb-2 relative z-10 ${
-                      mode === "dark"
-                        ? "text-dark-text-main/70"
-                        : "text-light-text-main/70"
-                    }`}
-                  >
-                    {item.label}
-                  </h3>
-
-                  {/* Value */}
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`
-                      text-base font-medium block relative z-10
-                      ${
-                        mode === "dark"
-                          ? "text-dark-success hover:text-dark-success/80"
-                          : "text-light-success hover:text-light-success/80"
-                      }
-                      transition-colors duration-200
-                    `}
-                  >
-                    {item.value}
-                  </a>
-                </motion.div>
-              </SpotlightCard>
+          {/* Direct Email Form */}
+          <div className="lg:col-span-7" id="contact-form">
+            <ScrollReveal delay={0.1} direction="up">
+              <FormContact />
             </ScrollReveal>
-          ))}
+          </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 });
-

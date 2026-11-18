@@ -1,67 +1,29 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { useApp } from "@/lib/context/app-context";
+import { memo } from "react";
+import { HERO_STATS } from "@/lib/data/portfolio";
 import { NumberCounter } from "@/components/animations/number-counter";
-import { ShimmerEffect } from "@/components/animations/shimmer-effect";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 
-const stats = [
-  { number: 13, suffix: "+", label: "پروژه انجام شده" },
-  { number: 6, suffix: "+", label: "مشتری راضی" },
-];
-
-export function StatsSection() {
-  const { mode } = useApp();
-  const statsRef = useRef<HTMLDivElement>(null);
-  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-
+export const StatsSection = memo(function StatsSection() {
   return (
-    <motion.div
-      ref={statsRef}
-      className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-12"
-      initial={{ opacity: 0, x: -50 }}
-      animate={statsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-      transition={{ duration: 0.6 }}
-    >
-      {stats.map((stat, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={
-            statsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-          }
-          transition={{ delay: index * 0.2, duration: 0.5 }}
-          className="group"
-        >
-          <ShimmerEffect>
-            <motion.div
-              className={`text-3xl sm:text-4xl md:text-5xl font-bold ${
-                mode === "dark" ? "text-dark-success" : "text-light-success"
-              }`}
-              whileHover={{ scale: 1.1 }}
-            >
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 mt-12">
+      {HERO_STATS.map((stat, index) => (
+        <ScrollReveal key={stat.label} delay={index * 0.08} direction="up">
+          <div className="h-full rounded-2xl p-5 bg-white/85 dark:bg-[#0e1526]/85 border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-emerald-500/40 transition-all duration-300 backdrop-blur-sm">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold bg-gradient-to-l from-emerald-500 via-teal-400 to-sky-500 bg-clip-text text-transparent">
               <NumberCounter
-                value={stat.number}
+                value={stat.value}
                 suffix={stat.suffix}
-                className={
-                  mode === "dark" ? "text-dark-success" : "text-light-success"
-                }
+                decimals={stat.decimals}
               />
-            </motion.div>
-          </ShimmerEffect>
-          <p
-            className={`text-xs sm:text-sm md:text-base mt-1 sm:mt-2 transition-colors ${
-              mode === "dark"
-                ? "text-dark-text-main/70 group-hover:text-dark-text-main"
-                : "text-light-text-main/70 group-hover:text-light-text-main"
-            }`}
-          >
-            {stat.label}
-          </p>
-        </motion.div>
+            </div>
+            <p className="mt-2 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 leading-snug">
+              {stat.label}
+            </p>
+          </div>
+        </ScrollReveal>
       ))}
-    </motion.div>
+    </div>
   );
-}
-
+});

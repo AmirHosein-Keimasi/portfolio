@@ -1,218 +1,156 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo, memo } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { memo } from "react";
 import Image from "next/image";
-import { useApp } from "@/lib/context/app-context";
+import { motion } from "framer-motion";
+import { FaMapMarkerAlt, FaCode, FaRocket } from "react-icons/fa";
+import { SiNextdotjs, SiTypescript, SiReact } from "react-icons/si";
+import { PROFILE } from "@/lib/data/portfolio";
 import { GradientText } from "@/components/animations/gradient-text";
 import { TextReveal } from "@/components/animations/text-reveal";
 import { StatsSection } from "./stats-section";
 import { CTASection } from "./cta-section";
 
 export const HeroSection = memo(function HeroSection() {
-  const { mode } = useApp();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? containerRef : undefined,
-    offset: ["start start", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -60], {
-    clamp: false,
-  });
-  const imageOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [1, 0.85, 0.5],
-    {
-      clamp: true,
-    },
-  );
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 30], {
-    clamp: false,
-  });
-
-  const gradient = useMemo(
-    () =>
-      mode === "dark"
-        ? "from-green-400 via-green-500 to-green-600"
-        : "from-green-500 via-green-600 to-green-700",
-    [mode],
-  );
-
-  const glowColor = useMemo(
-    () => (mode === "dark" ? "bg-dark-success" : "bg-light-success"),
-    [mode],
-  );
-
-  const backgroundStyle = useMemo(
-    () =>
-      mode === "dark"
-        ? {
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
-              radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)
-            `,
-          }
-        : {
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.18) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-              linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-              linear-gradient(45deg, rgba(236, 72, 153, 0.04) 0%, transparent 50%)
-            `,
-          },
-    [mode],
-  );
-
   return (
-    <motion.div
-      ref={containerRef}
-      className="flex-1 flex flex-col md:flex-row relative px-4 sm:px-6 md:px-5  py-6 sm:py-8 md:py-12 min-h-screen items-center md:items-start"
-    >
-      {/* Background Overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={backgroundStyle}
-      />
-      {/* Left Section - Profile Image (Desktop only) */}
-      <motion.div
-        style={{ y: imageY, opacity: imageOpacity }}
-        className="hidden md:flex md:relative items-center md:items-start md:justify-start md:w-1/2 lg:w-2/5 pointer-events-none z-0 md:order-2 will-change-transform"
-      >
-        <motion.div
-          className="relative will-change-transform"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Glow Effect - Optimized */}
-          <motion.div
-            className={`absolute inset-0 rounded-full blur-2xl opacity-25 ${glowColor} will-change-transform`}
-            style={{ transform: "scale(1.3) translateZ(0)" }}
-            animate={{
-              scale: [1.3, 1.35, 1.3],
-              opacity: [0.25, 0.3, 0.25],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <Image
-            src="/assets/1.png"
-            alt="امیرحسین کیماسی - فرانت دولوپر"
-            width={600}
-            height={600}
-            className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] rounded-full object-cover relative z-10 shadow-2xl"
-            priority
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-            sizes="(max-width: 1024px) 400px, 500px"
-          />
-        </motion.div>
-      </motion.div>
+    <section className="relative pt-10 pb-16 sm:pt-14 sm:pb-24 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Right Column: Intro & CTA */}
+          <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
+            <TextReveal delay={0.05}>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>{PROFILE.availabilityText}</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10">
+                  <FaMapMarkerAlt className="text-emerald-500 text-[11px]" />
+                  <span>{PROFILE.location}</span>
+                </span>
+              </div>
+            </TextReveal>
 
-      {/* Right Section - Text Content */}
-      <motion.div
-        style={{ y: textY }}
-        className="flex-1 flex flex-col justify-center md:justify-start md:pt-8 z-10 relative w-full md:w-auto md:order-1 will-change-transform"
-      >
-        {/* Main Heading */}
-        <TextReveal delay={0.2}>
-          <h1
-            className={`text-4xl sm:text-5xl md:text-7xl lg:text-7xl font-bold leading-tight sm:leading-none md:leading-none mb-4 sm:mb-6 md:mb-6 ${
-              mode === "dark" ? "text-dark-text-main" : "text-light-text-main"
-            }`}
-          >
-            <GradientText gradient={gradient}>سلام</GradientText>
-          </h1>
-        </TextReveal>
+            <TextReveal delay={0.12}>
+              <div className="space-y-3">
+                <p className="text-sm sm:text-base font-medium text-slate-500 dark:text-slate-400">
+                  سلام، من
+                </p>
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                  <GradientText>{PROFILE.fullName}</GradientText>
+                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold text-slate-700 dark:text-slate-200 mt-3">
+                    {PROFILE.role}{" "}
+                    <span
+                      className="text-base sm:text-lg lg:text-xl font-semibold text-emerald-600 dark:text-emerald-400"
+                      dir="ltr"
+                    >
+                      ({PROFILE.roleEn})
+                    </span>
+                  </span>
+                </h1>
+              </div>
+            </TextReveal>
 
-        {/* Subtitle */}
-        <TextReveal delay={0.4}>
-          <p
-            className={`text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 md:mb-4 font-medium ${
-              mode === "dark"
-                ? "text-dark-text-main/80"
-                : "text-light-text-main/80"
-            }`}
-          >
-            من امیرحسین کیماسی هستم
-          </p>
-        </TextReveal>
+            <TextReveal delay={0.2}>
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                {PROFILE.summaryParagraphs[0]}
+              </p>
+            </TextReveal>
 
-        {/* Description */}
-        <TextReveal delay={0.6}>
-          <p
-            className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8  max-w-2xl leading-relaxed ${
-              mode === "dark"
-                ? "text-dark-text-main/70"
-                : "text-light-text-main/70"
-            }`}
-          >
-            یک فرانت دولوپر و طراح رابط کاربری که عاشق ساختن تجربه‌های دیجیتال
-            فوق‌العاده است. من یا مسئولیتی رو نمی‌پذیرم یا اگه بپذیرم به بهترین
-            شکل ممکن انجامش میدم.
-          </p>
-        </TextReveal>
+            {/* Quick Tech Stack Strip */}
+            <TextReveal delay={0.26}>
+              <div className="flex flex-wrap items-center gap-2" dir="ltr">
+                {[
+                  { label: "Next.js", icon: SiNextdotjs },
+                  { label: "React.js", icon: SiReact },
+                  { label: "TypeScript", icon: SiTypescript },
+                  { label: "Tailwind CSS", icon: FaCode },
+                  { label: "SSR & SEO", icon: FaRocket },
+                ].map(({ label, icon: Icon }) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/80 dark:bg-white/5 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-white/10"
+                  >
+                    <Icon className="text-emerald-500 text-xs" aria-hidden="true" />
+                    <span>{label}</span>
+                  </span>
+                ))}
+              </div>
+            </TextReveal>
 
-        {/* Stats Section */}
-        <div className="">
-          <StatsSection />
+            <TextReveal delay={0.32}>
+              <CTASection />
+            </TextReveal>
+          </div>
+
+          {/* Left Column: Portrait Card */}
+          <div className="lg:col-span-5 flex justify-center order-1 lg:order-2">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
+            >
+              {/* Soft Ambient Halo */}
+              <div
+                className="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/20 to-sky-500/30 blur-2xl animate-pulse-subtle pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* Portrait Ring */}
+              <div className="relative p-1.5 rounded-full bg-gradient-to-tr from-emerald-500 via-teal-400 to-sky-500 shadow-2xl shadow-emerald-500/20">
+                <div className="rounded-full overflow-hidden bg-surface-light dark:bg-surface-dark p-1.5">
+                  <Image
+                    src={PROFILE.avatarUrl}
+                    alt={`${PROFILE.fullName} - ${PROFILE.role}`}
+                    width={420}
+                    height={420}
+                    priority
+                    className="w-56 h-56 sm:w-72 sm:h-72 lg:w-[340px] lg:h-[340px] rounded-full object-cover"
+                    sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 340px"
+                  />
+                </div>
+              </div>
+
+              {/* Floating Experience Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, duration: 0.5 }}
+                className="hidden sm:flex items-center gap-2.5 absolute -bottom-3 -right-4 px-4 py-2.5 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md"
+              >
+                <span className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
+                  {PROFILE.experienceYears}
+                </span>
+                <div className="leading-tight">
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">
+                    سال تجربه
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    محصولات Production
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Floating Current Role Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45, duration: 0.5 }}
+                className="hidden sm:flex items-center gap-2 absolute top-4 -left-6 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <span className="text-xs font-semibold text-slate-800 dark:text-slate-100">
+                  Frontend @ داناجو
+                </span>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Profile Image - Mobile (after Stats, before CTA) */}
-        <motion.div
-          style={{ y: imageY, opacity: imageOpacity }}
-          className="relative flex items-center justify-center md:hidden pointer-events-none z-0 mb-6 "
-        >
-          <motion.div
-            className="relative will-change-transform"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Glow Effect - Optimized */}
-            <motion.div
-              className={`absolute inset-0 rounded-full blur-2xl opacity-25 ${glowColor} will-change-transform`}
-              style={{ transform: "scale(1.3) translateZ(0)" }}
-              animate={{
-                scale: [1.3, 1.35, 1.3],
-                opacity: [0.25, 0.3, 0.25],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <Image
-              src="/assets/1.png"
-              alt="امیرحسین کیماسی - فرانت دولوپر"
-              width={600}
-              height={600}
-              className="w-[200px] h-[200px] xs:w-[240px] xs:h-[240px] sm:w-[280px] sm:h-[280px] rounded-full object-cover relative z-10 shadow-2xl"
-              priority
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              sizes="(max-width: 475px) 200px, (max-width: 640px) 240px, 280px"
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <CTASection />
-      </motion.div>
-    </motion.div>
+        {/* Stats Row */}
+        <StatsSection />
+      </div>
+    </section>
   );
 });

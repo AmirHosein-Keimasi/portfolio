@@ -1,92 +1,55 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import {
-  FaNetworkWired,
-  FaTools,
-  FaGraduationCap,
-} from "react-icons/fa";
-import { CustomDivider } from "@/components/common/custom-divider";
-import { DevEduTimeline } from "@/components/pages/dev-edu-timeline";
+import Link from "next/link";
+import { FaBriefcase, FaDownload, FaArrowLeft } from "react-icons/fa";
+import { PROFILE } from "@/lib/data/portfolio";
+import { SectionHeader } from "@/components/common/section-header";
 import { DevExpTimeline } from "@/components/pages/dev-exp-timeline";
-import { useApp } from "@/lib/context/app-context";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { DevEduTimeline } from "@/components/pages/dev-edu-timeline";
 
 export function ResumeSection() {
-  const [loading, setLoading] = useState(false);
-  const { mode } = useApp();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    setLoading(true);
-    return () => {
-      setLoading(false);
-    };
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? sectionRef : undefined,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.5, 0.8, 1, 0.8, 0.5]);
-  const y = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-
-  const warningColor =
-    mode === "dark" ? "border-dark-warning" : "border-light-warning";
-
   return (
-    <motion.section
-      ref={sectionRef}
-      style={{ opacity, y }}
-      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
-        mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main"
-      }`}
+    <section
+      id="experience"
+      className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/70 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.015]"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 sm:mb-10 md:mb-12">
-          <CustomDivider
-            bColor={warningColor}
-            cColor="warning"
-            icon={<FaNetworkWired />}
-            align="center"
-            text="رزومه من"
-          />
+        <SectionHeader
+          eyebrow="سوابق حرفه‌ای و تحصیلی"
+          title="تجربیات کاری، تحصیلات و افتخارات"
+          subtitle="مسیر حرفه‌ای من در توسعه محصولات واقعی در محیط Production، منتورینگ تیم فرانت‌اند و تحصیلات آکادمیک."
+          icon={<FaBriefcase />}
+        />
+
+        <div className="space-y-8">
+          <DevExpTimeline />
+
+          <div className="pt-4">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-5">
+              تحصیلات، افتخارات و زبان‌ها
+            </h3>
+            <DevEduTimeline />
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-          {/* بخش تجربیات */}
-          <div className="space-y-4 sm:space-y-6">
-            <div className="mb-6 sm:mb-8">
-              <CustomDivider
-                bColor={warningColor}
-                cColor="warning"
-                icon={<FaTools />}
-                align="center"
-                text="تجربیات"
-              />
-            </div>
-            <DevExpTimeline loading={loading} />
-          </div>
-
-          {/* بخش تحصیلات */}
-          <div className="space-y-4 sm:space-y-6">
-            <div className="mb-6 sm:mb-8">
-              <CustomDivider
-                bColor={warningColor}
-                cColor="warning"
-                icon={<FaGraduationCap />}
-                align="center"
-                text="تحصیلات"
-              />
-            </div>
-            <DevEduTimeline loading={loading} />
-          </div>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={PROFILE.resumePdfUrl}
+            download="Amirhossein-Keimasi-Resume.pdf"
+            className="inline-flex items-center gap-2 h-11 px-5 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/20 transition-colors"
+          >
+            <FaDownload className="text-xs" aria-hidden="true" />
+            <span>دانلود نسخه کامل رزومه (PDF)</span>
+          </a>
+          <Link
+            href="/resume"
+            className="inline-flex items-center gap-2 h-11 px-5 rounded-xl text-sm font-semibold border border-slate-300 dark:border-white/15 bg-white/80 dark:bg-white/5 text-slate-800 dark:text-slate-200 hover:border-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+          >
+            <span>مشاهده صفحه اختصاصی رزومه</span>
+            <FaArrowLeft className="text-xs" aria-hidden="true" />
+          </Link>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
-

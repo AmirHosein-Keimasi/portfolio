@@ -1,96 +1,36 @@
 "use client";
 
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import { FaUserCircle } from "react-icons/fa";
-import { CustomDivider } from "@/components/common/custom-divider";
-import { useApp } from "@/lib/context/app-context";
-import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
-// Dynamic import برای کامپوننت‌های سنگین
-const Skills = dynamic(
-  () => import("../skills").then((mod) => ({ default: mod.Skills })),
-  {
-    loading: () => (
-      <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
-      </div>
-    ),
-    ssr: false,
-  },
-);
-
-const SuftSkills = dynamic(
-  () => import("../suft-skills").then((mod) => ({ default: mod.SuftSkills })),
-  {
-    loading: () => (
-      <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
-      </div>
-    ),
-    ssr: true,
-  },
-);
+import Link from "next/link";
+import { FaCode, FaArrowLeft } from "react-icons/fa";
+import { SectionHeader } from "@/components/common/section-header";
+import { Skills } from "@/components/pages/skills";
 
 export function SkillsSection() {
-  const { mode } = useApp();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? sectionRef : undefined,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.5, 0.8, 1, 0.8, 0.5]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
   return (
-    <motion.section
-      ref={sectionRef}
-      style={{ opacity, y }}
-      className={`py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 relative ${
-        mode === "dark" ? "bg-dark-primary-dark" : "bg-gray-50"
-      }`}
+    <section
+      id="skills"
+      className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/70 dark:border-white/5"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="w-full mb-6 sm:mb-8">
-          <ScrollReveal direction="fade" delay={0.2}>
-            <CustomDivider
-              bColor={
-                mode === "dark"
-                  ? "border-dark-text-main"
-                  : "border-light-text-main"
-              }
-              cColor="warning"
-              icon={<FaUserCircle />}
-              align="center"
-              text="مهارت های من"
-            />
-          </ScrollReveal>
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
-              </div>
-            }
+        <SectionHeader
+          eyebrow="تخصص‌های فنی"
+          title="مهارت‌ها و تکنولوژی‌ها"
+          subtitle="مجموعه ابزارها و تکنولوژی‌هایی که روزانه برای ساخت رابط‌های کاربری مقیاس‌پذیر، سریع و Type-Safe استفاده می‌کنم."
+          icon={<FaCode />}
+        />
+
+        <Skills />
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 dark:border-white/15 bg-white/80 dark:bg-white/5 text-slate-800 dark:text-slate-200 hover:border-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all"
           >
-            <ScrollReveal direction="up" delay={0.4}>
-              <Skills />
-            </ScrollReveal>
-            <ScrollReveal direction="up" delay={0.6}>
-              <SuftSkills />
-            </ScrollReveal>
-          </Suspense>
+            <span>مشاهده جزئیات بیشتر و مهارت‌های نرم</span>
+            <FaArrowLeft className="text-xs" aria-hidden="true" />
+          </Link>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
-
