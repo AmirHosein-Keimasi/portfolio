@@ -1,79 +1,58 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from "react";
-import type { ThemeMode } from "@/types";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react";
+import type { AppContextType, ThemeMode } from "@/types";
 import { storage } from "@/lib/utils/storage";
-
-interface AppContextType {
-  drawerOpen: boolean;
-  setDrawerOpen: (open: boolean) => void;
-  handelThemeCheng: () => void;
-  mode: ThemeMode;
-}
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mode, setMode] = useState<ThemeMode>("dark");
-  const [isMdUp, setIsMdUp] = useState(false);
 
-  // Load theme from localStorage on mount
   useEffect(() => {
     const savedMode = storage.get<ThemeMode>("theme", "dark");
-    setMode(savedMode || "dark");
-    
-    const checkMediaQuery = () => {
-      if (typeof window !== "undefined") {
-        setIsMdUp(window.matchMedia("(min-width: 768px)").matches);
-      }
+    const resolved: ThemeMode = savedMode === "light" ? "light" : "dark";
+    setMode(resolved);
+    document.documentElement.classList.toggle("dark", resolved === "dark");
+
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setDrawerOpen(false);
     };
-    
-    checkMediaQuery();
-    
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", checkMediaQuery);
-      return () => window.removeEventListener("resize", checkMediaQuery);
-    }
+    mediaQuery.addEventListener("change", handleMediaChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaChange);
   }, []);
 
-  useEffect(() => {
-    if (isMdUp) {
-      setDrawerOpen(false);
-    }
-  }, [isMdUp]);
-
-  const handelThemeCheng = useCallback(() => {
+  const toggleTheme = useCallback(() => {
     setMode((prevMode) => {
-      const newMode = prevMode === "light" ? "dark" : "light";
+      const newMode: ThemeMode = prevMode === "light" ? "dark" : "light";
       storage.set("theme", newMode);
+      document.documentElement.classList.toggle("dark", newMode === "dark");
       return newMode;
     });
   }, []);
 
-  useEffect(() => {
-    if (mode === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [mode]);
-
-  const value = useMemo(
+  const value = useMemo<AppContextType>(
     () => ({
-      handelThemeCheng,
+      handelThemeCheng: toggleTheme,
+      toggleTheme,
       drawerOpen,
       setDrawerOpen,
       mode,
     }),
-    [handelThemeCheng, drawerOpen, mode]
+    [toggleTheme, drawerOpen, mode]
   );
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
 export function useApp() {
