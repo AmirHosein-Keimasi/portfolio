@@ -1,148 +1,52 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { memo } from "react";
 import {
-  FaCalendar,
+  FaChalkboardTeacher,
+  FaPuzzlePiece,
+  FaCodeBranch,
+  FaUsers,
+  FaBookOpen,
+  FaShieldAlt,
   FaClock,
   FaComments,
-  FaUsers,
-  FaCheckCircle,
-  FaEdit,
-  FaHeadphones,
-  FaHeart,
-  FaCode,
 } from "react-icons/fa";
-import { CustomDivider } from "@/components/common/custom-divider";
-import { useApp } from "@/lib/context/app-context";
-import { TextReveal } from "@/components/animations/text-reveal";
+import type { IconType } from "react-icons";
+import { SOFT_SKILLS } from "@/lib/data/portfolio";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { SpotlightCard } from "@/components/animations/list";
-import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
-import { GradientText } from "@/components/animations/gradient-text";
-import { motion } from "framer-motion";
 
-const skills = [
-  { title: "مسئولیت‌پذیری", icon: <FaCalendar /> },
-  { title: "نظم و وقت‌شناسی", icon: <FaClock /> },
-  { title: "کار تیمی", icon: <FaUsers /> },
-  { title: "توانایی حل مسئله", icon: <FaCheckCircle /> },
-  { title: "انتقادپذیر", icon: <FaComments /> },
-  { title: "یادگیری و تدریس", icon: <FaEdit /> },
-  { title: "شنونده‌ی خوب", icon: <FaHeadphones /> },
-  { title: "همدلی و همیاری", icon: <FaHeart /> },
-];
+const SOFT_ICON_MAP: Record<string, IconType> = {
+  mentorship: FaChalkboardTeacher,
+  "problem-solving": FaPuzzlePiece,
+  "code-review": FaCodeBranch,
+  teamwork: FaUsers,
+  learning: FaBookOpen,
+  responsibility: FaShieldAlt,
+  time: FaClock,
+  feedback: FaComments,
+};
 
-export function SuftSkills() {
-  const { mode } = useApp();
-
-  const colors = useMemo(
-    () => ({
-      border: mode === "dark" ? "border-dark-text-main" : "border-light-text-main",
-      successBg: mode === "dark" ? "bg-dark-success" : "bg-light-success",
-      cardBg: mode === "dark" ? "bg-dark-primary-main" : "bg-white",
-      textMain: mode === "dark" ? "text-dark-text-main" : "text-light-text-main",
-      textSecondary: mode === "dark" ? "text-dark-text-main/70" : "text-light-text-main/70",
-      successText: mode === "dark" ? "text-dark-success" : "text-light-success",
-    }),
-    [mode]
-  );
-
+export const SuftSkills = memo(function SuftSkills() {
   return (
-    <div className="py-16 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <TextReveal delay={0.2}>
-          <div className="text-center mb-12">
-            <CustomDivider
-              bColor={colors.border}
-              cColor="warning"
-              icon={<FaCode />}
-              align="center"
-              text="مهارت های نرم"
-            />
-          </div>
-        </TextReveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
-            <ScrollReveal
-              key={index}
-              delay={index * 0.1}
-              direction="up"
-            >
-              <SpotlightCard>
-                <motion.div
-                  className={`
-                    ${colors.cardBg}
-                    relative overflow-hidden
-                    flex flex-col items-center justify-center
-                    p-8 rounded-xl
-                    shadow-lg
-                    cursor-pointer
-                    group
-                    border-2
-                    ${mode === "dark" ? "border-dark-primary-dark" : "border-gray-100"}
-                    transition-all duration-300
-                  `}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -8,
-                    transition: { duration: 0.3 },
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  tabIndex={0}
-                  role="article"
-                  aria-label={`مهارت: ${skill.title}`}
-                >
-                  <ShimmerOverlay />
-                  
-                  {/* Icon Container */}
-                  <div
-                    className={`
-                      ${colors.successText}
-                      mb-4
-                      relative z-10
-                    `}
-                  >
-                    <div className="text-6xl">{skill.icon}</div>
-                  </div>
-
-                  {/* Title */}
-                  <motion.h3
-                    className={`
-                      ${colors.textMain}
-                      font-bold text-lg md:text-xl
-                      text-center
-                      relative z-10
-                      mb-2
-                    `}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <GradientText
-                      gradient={
-                        mode === "dark"
-                          ? "from-green-400 via-green-500 to-green-600"
-                          : "from-green-500 via-green-600 to-green-700"
-                      }
-                    >
-                      {skill.title}
-                    </GradientText>
-                  </motion.h3>
-
-                  {/* Decorative Element */}
-                  <motion.div
-                    className={`
-                      absolute bottom-0 left-0 right-0 h-1
-                      ${colors.successBg}
-                      transform scale-x-0 group-hover:scale-x-100
-                      transition-transform duration-300
-                    `}
-                  />
-                </motion.div>
-              </SpotlightCard>
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      {SOFT_SKILLS.map((skill, index) => {
+        const Icon = SOFT_ICON_MAP[skill.id] || FaUsers;
+        return (
+          <ScrollReveal key={skill.id} delay={index * 0.05} direction="up">
+            <div className="h-full rounded-2xl p-5 bg-white/85 dark:bg-[#0e1526]/85 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md">
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4">
+                <Icon aria-hidden="true" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">
+                {skill.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {skill.description}
+              </p>
+            </div>
+          </ScrollReveal>
+        );
+      })}
     </div>
   );
-}
+});

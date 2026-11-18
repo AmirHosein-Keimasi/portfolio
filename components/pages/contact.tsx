@@ -1,166 +1,75 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { FaUserCircle } from "react-icons/fa";
-import { CustomDivider } from "@/components/common/custom-divider";
-import { FormContact } from "./form-contact";
-import { SocialMediaIcons } from "@/components/social-media-icons";
-import { useApp } from "@/lib/context/app-context";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaPaperPlane } from "react-icons/fa";
+import { PROFILE } from "@/lib/data/portfolio";
 import { PremiumBackground } from "@/components/animations/premium-background";
+import { SectionHeader } from "@/components/common/section-header";
+import { SocialMediaIcons } from "@/components/social-media-icons";
+import { FormContact } from "./form-contact";
 
 export function Contact() {
-  const { mode } = useApp();
-  const bgColor =
-    mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main";
-  const textColor =
-    mode === "dark" ? "text-dark-text-main" : "text-light-text-main";
-  const borderColor =
-    mode === "dark" ? "border-dark-text-main" : "border-light-text-main";
-
-  const formRef = useRef<HTMLDivElement>(null);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const formInView = useInView(formRef, { once: true, margin: "-100px" });
-  const sidebarInView = useInView(sidebarRef, { once: true, margin: "-100px" });
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const formY = useTransform(scrollYProgress, [0, 1], [50, 0]);
-  const sidebarY = useTransform(scrollYProgress, [0, 1], [-50, 0]);
-  const formOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
-  const sidebarOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
-
   return (
-    <div
-      ref={containerRef}
-      className={`min-h-screen ${bgColor} flex flex-col relative`}
-    >
+    <div className="min-h-screen relative py-12 sm:py-16 md:py-20">
       <PremiumBackground />
-      <div className="p-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <CustomDivider
-            bColor={borderColor}
-            cColor="warning"
-            icon={<FaUserCircle />}
-            align="center"
-            text="ارتباط با من "
-          />
-        </motion.div>
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          eyebrow="ارتباط مستقیم"
+          title="ارسال پیام و شروع همکاری"
+          subtitle="پیام شما مستقیماً به ایمیل شخصی من ارسال می‌شود و در کوتاه‌ترین زمان پاسخ خواهم داد."
+          icon={<FaPaperPlane />}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
-          {/* فرم تماس */}
-          <motion.div
-            ref={formRef}
-            style={{ y: formY, opacity: formOpacity }}
-            initial={{ opacity: 0, x: -50 }}
-            animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{
-              duration: 0.8,
-              ease: [0.25, 0.25, 0, 1],
-            }}
-            className="col-span-12 md:col-span-8"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="flex justify-center items-center"
-            >
-              <FormContact />
-            </motion.div>
-          </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          <div className="lg:col-span-8">
+            <FormContact />
+          </div>
 
-          {/* بخش سمت راست */}
-          <motion.div
-            ref={sidebarRef}
-            style={{ y: sidebarY, opacity: sidebarOpacity }}
-            initial={{ opacity: 0, x: 50 }}
-            animate={
-              sidebarInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
-            }
-            transition={{
-              duration: 0.8,
-              ease: [0.25, 0.25, 0, 1],
-            }}
-            className="col-span-0 md:col-span-4"
-          >
-            <motion.div
-              className="text-center bg-cover bg-center bg-no-repeat mt-5 p-6 rounded-2xl"
-              style={{
-                backgroundImage: `url(/assets/map.svg)`,
-              }}
-              // whileHover={{
-              //   scale: 1.05,
-              //   boxShadow:
-              //     mode === "dark"
-              //       ? "0 20px 40px rgba(54, 114, 117, 0.3)"
-              //       : "0 20px 40px rgba(147, 191, 207, 0.3)",
-              // }}
-              // transition={{ duration: 0.3 }}
-            >
-              <motion.h6
-                className={`${textColor} font-vazir mt-2 hidden md:block text-lg mb-4`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  sidebarInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                بیا در مورد همه چیز باهم صحبت کنیم
-              </motion.h6>
-              <motion.p
-                className={`${textColor} mt-2 hidden md:block mb-6`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  sidebarInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <motion.span
-                  animate={{ rotate: [0, 14, -8, 14, -8, 0] }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 1,
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                  }}
-                  className="inline-block text-2xl"
+          <aside className="lg:col-span-4 rounded-2xl p-6 bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{PROFILE.availabilityText}</span>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              بیا درباره پروژه یا همکاری بعدی صحبت کنیم
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              اگر به دنبال توسعه‌دهنده فرانت‌اند با تجربه واقعی در React، Next.js و TypeScript هستید، خوشحال می‌شوم با هم در تماس باشیم.
+            </p>
+
+            <ul className="space-y-3 pt-2 border-t border-slate-200/70 dark:border-white/10 text-sm">
+              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                <FaEnvelope className="text-emerald-500 shrink-0" />
+                <a
+                  href={`mailto:${PROFILE.email}`}
+                  className="hover:text-emerald-600 dark:hover:text-emerald-400 truncate"
+                  dir="ltr"
                 >
-                  👋
-                </motion.span>{" "}
-                <motion.a
-                  href="mailto:amirhosein.kiemasi@gmail.com"
-                  className="text-red-500 hover:underline font-medium"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  {PROFILE.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                <FaPhone className="text-emerald-500 shrink-0" />
+                <a
+                  href={PROFILE.phoneHref}
+                  className="hover:text-emerald-600 dark:hover:text-emerald-400"
+                  dir="ltr"
                 >
-                  ایمیل
-                </motion.a>{" "}
-                بزن به من
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={
-                  sidebarInView
-                    ? { opacity: 1, scale: 1 }
-                    : { opacity: 0, scale: 0.8 }
-                }
-                transition={{ delay: 0.7, duration: 0.6 }}
-              >
-                <SocialMediaIcons textAlign="center" />
-              </motion.div>
-            </motion.div>
-          </motion.div>
+                  {PROFILE.phone}
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                <FaMapMarkerAlt className="text-emerald-500 shrink-0" />
+                <span>{PROFILE.location}</span>
+              </li>
+            </ul>
+
+            <div className="pt-3 border-t border-slate-200/70 dark:border-white/10">
+              <SocialMediaIcons textAlign="right" />
+            </div>
+          </aside>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

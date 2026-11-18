@@ -1,126 +1,134 @@
 "use client";
 
-import { FaGraduationCap } from "react-icons/fa";
-import { devEdu } from "@/lib/constants/dev-skills";
-import { useApp } from "@/lib/context/app-context";
+import { memo } from "react";
+import {
+  FaGraduationCap,
+  FaTrophy,
+  FaLanguage,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
+import { EDUCATION, AWARDS, LANGUAGES } from "@/lib/data/portfolio";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { SpotlightCard } from "@/components/animations/list";
-import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
-import { GradientText } from "@/components/animations/gradient-text";
-import { motion } from "framer-motion";
 
 interface DevEduTimelineProps {
-  loading: boolean;
+  loading?: boolean;
 }
 
-export function DevEduTimeline({ loading }: DevEduTimelineProps) {
-  const { mode } = useApp();
-  const textColor = mode === "dark" ? "text-dark-text-main" : "text-light-text-main";
-  const cardBg = mode === "dark" ? "bg-dark-primary-dark/80" : "bg-white/80";
-  const iconBg = mode === "dark" ? "bg-yellow-500/20" : "bg-yellow-400/20";
-  const iconColor = mode === "dark" ? "text-yellow-400" : "text-yellow-600";
-  const gridColor = mode === "dark" ? "#eab308" : "#facc15";
-
+export const DevEduTimeline = memo(function DevEduTimeline(
+  _props: DevEduTimelineProps
+) {
   return (
     <div className="space-y-6" dir="rtl">
-      {devEdu.map((item, index) => (
-        <ScrollReveal key={index} delay={index * 0.15} direction="left">
-          <SpotlightCard>
-            <motion.div
-              className={`
-                ${cardBg}
-                relative overflow-hidden
-                rounded-2xl
-                p-6
-                shadow-lg
-                group
-                transition-all duration-300
-                backdrop-blur-sm
-              `}
-              whileHover={{
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 },
-              }}
-              initial={{ opacity: loading ? 1 : 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {/* Background Pattern */}
-              <div 
-                className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(${gridColor} 1px, transparent 1px),
-                    linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
-                  `,
-                  backgroundSize: '40px 40px',
-                }}
-              />
-              <ShimmerOverlay />
-              
-              <div className="relative z-10 flex items-start gap-4">
-                {/* آیکون */}
-                <motion.div
-                  className={`
-                    ${iconBg}
-                    ${iconColor}
-                    w-14 h-14
-                    rounded-xl
-                    flex items-center justify-center
-                    flex-shrink-0
-                    shadow-md
-                  `}
-                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <FaGraduationCap className="text-2xl" />
-                </motion.div>
-
-                {/* محتوا */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-                      {item.year}
-                    </span>
-                  </div>
-                  
-                  <h3 className={`text-xl font-bold ${textColor} mb-2`}>
-                    <GradientText
-                      gradient={
-                        mode === "dark"
-                          ? "from-yellow-400 via-yellow-500 to-yellow-600"
-                          : "from-yellow-500 via-yellow-600 to-yellow-700"
-                      }
-                    >
-                      {item.cert}
-                    </GradientText>
-                  </h3>
-                  
-                  <p className={`text-base ${textColor} mb-2 opacity-90`}>
-                    {item.major}
-                  </p>
-                  
-                  <p className={`text-sm ${textColor} opacity-75`}>
-                    {item.place}
-                  </p>
-                </div>
+      {/* Education */}
+      {EDUCATION.map((edu, index) => (
+        <ScrollReveal key={edu.id} delay={index * 0.1} direction="up">
+          <div className="rounded-2xl p-6 bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-emerald-500/40 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-sky-500/15 border border-sky-500/25 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0 text-xl">
+                <FaGraduationCap aria-hidden="true" />
               </div>
-
-              {/* خط تزئینی پایین */}
-              <motion.div
-                className={`
-                  absolute bottom-0 left-0 right-0 h-1
-                  bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600
-                  transform scale-x-0 group-hover:scale-x-100
-                  transition-transform duration-300
-                `}
-              />
-            </motion.div>
-          </SpotlightCard>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                    {edu.institution}
+                  </h3>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10">
+                    {edu.period}
+                  </span>
+                </div>
+                <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">
+                  {edu.degree} — {edu.major}
+                </p>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  {edu.description}
+                </p>
+              </div>
+            </div>
+          </div>
         </ScrollReveal>
       ))}
+
+      {/* Honors & Awards */}
+      {AWARDS.map((award, index) => (
+        <ScrollReveal key={award.id} delay={(index + 1) * 0.1} direction="up">
+          <div className="rounded-2xl p-6 bg-gradient-to-br from-amber-500/10 via-white/90 to-white/90 dark:from-amber-500/10 dark:via-[#0e1526]/95 dark:to-[#0e1526]/95 border border-amber-500/30 shadow-sm hover:border-amber-500/60 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-xl">
+                <FaTrophy aria-hidden="true" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                    {award.title}
+                  </h3>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25">
+                    {award.year}
+                  </span>
+                </div>
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-2">
+                  {award.issuer}
+                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {award.description}
+                </p>
+                {award.url && (
+                  <a
+                    href={award.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold text-amber-700 dark:text-amber-400 hover:underline"
+                  >
+                    <span>مشاهده خبر رسمی در وب‌سایت دانشگاه گناباد</span>
+                    <FaExternalLinkAlt className="text-[10px]" aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      ))}
+
+      {/* Languages */}
+      <ScrollReveal delay={0.2} direction="up">
+        <div className="rounded-2xl p-6 bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
+              <FaLanguage aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                زبان‌ها
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                مهارت‌های زبانی
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {LANGUAGES.map((lang) => (
+              <div
+                key={lang.name}
+                className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/10"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
+                    {lang.name}
+                  </span>
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                    {lang.level}
+                  </span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-l from-emerald-500 to-sky-400"
+                    style={{ width: `${lang.proficiency}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ScrollReveal>
     </div>
   );
-}
-
+});

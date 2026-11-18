@@ -1,150 +1,154 @@
 "use client";
 
-import { FaTools, FaGithub } from "react-icons/fa";
-import { devEx } from "@/lib/constants/dev-skills";
-import { useApp } from "@/lib/context/app-context";
+import { memo } from "react";
+import {
+  FaBriefcase,
+  FaExternalLinkAlt,
+  FaCheckCircle,
+  FaLayerGroup,
+} from "react-icons/fa";
+import { WORK_EXPERIENCES } from "@/lib/data/portfolio";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { SpotlightCard } from "@/components/animations/list";
-import { ShimmerOverlay } from "@/components/animations/shimmer-overlay";
-import { GradientText } from "@/components/animations/gradient-text";
-import { motion } from "framer-motion";
 
 interface DevExpTimelineProps {
-  loading: boolean;
+  loading?: boolean;
+  compact?: boolean;
 }
 
-export function DevExpTimeline({ loading }: DevExpTimelineProps) {
-  const { mode } = useApp();
-  const textColor = mode === "dark" ? "text-dark-text-main" : "text-light-text-main";
-  const cardBg = mode === "dark" ? "bg-dark-primary-dark/80" : "bg-white/80";
-  const iconBg = mode === "dark" ? "bg-yellow-500/20" : "bg-yellow-400/20";
-  const iconColor = mode === "dark" ? "text-yellow-400" : "text-yellow-600";
-  const gridColor = mode === "dark" ? "#eab308" : "#facc15";
-
+export const DevExpTimeline = memo(function DevExpTimeline({
+  compact = false,
+}: DevExpTimelineProps) {
   return (
     <div className="space-y-6" dir="rtl">
-      {devEx.map((item, index) => (
-        <ScrollReveal key={index} delay={index * 0.15} direction="right">
-          <SpotlightCard>
-            <motion.div
-              className={`
-                ${cardBg}
-                relative overflow-hidden
-                rounded-2xl
-                p-6
-                shadow-lg
-                group
-                transition-all duration-300
-                backdrop-blur-sm
-              `}
-              whileHover={{
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 },
-              }}
-              initial={{ opacity: loading ? 1 : 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {/* Background Pattern */}
-              <div 
-                className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(${gridColor} 1px, transparent 1px),
-                    linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
-                  `,
-                  backgroundSize: '40px 40px',
-                }}
-              />
-              <ShimmerOverlay />
-              
-              <div className="relative z-10 flex items-start gap-4">
-                {/* آیکون */}
-                <motion.div
-                  className={`
-                    ${iconBg}
-                    ${iconColor}
-                    w-14 h-14
-                    rounded-xl
-                    flex items-center justify-center
-                    flex-shrink-0
-                    shadow-md
-                  `}
-                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <FaTools className="text-2xl" />
-                </motion.div>
-
-                {/* محتوا */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-3 flex-wrap">
-                    <span className="text-xs font-medium px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-                      {item.major}
-                    </span>
+      {WORK_EXPERIENCES.map((exp, index) => (
+        <ScrollReveal key={exp.id} delay={index * 0.1} direction="up">
+          <article className="relative rounded-2xl p-6 sm:p-7 bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300 backdrop-blur-sm">
+            {/* Header row */}
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-5 border-b border-slate-200/70 dark:border-white/10">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/15 to-sky-500/15 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-xl">
+                  <FaBriefcase aria-hidden="true" />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                      {exp.company}
+                    </h3>
+                    {exp.isCurrent && (
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        مشغول به کار
+                      </span>
+                    )}
                   </div>
-                  
-                  <h3 className={`text-xl font-bold ${textColor} mb-3`}>
-                    <GradientText
-                      gradient={
-                        mode === "dark"
-                          ? "from-yellow-400 via-yellow-500 to-yellow-600"
-                          : "from-yellow-500 via-yellow-600 to-yellow-700"
-                      }
-                    >
-                      {item.cert}
-                    </GradientText>
-                  </h3>
-                  
-                  <motion.a
-                    href={item.place}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`
-                      inline-flex items-center gap-2
-                      px-4 py-2
-                      rounded-lg
-                      bg-yellow-500/20 dark:bg-yellow-500/30
-                      border border-yellow-500/40 dark:border-yellow-400/40
-                      text-sm font-medium
-                      ${mode === "dark" ? "text-yellow-400" : "text-yellow-700"}
-                      hover:bg-yellow-500/30 dark:hover:bg-yellow-500/40
-                      hover:border-yellow-500/60 dark:hover:border-yellow-400/60
-                      transition-all duration-300
-                      group/link
-                      shadow-sm hover:shadow-md
-                    `}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FaGithub className="text-base" />
-                    <span className="truncate max-w-xs">مشاهده در GitHub</span>
-                    <motion.span
-                      className="inline-block"
-                      whileHover={{ x: 4 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      →
-                    </motion.span>
-                  </motion.a>
+                  <p className="text-sm font-medium text-emerald-700 dark:text-emerald-400 mt-1">
+                    {exp.role}
+                  </p>
                 </div>
               </div>
 
-              {/* خط تزئینی پایین */}
-              <motion.div
-                className={`
-                  absolute bottom-0 left-0 right-0 h-1
-                  bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600
-                  transform scale-x-0 group-hover:scale-x-100
-                  transition-transform duration-300
-                `}
-              />
-            </motion.div>
-          </SpotlightCard>
+              <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-end">
+                <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-white/10">
+                  {exp.period}
+                </span>
+                {exp.website && (
+                  <a
+                    href={exp.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-600 dark:text-sky-400 hover:underline"
+                  >
+                    <span>مشاهده وب‌سایت</span>
+                    <FaExternalLinkAlt className="text-[10px]" aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Summary */}
+            <p className="mt-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              {exp.summary}
+            </p>
+
+            {/* Structured Groups (Danajou) */}
+            {exp.groups && exp.groups.length > 0 && (
+              <div
+                className={`mt-5 grid grid-cols-1 ${
+                  compact ? "gap-4" : "md:grid-cols-3 gap-4"
+                }`}
+              >
+                {exp.groups.map((group) => (
+                  <div
+                    key={group.title}
+                    className="rounded-xl p-4 bg-slate-50/90 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/10"
+                  >
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <FaLayerGroup
+                        className="text-xs text-emerald-500 shrink-0"
+                        aria-hidden="true"
+                      />
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                        {group.titleFa}
+                      </h4>
+                    </div>
+                    <p
+                      className="text-[11px] font-medium text-slate-400 dark:text-slate-500 mb-3"
+                      dir="ltr"
+                    >
+                      {group.title}
+                    </p>
+                    <ul className="space-y-2">
+                      {group.items.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-xs sm:text-[13px] text-slate-700 dark:text-slate-300 leading-relaxed"
+                        >
+                          <FaCheckCircle
+                            className="text-emerald-500 mt-1 shrink-0 text-[11px]"
+                            aria-hidden="true"
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Flat Highlights (CastoFly) */}
+            {exp.highlights && exp.highlights.length > 0 && (
+              <ul className="mt-5 space-y-2.5">
+                {exp.highlights.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
+                  >
+                    <FaCheckCircle
+                      className="text-emerald-500 mt-1 shrink-0 text-xs"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Tech Tags */}
+            <div className="mt-5 pt-4 border-t border-slate-200/70 dark:border-white/10 flex flex-wrap gap-2">
+              {exp.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  dir="ltr"
+                  className="text-xs font-medium px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </article>
         </ScrollReveal>
       ))}
     </div>
   );
-}
-
+});
