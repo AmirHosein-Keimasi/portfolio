@@ -1,35 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useApp } from "@/lib/context/app-context";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export function ScrollProgress() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const { mode } = useApp();
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollPx = document.documentElement.scrollTop;
-      const winHeightPx =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (scrollPx / winHeightPx) * 100;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener("scroll", updateScrollProgress);
-    return () => window.removeEventListener("scroll", updateScrollProgress);
-  }, []);
-
-  const bgColor =
-    mode === "dark" ? "bg-dark-success" : "bg-light-success";
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 h-1 ${bgColor} z-[100] origin-left transition-transform duration-150`}
-      style={{ transform: `scaleX(${scrollProgress / 100})` }}
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-l from-emerald-500 via-teal-400 to-sky-400 origin-right z-[60] pointer-events-none no-print"
+      style={{ scaleX }}
       aria-hidden="true"
     />
   );
 }
-

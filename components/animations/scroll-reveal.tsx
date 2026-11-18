@@ -1,62 +1,42 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
+import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 interface ScrollRevealProps {
   children: ReactNode;
-  delay?: number;
   direction?: "up" | "down" | "left" | "right" | "fade";
+  delay?: number;
+  duration?: number;
   className?: string;
 }
 
+const offsets: Record<NonNullable<ScrollRevealProps["direction"]>, { x: number; y: number }> = {
+  up: { x: 0, y: 24 },
+  down: { x: 0, y: -24 },
+  left: { x: 24, y: 0 },
+  right: { x: -24, y: 0 },
+  fade: { x: 0, y: 0 },
+};
+
 export function ScrollReveal({
   children,
-  delay = 0,
   direction = "up",
+  delay = 0,
+  duration = 0.5,
   className = "",
 }: ScrollRevealProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "0px" });
-
-  const variants = {
-    up: {
-      hidden: { opacity: 0, y: 50 },
-      visible: { opacity: 1, y: 0 },
-    },
-    down: {
-      hidden: { opacity: 0, y: -50 },
-      visible: { opacity: 1, y: 0 },
-    },
-    left: {
-      hidden: { opacity: 0, x: 50 },
-      visible: { opacity: 1, x: 0 },
-    },
-    right: {
-      hidden: { opacity: 0, x: -50 },
-      visible: { opacity: 1, x: 0 },
-    },
-    fade: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 },
-    },
-  };
+  const offset = offsets[direction];
 
   return (
     <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variants[direction]}
-      transition={{
-        duration: 0.6,
-        delay,
-        ease: [0.25, 0.25, 0, 1],
-      }}
+      initial={{ opacity: 0, x: offset.x, y: offset.y }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
     </motion.div>
   );
 }
-
