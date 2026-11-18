@@ -1,18 +1,28 @@
 "use client";
 
-import { useState, useMemo, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 import { useFormik, FormikHelpers } from "formik";
-import { contactValidationSchema } from "@/lib/validation/contact-validation";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion";
 import {
   FaEnvelope,
   FaUser,
-  FaFileAlt,
+  FaTag,
+  FaPaperPlane,
   FaCheckCircle,
   FaExclamationCircle,
 } from "react-icons/fa";
-import { useApp } from "@/lib/context/app-context";
+import {
+  contactValidationSchema,
+  type ContactFormValues,
+} from "@/lib/validation/contact-validation";
+
+const initialValues: ContactFormValues = {
+  fullname: "",
+  email: "",
+  subject: "",
+  message: "",
+  website: "",
+};
 
 export const FormContact = memo(function FormContact() {
   const [submitStatus, setSubmitStatus] = useState<{
@@ -21,35 +31,10 @@ export const FormContact = memo(function FormContact() {
   }>({ type: null, message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const contactInputNames = {
-    fullname: "",
-    email: "",
-    subject: "",
-    message: "",
-  };
-
-  const { mode } = useApp();
-
-  const styles = useMemo(
-    () => ({
-      bgColor:
-        mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main",
-      inputBg: mode === "dark" ? "bg-gray-700" : "bg-white",
-      inputText: mode === "dark" ? "text-white" : "text-gray-900",
-      borderColor: mode === "dark" ? "border-gray-600" : "border-gray-300",
-      errorColor: "border-red-500",
-      buttonColor:
-        mode === "dark"
-          ? "bg-dark-success hover:bg-dark-success/90"
-          : "bg-light-success hover:bg-light-success/90",
-    }),
-    [mode],
-  );
-
   const handleSubmit = useCallback(
     async (
-      values: typeof contactInputNames,
-      { resetForm }: FormikHelpers<typeof contactInputNames>
+      values: ContactFormValues,
+      { resetForm }: FormikHelpers<ContactFormValues>
     ) => {
       setIsSubmitting(true);
       setSubmitStatus({ type: null, message: "" });
@@ -64,333 +49,247 @@ export const FormContact = memo(function FormContact() {
         const data = await response.json();
 
         if (response.ok) {
-          toast.success(data.message || "پیام شما با موفقیت ارسال شد!");
+          const msg =
+            data.message || "پیام شما با موفقیت ارسال شد! به‌زودی پاسخ می‌دهم.";
+          toast.success(msg);
+          setSubmitStatus({ type: "success", message: msg });
           resetForm();
-          setSubmitStatus({ type: null, message: "" });
         } else {
-          toast.error(data.error || "خطایی در ارسال پیام رخ داد.");
-          setSubmitStatus({
-            type: "error",
-            message: data.error || "خطایی در ارسال پیام رخ داد.",
-          });
+          const errMsg = data.error || "خطایی در ارسال پیام رخ داد.";
+          toast.error(errMsg);
+          setSubmitStatus({ type: "error", message: errMsg });
         }
-      } catch (error) {
-        toast.error("خطایی در ارسال پیام رخ داد. لطفا دوباره تلاش کنید.");
-        setSubmitStatus({
-          type: "error",
-          message: "خطایی در ارسال پیام رخ داد. لطفا دوباره تلاش کنید.",
-        });
+      } catch {
+        const errMsg =
+          "اتصال به سرور برقرار نشد. لطفاً دوباره تلاش کنید یا مستقیماً ایمیل بزنید.";
+        toast.error(errMsg);
+        setSubmitStatus({ type: "error", message: errMsg });
       } finally {
         setIsSubmitting(false);
       }
     },
-    [],
+    []
   );
 
-  const formik = useFormik({
-    initialValues: contactInputNames,
+  const formik = useFormik<ContactFormValues>({
+    initialValues,
     onSubmit: handleSubmit,
     validationSchema: contactValidationSchema,
   });
 
+  const inputBaseClass =
+    "w-full rounded-xl border bg-slate-50/80 dark:bg-[#070b14]/80 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 disabled:opacity-50";
+
   return (
-    <motion.form
+    <form
       autoComplete="off"
       onSubmit={formik.handleSubmit}
-      className="w-full"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
+      className="w-full rounded-2xl p-6 sm:p-8 bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm backdrop-blur-sm"
+      dir="rtl"
+      noValidate
     >
-      <motion.div
-        className={`${styles.bgColor} p-4 rounded-2xl shadow-lg`}
-        whileHover={{
-          boxShadow:
-            mode === "dark"
-              ? "0 20px 40px rgba(16, 185, 129, 0.2)"
-              : "0 20px 40px rgba(16, 185, 129, 0.15)",
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Status Messages */}
-        {submitStatus.type && (
-          <div
-            className={`
-              mb-4 p-4 rounded-lg flex items-center gap-2
-              ${
-                submitStatus.type === "success"
-                  ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200"
-                  : "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200"
-              }
-            `}
-            role="alert"
-            aria-live="polite"
-          >
-            {submitStatus.type === "success" ? (
-              <FaCheckCircle className="text-lg" />
-            ) : (
-              <FaExclamationCircle className="text-lg" />
-            )}
-            <span>{submitStatus.message}</span>
-          </div>
-        )}
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+          ارسال پیام مستقیم
+        </h3>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          پروژه‌ای در ذهن دارید یا قصد همکاری دارید؟ فرم زیر را پر کنید تا پیام شما مستقیماً به ایمیل من ارسال شود.
+        </p>
+      </div>
 
-        <div className="w-full" dir="ltr">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <label
-                htmlFor="fullname"
-                className="block text-sm font-medium mb-1 text-right"
-              >
-                نام و نام خانوادگی
-              </label>
-              <div className="relative">
-                <motion.input
-                  whileFocus={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                  id="fullname"
-                  type="text"
-                  name="fullname"
-                  value={formik.values?.fullname || ""}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  disabled={isSubmitting}
-                  aria-invalid={
-                    formik.touched.fullname && formik.errors.fullname
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    formik.touched.fullname && formik.errors.fullname
-                      ? "fullname-error"
-                      : undefined
-                  }
-                  className={`
-                    w-full px-3 py-2 pr-10 rounded-lg border
-                    ${styles.inputBg} ${styles.inputText}
-                    ${formik.touched.fullname && formik.errors.fullname ? styles.errorColor : styles.borderColor}
-                    focus:outline-none focus:ring-2 focus:ring-yellow-500
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  `}
-                  placeholder="نام و نام خانوادگی"
-                />
-                <FaUser
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-              {formik.touched.fullname && formik.errors.fullname && (
-                <motion.p
-                  id="fullname-error"
-                  className="text-red-500 text-xs mt-1 text-right"
-                  role="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {formik.errors.fullname}
-                </motion.p>
-              )}
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium mb-1 text-right"
-              >
-                آدرس ایمیل
-              </label>
-              <div className="relative">
-                <motion.input
-                  whileFocus={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formik.values?.email || ""}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  disabled={isSubmitting}
-                  aria-invalid={
-                    formik.touched.email && formik.errors.email
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    formik.touched.email && formik.errors.email
-                      ? "email-error"
-                      : undefined
-                  }
-                  className={`
-                    w-full px-3 py-2 pr-10 rounded-lg border
-                    ${styles.inputBg} ${styles.inputText}
-                    ${formik.touched.email && formik.errors.email ? styles.errorColor : styles.borderColor}
-                    focus:outline-none focus:ring-2 focus:ring-yellow-500
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  `}
-                  placeholder="آدرس ایمیل"
-                />
-                <FaEnvelope
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-              {formik.touched.email && formik.errors.email && (
-                <motion.p
-                  id="email-error"
-                  className="text-red-500 text-xs mt-1 text-right"
-                  role="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {formik.errors.email}
-                </motion.p>
-              )}
-            </motion.div>
-            <motion.div
-              className="md:col-span-2"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <label
-                htmlFor="subject"
-                className="block text-sm font-medium mb-1 text-right"
-              >
-                عنوان
-              </label>
-              <div className="relative">
-                <motion.input
-                  whileFocus={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                  id="subject"
-                  type="text"
-                  name="subject"
-                  value={formik.values?.subject || ""}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  disabled={isSubmitting}
-                  aria-invalid={
-                    formik.touched.subject && formik.errors.subject
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    formik.touched.subject && formik.errors.subject
-                      ? "subject-error"
-                      : undefined
-                  }
-                  className={`
-                    w-full px-3 py-2 pr-10 rounded-lg border
-                    ${styles.inputBg} ${styles.inputText}
-                    ${formik.touched.subject && formik.errors.subject ? styles.errorColor : styles.borderColor}
-                    focus:outline-none focus:ring-2 focus:ring-yellow-500
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  `}
-                  placeholder="عنوان"
-                />
-                <FaFileAlt
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-              {formik.touched.subject && formik.errors.subject && (
-                <motion.p
-                  id="subject-error"
-                  className="text-red-500 text-xs mt-1 text-right"
-                  role="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {formik.errors.subject}
-                </motion.p>
-              )}
-            </motion.div>
-            <motion.div
-              className="md:col-span-2"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium mb-1 text-right"
-              >
-                متن پیام
-              </label>
-              <motion.textarea
-                whileFocus={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-                id="message"
-                name="message"
-                rows={6}
-                value={formik.values?.message || ""}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                disabled={isSubmitting}
-                aria-invalid={
-                  formik.touched.message && formik.errors.message
-                    ? "true"
-                    : "false"
-                }
-                aria-describedby={
-                  formik.touched.message && formik.errors.message
-                    ? "message-error"
-                    : undefined
-                }
-                className={`
-                    w-full px-3 py-2 rounded-lg border
-                    ${styles.inputBg} ${styles.inputText}
-                    ${formik.touched.message && formik.errors.message ? styles.errorColor : styles.borderColor}
-                    focus:outline-none focus:ring-2 focus:ring-yellow-500
-                    resize-none
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  `}
-                placeholder="متن پیام"
-              />
-              {formik.touched.message && formik.errors.message && (
-                <motion.p
-                  id="message-error"
-                  className="text-red-500 text-xs mt-1 text-right"
-                  role="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  {formik.errors.message}
-                </motion.p>
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-      <motion.div
-        className={`${styles.bgColor} flex items-end flex-col p-4`}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          type="submit"
-          disabled={isSubmitting}
-          className={`
-            ${styles.buttonColor}
-            text-white font-medium py-2 px-6 rounded-lg
-            transition-colors duration-200 mt-2 w-full
-            disabled:opacity-50 disabled:cursor-not-allowed
-          `}
-          aria-busy={isSubmitting}
+      {/* Status Alert */}
+      {submitStatus.type && (
+        <div
+          className={`mb-6 p-4 rounded-xl flex items-start gap-3 text-sm border ${
+            submitStatus.type === "success"
+              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
+              : "bg-red-500/10 border-red-500/30 text-red-700 dark:text-red-300"
+          }`}
+          role="alert"
+          aria-live="polite"
         >
-          {isSubmitting ? "در حال ارسال..." : "ارسال کن"}
-        </motion.button>
-      </motion.div>
-    </motion.form>
+          {submitStatus.type === "success" ? (
+            <FaCheckCircle className="text-lg mt-0.5 shrink-0" />
+          ) : (
+            <FaExclamationCircle className="text-lg mt-0.5 shrink-0" />
+          )}
+          <span>{submitStatus.message}</span>
+        </div>
+      )}
+
+      {/* Hidden honeypot field */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formik.values.website || ""}
+          onChange={formik.handleChange}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Fullname */}
+        <div>
+          <label
+            htmlFor="fullname"
+            className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+          >
+            نام و نام خانوادگی
+          </label>
+          <div className="relative">
+            <FaUser
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"
+              aria-hidden="true"
+            />
+            <input
+              id="fullname"
+              name="fullname"
+              type="text"
+              placeholder="مثلاً: علی محمدی"
+              value={formik.values.fullname}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              disabled={isSubmitting}
+              className={`${inputBaseClass} pr-10 pl-3.5 h-11 ${
+                formik.touched.fullname && formik.errors.fullname
+                  ? "border-red-500"
+                  : "border-slate-200 dark:border-white/10"
+              }`}
+            />
+          </div>
+          {formik.touched.fullname && formik.errors.fullname && (
+            <p className="text-red-500 text-xs mt-1.5" role="alert">
+              {formik.errors.fullname}
+            </p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+          >
+            آدرس ایمیل
+          </label>
+          <div className="relative">
+            <FaEnvelope
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"
+              aria-hidden="true"
+            />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              dir="ltr"
+              placeholder="you@example.com"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              disabled={isSubmitting}
+              className={`${inputBaseClass} pr-10 pl-3.5 h-11 text-left ${
+                formik.touched.email && formik.errors.email
+                  ? "border-red-500"
+                  : "border-slate-200 dark:border-white/10"
+              }`}
+            />
+          </div>
+          {formik.touched.email && formik.errors.email && (
+            <p className="text-red-500 text-xs mt-1.5" role="alert">
+              {formik.errors.email}
+            </p>
+          )}
+        </div>
+
+        {/* Subject */}
+        <div className="sm:col-span-2">
+          <label
+            htmlFor="subject"
+            className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+          >
+            موضوع پیام
+          </label>
+          <div className="relative">
+            <FaTag
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"
+              aria-hidden="true"
+            />
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="مثلاً: پیشنهاد همکاری فرانت‌اند / مشاوره پروژه"
+              value={formik.values.subject}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              disabled={isSubmitting}
+              className={`${inputBaseClass} pr-10 pl-3.5 h-11 ${
+                formik.touched.subject && formik.errors.subject
+                  ? "border-red-500"
+                  : "border-slate-200 dark:border-white/10"
+              }`}
+            />
+          </div>
+          {formik.touched.subject && formik.errors.subject && (
+            <p className="text-red-500 text-xs mt-1.5" role="alert">
+              {formik.errors.subject}
+            </p>
+          )}
+        </div>
+
+        {/* Message */}
+        <div className="sm:col-span-2">
+          <label
+            htmlFor="message"
+            className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+          >
+            متن پیام
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={5}
+            placeholder="جزئیات پیام یا پروژه خود را بنویسید..."
+            value={formik.values.message}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            disabled={isSubmitting}
+            className={`${inputBaseClass} p-3.5 resize-y min-h-[130px] ${
+              formik.touched.message && formik.errors.message
+                ? "border-red-500"
+                : "border-slate-200 dark:border-white/10"
+            }`}
+          />
+          {formik.touched.message && formik.errors.message && (
+            <p className="text-red-500 text-xs mt-1.5" role="alert">
+              {formik.errors.message}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        aria-busy={isSubmitting}
+        className="mt-6 w-full inline-flex items-center justify-center gap-2.5 h-12 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-md shadow-emerald-600/20 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? (
+          <>
+            <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+            <span>در حال ارسال پیام...</span>
+          </>
+        ) : (
+          <>
+            <FaPaperPlane className="text-xs" aria-hidden="true" />
+            <span>ارسال پیام</span>
+          </>
+        )}
+      </button>
+    </form>
   );
 });
