@@ -1,5 +1,4 @@
 export { HeroSection } from "./hero-section";
-export { AboutSection } from "./about-section";
 export { StatsSection } from "./stats-section";
 export { CTASection } from "./cta-section";
 export { SkillsSection } from "./skills-section";

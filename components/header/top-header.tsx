@@ -12,7 +12,6 @@ import { ThemeActionBtn } from "@/components/theme-action-btn";
 
 const SECTION_IDS = [
   "hero",
-  "about",
   "skills",
   "resume",
   "projects",

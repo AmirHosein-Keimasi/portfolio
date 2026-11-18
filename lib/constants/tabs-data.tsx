@@ -1,6 +1,5 @@
 import {
   FaHome,
-  FaUser,
   FaTools,
   FaBriefcase,
   FaCode,
@@ -17,7 +16,6 @@ export interface TabRoute {
 
 export const tabsData = (): TabRoute[] => [
   { id: "hero", label: "صفحه اصلی", icon: <FaHome />, href: "/#hero" },
-  { id: "about", label: "درباره من", icon: <FaUser />, href: "/#about" },
   { id: "skills", label: "مهارت‌ها", icon: <FaTools />, href: "/#skills" },
   { id: "resume", label: "سوابق کاری", icon: <FaBriefcase />, href: "/#resume" },
   { id: "projects", label: "پروژه‌ها", icon: <FaCode />, href: "/#projects" },

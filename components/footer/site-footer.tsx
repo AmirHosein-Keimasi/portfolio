@@ -6,11 +6,12 @@ import { PROFILE } from "@/lib/data/portfolio";
 import { SocialMediaIcons } from "@/components/social-media-icons";
 
 const quickLinks = [
-  { label: "صفحه اصلی", href: "/" },
-  { label: "درباره من", href: "/about" },
-  { label: "رزومه و سوابق", href: "/resume" },
-  { label: "نمونه کارها", href: "/projects" },
-  { label: "تماس با من", href: "/contact" },
+  { label: "صفحه اصلی", href: "/#hero" },
+  { label: "مهارت‌ها", href: "/#skills" },
+  { label: "سوابق کاری", href: "/#resume" },
+  { label: "پروژه‌ها", href: "/#projects" },
+  { label: "تحصیلات و افتخارات", href: "/#education" },
+  { label: "تماس با من", href: "/#contact" },
 ];
 
 export function SiteFooter() {
