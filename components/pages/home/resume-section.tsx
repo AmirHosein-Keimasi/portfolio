@@ -1,13 +1,13 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { FaBriefcase, FaDownload, FaArrowLeft } from "react-icons/fa";
 import { PROFILE } from "@/lib/data/portfolio";
 import { SectionHeader } from "@/components/common/section-header";
 import { DevExpTimeline } from "@/components/pages/dev-exp-timeline";
-import { DevEduTimeline } from "@/components/pages/dev-edu-timeline";
 
-export function ResumeSection() {
+export const ResumeSection = memo(function ResumeSection() {
   return (
     <section
       id="resume"
@@ -15,22 +15,13 @@ export function ResumeSection() {
     >
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          eyebrow="سوابق حرفه‌ای و تحصیلی"
-          title="تجربیات کاری، تحصیلات و افتخارات"
-          subtitle="مسیر حرفه‌ای من در توسعه محصولات واقعی در محیط Production، منتورینگ تیم فرانت‌اند و تحصیلات آکادمیک."
+          eyebrow="سوابق حرفه‌ای"
+          title="تجربیات کاری تخصصی"
+          subtitle="مسیر حرفه‌ای من در توسعه محصولات واقعی در محیط Production، منتورینگ فنی تیم فرانت‌اند، معماری ماژولار و بهینه‌سازی عملکرد."
           icon={<FaBriefcase />}
         />
 
-        <div className="space-y-8">
-          <DevExpTimeline />
-
-          <div className="pt-4">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-5">
-              تحصیلات، افتخارات و زبان‌ها
-            </h3>
-            <DevEduTimeline />
-          </div>
-        </div>
+        <DevExpTimeline />
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
@@ -52,4 +43,4 @@ export function ResumeSection() {
       </div>
     </section>
   );
-}
+});

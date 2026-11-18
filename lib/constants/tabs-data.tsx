@@ -2,8 +2,9 @@ import {
   FaHome,
   FaUser,
   FaTools,
-  FaFileAlt,
+  FaBriefcase,
   FaCode,
+  FaGraduationCap,
   FaEnvelope,
 } from "react-icons/fa";
 
@@ -18,7 +19,13 @@ export const tabsData = (): TabRoute[] => [
   { id: "hero", label: "صفحه اصلی", icon: <FaHome />, href: "/#hero" },
   { id: "about", label: "درباره من", icon: <FaUser />, href: "/#about" },
   { id: "skills", label: "مهارت‌ها", icon: <FaTools />, href: "/#skills" },
-  { id: "resume", label: "رزومه و سوابق", icon: <FaFileAlt />, href: "/#resume" },
+  { id: "resume", label: "سوابق کاری", icon: <FaBriefcase />, href: "/#resume" },
   { id: "projects", label: "پروژه‌ها", icon: <FaCode />, href: "/#projects" },
+  {
+    id: "education",
+    label: "تحصیلات و افتخارات",
+    icon: <FaGraduationCap />,
+    href: "/#education",
+  },
   { id: "contact", label: "تماس با من", icon: <FaEnvelope />, href: "/#contact" },
 ];

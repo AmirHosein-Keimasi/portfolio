@@ -8,6 +8,7 @@ import {
   SkillsSection,
   ResumeSection,
   ProjectsSection,
+  EducationSection,
   ContactSection,
 } from "./home";
 
@@ -21,6 +22,7 @@ export const HomePage = memo(function HomePage() {
         <SkillsSection />
         <ResumeSection />
         <ProjectsSection />
+        <EducationSection />
         <ContactSection />
       </main>
     </div>

@@ -10,7 +10,15 @@ import { PROFILE } from "@/lib/data/portfolio";
 import { InstallButton } from "@/components/install-button";
 import { ThemeActionBtn } from "@/components/theme-action-btn";
 
-const SECTION_IDS = ["hero", "about", "skills", "resume", "projects", "contact"];
+const SECTION_IDS = [
+  "hero",
+  "about",
+  "skills",
+  "resume",
+  "projects",
+  "education",
+  "contact",
+];
 
 export function TopHeader() {
   const pathname = usePathname();
@@ -152,7 +160,7 @@ export function TopHeader() {
                     prefetch={true}
                     onClick={(e) => handleNavClick(e, tab.href)}
                     aria-current={active ? "page" : undefined}
-                    className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                    className={`relative flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3.5 py-1.5 lg:py-2 rounded-xl text-xs lg:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                       active
                         ? "text-emerald-700 dark:text-emerald-300 bg-white dark:bg-emerald-500/15 shadow-sm font-semibold"
                         : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"

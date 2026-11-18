@@ -5,4 +5,5 @@ export { CTASection } from "./cta-section";
 export { SkillsSection } from "./skills-section";
 export { ResumeSection } from "./resume-section";
 export { ProjectsSection } from "./projects-section";
+export { EducationSection } from "./education-section";
 export { ContactSection } from "./contact-section";
