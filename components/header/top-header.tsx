@@ -4,120 +4,133 @@ import { useMemo, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
 import { tabsData } from "@/lib/constants/tabs-data";
+import { PROFILE } from "@/lib/data/portfolio";
 import { InstallButton } from "@/components/install-button";
 import { ThemeActionBtn } from "@/components/theme-action-btn";
-import { useApp } from "@/lib/context/app-context";
 
 export function TopHeader() {
-  const { mode } = useApp();
   const pathname = usePathname();
   const data = useMemo(() => tabsData(), []);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // بستن منو هنگام تغییر مسیر
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // جلوگیری از اسکرول بدن هنگام باز بودن منو
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
-  const colors = useMemo(
-    () => ({
-      text: mode === "dark" ? "text-dark-text-main" : "text-light-text-main",
-      active: mode === "dark" ? "text-dark-success" : "text-light-success",
-      hover: mode === "dark" ? "hover:text-dark-success" : "hover:text-light-success",
-      bg: mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main",
-      border: mode === "dark" ? "border-dark-text-main/20" : "border-light-text-main/20",
-      sidebarBg: mode === "dark" ? "bg-dark-primary-main" : "bg-light-primary-main",
-      overlay: mode === "dark" ? "bg-black/50" : "bg-black/30",
-    }),
-    [mode]
-  );
-
   const isActive = useCallback(
     (href: string) => {
-      if (href === "/") {
-        return pathname === "/";
-      }
-      return pathname?.startsWith(href);
+      if (href === "/") return pathname === "/";
+      if (href === "/contact" && pathname === "/connect") return true;
+      return pathname?.startsWith(href) ?? false;
     },
     [pathname]
   );
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
     <>
       <header
-        className={`
-          fixed top-0 left-0 right-0 z-50
-          ${colors.bg}
-          border-b ${colors.border}
-          shadow-md
-        `}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 no-print ${
+          scrolled
+            ? "bg-white/85 dark:bg-[#070b14]/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 shadow-sm"
+            : "bg-white/60 dark:bg-[#070b14]/60 backdrop-blur-md border-b border-transparent"
+        }`}
         role="banner"
       >
-        <div className="max-w-7xl mx-auto px-4">
-          <nav className="flex items-center justify-between h-16 md:h-20" aria-label="Main navigation">
-            {/* همبرگر منو - فقط موبایل */}
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200 hover:bg-opacity-10 hover:bg-gray-500"
-              aria-label="Toggle menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? (
-                <FaTimes className={`text-xl ${colors.text}`} />
-              ) : (
-                <FaBars className={`text-xl ${colors.text}`} />
-              )}
-            </button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav
+            className="flex items-center justify-between h-16 md:h-20 gap-4"
+            aria-label="ناوبری اصلی"
+          >
+            {/* Brand + Mobile menu toggle */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/5 text-slate-700 dark:text-slate-200 hover:border-emerald-500/50 transition-colors"
+                aria-label="باز کردن منو"
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <FaTimes className="text-lg" />
+                ) : (
+                  <FaBars className="text-lg" />
+                )}
+              </button>
 
-            {/* منوهای اصلی - فقط دسکتاپ */}
-            <div className="hidden md:flex items-center gap-2 md:gap-4 flex-1">
-              {data.map((tab, index) => {
+              <Link
+                href="/"
+                className="flex items-center gap-2.5 group focus:outline-none"
+              >
+                <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-sky-500 text-white font-bold text-sm flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                  {PROFILE.initials}
+                </span>
+                <div className="hidden sm:flex flex-col leading-tight">
+                  <span className="font-bold text-sm md:text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    {PROFILE.fullName}
+                  </span>
+                  <span
+                    className="text-[11px] text-slate-500 dark:text-slate-400"
+                    dir="ltr"
+                  >
+                    Frontend Developer
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-1 p-1 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-slate-100/70 dark:bg-white/[0.04]">
+              {data.map((tab) => {
                 const active = isActive(tab.href);
                 return (
                   <Link
-                    key={index}
+                    key={tab.href}
                     href={tab.href}
                     prefetch={true}
-                    className={`
-                      flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg
-                      transition-colors duration-200 whitespace-nowrap
-                      text-sm md:text-base
-                      ${
-                        active
-                          ? `${colors.active} font-bold`
-                          : `${colors.text} ${colors.hover}`
-                      }
-                    `}
                     aria-current={active ? "page" : undefined}
+                    className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                      active
+                        ? "text-emerald-700 dark:text-emerald-300 bg-white dark:bg-emerald-500/15 shadow-sm"
+                        : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"
+                    }`}
                   >
-                    <span className="text-base md:text-lg" aria-hidden="true">{tab.icon}</span>
+                    <span className="text-sm opacity-80" aria-hidden="true">
+                      {tab.icon}
+                    </span>
                     <span>{tab.label}</span>
                   </Link>
                 );
               })}
             </div>
 
-            {/* دکمه‌های سمت راست */}
-            <div className="flex items-center gap-2 md:gap-3">
-              <div className="hidden md:block">
+            {/* Right Actions */}
+            <div className="flex items-center gap-2">
+              <a
+                href={PROFILE.resumePdfUrl}
+                download="Amirhossein-Keimasi-Resume.pdf"
+                className="hidden sm:inline-flex items-center gap-2 h-10 px-3.5 rounded-xl text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/20 transition-all duration-200"
+              >
+                <FaDownload className="text-xs" aria-hidden="true" />
+                <span>دانلود رزومه</span>
+              </a>
+              <div className="hidden lg:block">
                 <InstallButton />
               </div>
               <ThemeActionBtn />
@@ -126,69 +139,63 @@ export function TopHeader() {
         </div>
       </header>
 
-      {/* Overlay برای موبایل */}
+      {/* Mobile RTL Slide-Over Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className={`fixed inset-0 z-40 ${colors.overlay} md:hidden`}
-              onClick={toggleMobileMenu}
+              className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Sidebar */}
             <motion.aside
-              initial={{ x: "-100%" }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-              className={`
-                fixed top-16 left-0 bottom-0 z-50 w-64
-                ${colors.sidebarBg}
-                border-r ${colors.border}
-                shadow-2xl
-                md:hidden
-                overflow-y-auto
-              `}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              className="fixed top-16 right-0 bottom-0 z-50 w-72 bg-white dark:bg-[#0b1120] border-l border-slate-200 dark:border-white/10 shadow-2xl md:hidden overflow-y-auto"
+              aria-label="منوی موبایل"
             >
-              <nav className="flex flex-col p-4 gap-2" aria-label="Mobile navigation">
-                {data.map((tab, index) => {
+              <div className="p-5 flex flex-col gap-2">
+                {data.map((tab) => {
                   const active = isActive(tab.href);
                   return (
                     <Link
-                      key={index}
+                      key={tab.href}
                       href={tab.href}
                       prefetch={true}
-                      onClick={toggleMobileMenu}
-                      className={`
-                        flex items-center gap-3 px-4 py-3 rounded-lg
-                        transition-colors duration-200
-                        text-base
-                        ${
-                          active
-                            ? `${colors.active} font-bold bg-opacity-10 ${
-                                mode === "dark" ? "bg-dark-success" : "bg-light-success"
-                              }`
-                            : `${colors.text} ${colors.hover}`
-                        }
-                      `}
+                      onClick={() => setIsMobileMenuOpen(false)}
                       aria-current={active ? "page" : undefined}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                        active
+                          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold"
+                          : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5"
+                      }`}
                     >
-                      <span className="text-xl" aria-hidden="true">{tab.icon}</span>
+                      <span className="text-base" aria-hidden="true">
+                        {tab.icon}
+                      </span>
                       <span>{tab.label}</span>
                     </Link>
                   );
                 })}
 
-                {/* Install Button در موبایل */}
-                <div className={`mt-4 pt-4 border-t ${colors.border}`}>
+                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-white/10 flex flex-col gap-3">
+                  <a
+                    href={PROFILE.resumePdfUrl}
+                    download="Amirhossein-Keimasi-Resume.pdf"
+                    className="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm"
+                  >
+                    <FaDownload className="text-xs" aria-hidden="true" />
+                    <span>دانلود رزومه PDF</span>
+                  </a>
                   <InstallButton />
                 </div>
-              </nav>
+              </div>
             </motion.aside>
           </>
         )}

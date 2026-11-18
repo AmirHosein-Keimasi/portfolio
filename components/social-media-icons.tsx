@@ -1,82 +1,89 @@
 "use client";
 
-import { useMemo } from "react";
 import {
   FaGithub,
   FaTelegram,
   FaInstagram,
   FaWhatsapp,
   FaLinkedin,
+  FaEnvelope,
 } from "react-icons/fa";
-import { useApp } from "@/lib/context/app-context";
+import { PROFILE } from "@/lib/data/portfolio";
 
 interface SocialMediaIconsProps {
   textAlign?: "left" | "right" | "center";
+  className?: string;
 }
 
 const socialLinks = [
   {
-    href: "https://github.com/amirhosein-keimasi",
-    label: "Github",
+    href: PROFILE.github,
+    label: "GitHub",
     icon: FaGithub,
+    external: true,
   },
   {
-    href: "https://www.instagram.com/amir_v13",
-    label: "Instagram",
-    icon: FaInstagram,
-  },
-  {
-    href: "https://telegram.im/@amir1_1",
-    label: "Telegram",
-    icon: FaTelegram,
-  },
-  {
-    href: "https://telegram.im/@amir1_1",
-    label: "WhatsApp",
-    icon: FaWhatsapp,
-  },
-  {
-    href: "https://www.linkedin.com/in/amirhossein-keimasi",
+    href: PROFILE.linkedin,
     label: "LinkedIn",
     icon: FaLinkedin,
+    external: true,
+  },
+  {
+    href: PROFILE.telegram,
+    label: "Telegram",
+    icon: FaTelegram,
+    external: true,
+  },
+  {
+    href: PROFILE.whatsapp,
+    label: "WhatsApp",
+    icon: FaWhatsapp,
+    external: true,
+  },
+  {
+    href: PROFILE.instagram,
+    label: "Instagram",
+    icon: FaInstagram,
+    external: true,
+  },
+  {
+    href: `mailto:${PROFILE.email}`,
+    label: "Email",
+    icon: FaEnvelope,
+    external: false,
   },
 ];
 
-export function SocialMediaIcons({ textAlign = "center" }: SocialMediaIconsProps) {
-  const { mode } = useApp();
-  
-  const colors = useMemo(
-    () => ({
-      text: mode === "dark" ? "text-dark-text-main" : "text-light-text-main",
-      hover: mode === "dark" ? "hover:text-dark-success" : "hover:text-light-success",
-    }),
-    [mode]
-  );
-
-  const alignClass = useMemo(
-    () =>
-      textAlign === "right"
-        ? "text-right"
-        : textAlign === "left"
-        ? "text-left"
-        : "text-center",
-    [textAlign]
-  );
+export function SocialMediaIcons({
+  textAlign = "right",
+  className = "",
+}: SocialMediaIconsProps) {
+  const justifyClass =
+    textAlign === "center"
+      ? "justify-center"
+      : textAlign === "left"
+        ? "justify-end"
+        : "justify-start";
 
   return (
-    <div className={`mt-8 ${alignClass}`} role="list" aria-label="Social media links">
-      {socialLinks.map((link, index) => {
+    <div
+      className={`flex flex-wrap items-center gap-2.5 ${justifyClass} ${className}`}
+      role="list"
+      aria-label="شبکه‌های اجتماعی"
+    >
+      {socialLinks.map((link) => {
         const Icon = link.icon;
         return (
           <a
-            key={index}
+            key={link.label}
             href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-block p-2 ${colors.text} ${colors.hover} transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded-full`}
-            aria-label={`Visit ${link.label} profile`}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            aria-label={link.label}
+            title={link.label}
+            className="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:border-emerald-500/60 hover:text-emerald-600 dark:hover:text-emerald-400 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
           >
-            <Icon className="text-2xl" aria-hidden="true" />
+            <Icon className="text-lg" aria-hidden="true" />
           </a>
         );
       })}

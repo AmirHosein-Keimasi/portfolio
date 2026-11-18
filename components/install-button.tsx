@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { MdInstallMobile } from "react-icons/md";
-import { useApp } from "@/lib/context/app-context";
 import { storage } from "@/lib/utils/storage";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -11,9 +10,9 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export function InstallButton() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
-  const { mode } = useApp();
 
   useEffect(() => {
     if (storage.get("installButtonShown") === true) {
@@ -21,51 +20,40 @@ export function InstallButton() {
       return;
     }
 
-    if (typeof window !== "undefined") {
-      const handleBeforeInstallPrompt = (e: Event) => {
-        e.preventDefault();
-        setDeferredPrompt(e as BeforeInstallPromptEvent);
-        setShowInstallButton(true);
-      };
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      setShowInstallButton(true);
+    };
 
-      window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-
-      return () => {
-        window.removeEventListener(
-          "beforeinstallprompt",
-          handleBeforeInstallPrompt,
-        );
-      };
-    }
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
   }, []);
 
   const handleInstallClick = useCallback(async () => {
-    if (deferredPrompt) {
-      await deferredPrompt.prompt();
-      const result = await deferredPrompt.userChoice;
-      storage.set("installButtonShown", true);
-      setDeferredPrompt(null);
-      setShowInstallButton(false);
-    }
+    if (!deferredPrompt) return;
+    await deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    storage.set("installButtonShown", true);
+    setDeferredPrompt(null);
+    setShowInstallButton(false);
   }, [deferredPrompt]);
 
   if (!showInstallButton) return null;
 
   return (
     <button
+      type="button"
       onClick={handleInstallClick}
-      className={`
-        flex items-center gap-2 px-3 md:px-4 py-2 rounded-full text-sm md:text-base font-medium
-        transition-colors duration-200
-        ${mode === "dark" 
-          ? "bg-dark-success text-dark-text-main hover:bg-dark-success/90" 
-          : "bg-light-success text-light-text-main hover:bg-light-success/90"
-        }
-      `}
+      className="inline-flex items-center gap-2 h-10 px-3.5 rounded-xl text-sm font-medium bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/20 transition-all duration-200"
     >
-      <MdInstallMobile className="text-base md:text-lg" />
-      <span className="hidden sm:inline">نصب اپلیکیشن</span>
+      <MdInstallMobile className="text-lg" aria-hidden="true" />
+      <span>نصب اپ</span>
     </button>
   );
 }
-
