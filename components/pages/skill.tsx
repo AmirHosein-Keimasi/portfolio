@@ -1,7 +1,3 @@
-"use client";
-
-import { memo } from "react";
-import { motion } from "framer-motion";
 import {
   SiTypescript,
   SiJavascript,
@@ -56,7 +52,7 @@ interface SkillProps {
   featured?: boolean;
 }
 
-export const Skill = memo(function Skill({
+export function Skill({
   name,
   iconKey,
   value,
@@ -103,14 +99,11 @@ export const Skill = memo(function Skill({
         aria-valuemax={100}
         aria-label={`${name}: ${value}%`}
       >
-        <motion.div
-          className="h-full rounded-full bg-gradient-to-l from-emerald-500 via-teal-400 to-sky-400"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${value}%` }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        <div
+          className="h-full rounded-full bg-gradient-to-l from-emerald-500 via-teal-400 to-sky-400 transition-all duration-500"
+          style={{ width: `${value}%` }}
         />
       </div>
     </div>
   );
-});
+}

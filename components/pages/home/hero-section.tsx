@@ -1,8 +1,4 @@
-"use client";
-
-import { memo } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { FaMapMarkerAlt, FaCode, FaRocket } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiReact } from "react-icons/si";
 import { PROFILE } from "@/lib/data/portfolio";
@@ -11,7 +7,7 @@ import { TextReveal } from "@/components/animations/text-reveal";
 import { StatsSection } from "./stats-section";
 import { CTASection } from "./cta-section";
 
-export const HeroSection = memo(function HeroSection() {
+export function HeroSection() {
   return (
     <section
       id="hero"
@@ -88,12 +84,7 @@ export const HeroSection = memo(function HeroSection() {
 
           {/* Left Column: Portrait Card */}
           <div className="lg:col-span-5 flex justify-center order-1 lg:order-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
-            >
+            <div className="relative">
               {/* Soft Ambient Halo */}
               <div
                 className="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/20 to-sky-500/30 blur-2xl animate-pulse-subtle pointer-events-none"
@@ -116,12 +107,7 @@ export const HeroSection = memo(function HeroSection() {
               </div>
 
               {/* Floating Experience Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, duration: 0.5 }}
-                className="hidden sm:flex items-center gap-2.5 absolute -bottom-3 -right-4 px-4 py-2.5 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md"
-              >
+              <div className="hidden sm:flex items-center gap-2.5 absolute -bottom-3 -right-4 px-4 py-2.5 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md">
                 <span className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
                   {PROFILE.experienceYears}
                 </span>
@@ -133,21 +119,16 @@ export const HeroSection = memo(function HeroSection() {
                     محصولات Production
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Floating Current Role Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: -12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.45, duration: 0.5 }}
-                className="hidden sm:flex items-center gap-2 absolute top-4 -left-6 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md"
-              >
+              <div className="hidden sm:flex items-center gap-2 absolute top-4 -left-6 px-3.5 py-2 rounded-2xl bg-white/95 dark:bg-[#0e1526]/95 border border-slate-200 dark:border-white/15 shadow-xl backdrop-blur-md">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                 <span className="text-xs font-semibold text-slate-800 dark:text-slate-100">
                   Frontend @ داناجو
                 </span>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -156,4 +137,4 @@ export const HeroSection = memo(function HeroSection() {
       </div>
     </section>
   );
-});
+}

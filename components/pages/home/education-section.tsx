@@ -1,12 +1,9 @@
-"use client";
-
-import { memo } from "react";
 import { FaGraduationCap, FaDownload } from "react-icons/fa";
 import { PROFILE } from "@/lib/data/portfolio";
 import { SectionHeader } from "@/components/common/section-header";
 import { DevEduTimeline } from "@/components/pages/dev-edu-timeline";
 
-export const EducationSection = memo(function EducationSection() {
+export function EducationSection() {
   return (
     <section
       id="education"
@@ -35,4 +32,4 @@ export const EducationSection = memo(function EducationSection() {
       </div>
     </section>
   );
-});
+}

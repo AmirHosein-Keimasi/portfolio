@@ -1,6 +1,3 @@
-"use client";
-
-import { memo } from "react";
 import {
   FaGraduationCap,
   FaTrophy,
@@ -14,9 +11,7 @@ interface DevEduTimelineProps {
   loading?: boolean;
 }
 
-export const DevEduTimeline = memo(function DevEduTimeline(
-  _props: DevEduTimelineProps
-) {
+export function DevEduTimeline(_props: DevEduTimelineProps) {
   return (
     <div className="space-y-6" dir="rtl">
       {/* Education */}
@@ -131,4 +126,4 @@ export const DevEduTimeline = memo(function DevEduTimeline(
       </ScrollReveal>
     </div>
   );
-});
+}

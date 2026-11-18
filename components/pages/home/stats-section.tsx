@@ -1,11 +1,8 @@
-"use client";
-
-import { memo } from "react";
 import { HERO_STATS } from "@/lib/data/portfolio";
 import { NumberCounter } from "@/components/animations/number-counter";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 
-export const StatsSection = memo(function StatsSection() {
+export function StatsSection() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 mt-12">
       {HERO_STATS.map((stat, index) => (
@@ -26,4 +23,4 @@ export const StatsSection = memo(function StatsSection() {
       ))}
     </div>
   );
-});
+}

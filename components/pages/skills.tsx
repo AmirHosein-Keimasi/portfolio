@@ -1,11 +1,8 @@
-"use client";
-
-import { memo } from "react";
 import { SKILL_CATEGORIES, TECHNICAL_SKILLS } from "@/lib/data/portfolio";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { Skill } from "./skill";
 
-export const Skills = memo(function Skills() {
+export function Skills() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
       {SKILL_CATEGORIES.map((category, index) => {
@@ -45,4 +42,4 @@ export const Skills = memo(function Skills() {
       })}
     </div>
   );
-});
+}

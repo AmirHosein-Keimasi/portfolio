@@ -1,6 +1,4 @@
-"use client";
-
-import { ReactNode, memo } from "react";
+import { ReactNode } from "react";
 
 interface SectionHeaderProps {
   eyebrow?: string;
@@ -10,7 +8,7 @@ interface SectionHeaderProps {
   align?: "center" | "right";
 }
 
-export const SectionHeader = memo(function SectionHeader({
+export function SectionHeader({
   eyebrow,
   title,
   subtitle,
@@ -45,4 +43,4 @@ export const SectionHeader = memo(function SectionHeader({
       )}
     </div>
   );
-});
+}

@@ -15,16 +15,19 @@ export function NumberCounter({
   value,
   suffix = "",
   decimals = 0,
-  duration = 1200,
+  duration = 1000,
   className = "",
 }: NumberCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
-  const [displayValue, setDisplayValue] = useState(0);
+  // Start with value for SSG/SEO, animate on client view
+  const [displayValue, setDisplayValue] = useState(value);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimated) return;
 
+    setHasAnimated(true);
     let frameId: number;
     const startTime = performance.now();
 
@@ -43,7 +46,7 @@ export function NumberCounter({
 
     frameId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frameId);
-  }, [isInView, value, duration]);
+  }, [isInView, value, duration, hasAnimated]);
 
   const formatted =
     decimals > 0
@@ -52,8 +55,8 @@ export function NumberCounter({
 
   return (
     <span ref={ref} className={className} dir="ltr">
-      {formatted}
       {suffix}
+      {formatted}
     </span>
   );
 }

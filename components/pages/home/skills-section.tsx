@@ -1,12 +1,9 @@
-"use client";
-
-import { memo } from "react";
 import { FaCode, FaUsers } from "react-icons/fa";
 import { SectionHeader } from "@/components/common/section-header";
 import { Skills } from "@/components/pages/skills";
 import { SuftSkills } from "@/components/pages/suft-skills";
 
-export const SkillsSection = memo(function SkillsSection() {
+export function SkillsSection() {
   return (
     <section
       id="skills"
@@ -42,4 +39,4 @@ export const SkillsSection = memo(function SkillsSection() {
       </div>
     </section>
   );
-});
+}

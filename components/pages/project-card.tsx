@@ -1,6 +1,3 @@
-"use client";
-
-import { memo } from "react";
 import Image from "next/image";
 import { FaExternalLinkAlt, FaGithub, FaCheck, FaCode } from "react-icons/fa";
 import type { ProjectItem } from "@/types";
@@ -9,9 +6,7 @@ interface ProjectCardProps {
   project: ProjectItem;
 }
 
-export const ProjectCard = memo(function ProjectCard({
-  project,
-}: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
       {/* Visual Preview */}
@@ -149,4 +144,4 @@ export const ProjectCard = memo(function ProjectCard({
       </div>
     </article>
   );
-});
+}

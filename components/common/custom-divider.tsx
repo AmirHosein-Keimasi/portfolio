@@ -1,6 +1,4 @@
-"use client";
-
-import { ReactNode, memo } from "react";
+import { ReactNode } from "react";
 
 interface CustomDividerProps {
   bColor?: string;
@@ -10,7 +8,7 @@ interface CustomDividerProps {
   text: string;
 }
 
-export const CustomDivider = memo(function CustomDivider({
+export function CustomDivider({
   icon,
   text,
 }: CustomDividerProps) {
@@ -24,4 +22,4 @@ export const CustomDivider = memo(function CustomDivider({
       <div className="flex-1 h-px bg-gradient-to-l from-transparent via-slate-300 dark:via-white/15 to-slate-300 dark:to-white/15" />
     </div>
   );
-});
+}

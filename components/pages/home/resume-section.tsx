@@ -1,13 +1,10 @@
-"use client";
-
-import { memo } from "react";
 import Link from "next/link";
 import { FaBriefcase, FaDownload, FaArrowLeft } from "react-icons/fa";
 import { PROFILE } from "@/lib/data/portfolio";
 import { SectionHeader } from "@/components/common/section-header";
 import { DevExpTimeline } from "@/components/pages/dev-exp-timeline";
 
-export const ResumeSection = memo(function ResumeSection() {
+export function ResumeSection() {
   return (
     <section
       id="resume"
@@ -43,4 +40,4 @@ export const ResumeSection = memo(function ResumeSection() {
       </div>
     </section>
   );
-});
+}

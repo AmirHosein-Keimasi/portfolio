@@ -1,7 +1,3 @@
-"use client";
-
-import { useState, useCallback, memo } from "react";
-import toast from "react-hot-toast";
 import {
   FaEnvelope,
   FaPhone,
@@ -11,8 +7,6 @@ import {
   FaWhatsapp,
   FaGlobe,
   FaMapMarkerAlt,
-  FaCopy,
-  FaCheckCircle,
   FaPaperPlane,
 } from "react-icons/fa";
 import type { IconType } from "react-icons";
@@ -21,6 +15,7 @@ import type { ContactChannel } from "@/types";
 import { SectionHeader } from "@/components/common/section-header";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { FormContact } from "@/components/pages/form-contact";
+import { CopyChannelButton } from "./copy-channel-button";
 
 const CHANNEL_ICONS: Record<ContactChannel["iconKey"], IconType> = {
   email: FaEnvelope,
@@ -33,20 +28,7 @@ const CHANNEL_ICONS: Record<ContactChannel["iconKey"], IconType> = {
   location: FaMapMarkerAlt,
 };
 
-export const ContactSection = memo(function ContactSection() {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const handleCopy = useCallback(async (text: string, id: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success("در کلیپ‌بورد کپی شد!");
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    } catch {
-      toast.error("خطا در کپی کردن");
-    }
-  }, []);
-
+export function ContactSection() {
   return (
     <section
       id="contact"
@@ -65,7 +47,6 @@ export const ContactSection = memo(function ContactSection() {
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
             {CONTACT_CHANNELS.slice(0, 6).map((item, index) => {
               const Icon = CHANNEL_ICONS[item.iconKey];
-              const isCopied = copiedId === item.id;
               return (
                 <ScrollReveal key={item.id} delay={index * 0.05} direction="up">
                   <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white/90 dark:bg-[#0e1526]/90 border border-slate-200/80 dark:border-white/10 hover:border-emerald-500/40 transition-all duration-200 shadow-sm">
@@ -91,19 +72,7 @@ export const ContactSection = memo(function ContactSection() {
                       </div>
                     </a>
 
-                    <button
-                      type="button"
-                      onClick={() => handleCopy(item.copyValue, item.id)}
-                      aria-label={`کپی ${item.labelFa}`}
-                      title="کپی"
-                      className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors shrink-0"
-                    >
-                      {isCopied ? (
-                        <FaCheckCircle className="text-emerald-500 text-sm" />
-                      ) : (
-                        <FaCopy className="text-sm" />
-                      )}
-                    </button>
+                    <CopyChannelButton value={item.copyValue} />
                   </div>
                 </ScrollReveal>
               );
@@ -120,4 +89,4 @@ export const ContactSection = memo(function ContactSection() {
       </div>
     </section>
   );
-});
+}

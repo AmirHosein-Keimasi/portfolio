@@ -1,6 +1,3 @@
-"use client";
-
-import Link from "next/link";
 import { FaDownload, FaPaperPlane, FaCode } from "react-icons/fa";
 import { PROFILE } from "@/lib/data/portfolio";
 import { MagneticButton } from "@/components/animations/magnetic-button";

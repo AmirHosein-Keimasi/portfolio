@@ -1,6 +1,3 @@
-"use client";
-
-import { memo } from "react";
 import {
   FaChalkboardTeacher,
   FaPuzzlePiece,
@@ -26,7 +23,7 @@ const SOFT_ICON_MAP: Record<string, IconType> = {
   feedback: FaComments,
 };
 
-export const SuftSkills = memo(function SuftSkills() {
+export function SuftSkills() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
       {SOFT_SKILLS.map((skill, index) => {
@@ -49,4 +46,4 @@ export const SuftSkills = memo(function SuftSkills() {
       })}
     </div>
   );
-});
+}

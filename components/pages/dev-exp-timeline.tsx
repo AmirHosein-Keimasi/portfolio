@@ -1,6 +1,3 @@
-"use client";
-
-import { memo } from "react";
 import {
   FaBriefcase,
   FaExternalLinkAlt,
@@ -15,9 +12,7 @@ interface DevExpTimelineProps {
   compact?: boolean;
 }
 
-export const DevExpTimeline = memo(function DevExpTimeline({
-  compact = false,
-}: DevExpTimelineProps) {
+export function DevExpTimeline({ compact = false }: DevExpTimelineProps) {
   return (
     <div className="space-y-6" dir="rtl">
       {WORK_EXPERIENCES.map((exp, index) => (
@@ -151,4 +146,4 @@ export const DevExpTimeline = memo(function DevExpTimeline({
       ))}
     </div>
   );
-});
+}
