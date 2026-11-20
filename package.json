@@ -16,7 +16,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^12.23.26",
     "next": "^15.5.9",
-    "nodemailer": "^7.0.10",
+    "nodemailer": "^10.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.6.0",
