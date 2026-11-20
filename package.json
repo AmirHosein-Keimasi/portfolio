@@ -16,7 +16,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^12.23.26",
     "next": "^15.5.9",
-    "nodemailer": "^7.0.10",
+    "nodemailer": "^10.6.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.6.0",
@@ -26,15 +26,18 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
-    "@types/nodemailer": "^7.0.4",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.23",
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.5.9",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.33",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "postcss": "$postcss"
   }
 }
